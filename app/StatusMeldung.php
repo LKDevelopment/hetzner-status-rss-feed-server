@@ -19,5 +19,17 @@ class StatusMeldung extends Model
         'text',
         'category',
         'date_time',
+        'external_id',
+        'parent_id',
+        'permalink',
     ];
+
+    public $appends = [
+        'children',
+    ];
+
+    public function getChildrenAttribute()
+    {
+        return $this->hasMany(StatusMeldung::class, 'parent_id', 'external_id');
+    }
 }

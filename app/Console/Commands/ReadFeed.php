@@ -67,15 +67,26 @@ class ReadFeed extends Command
                     $text = (string) $_links;
                 }
             }
-            $message = StatusMeldung::where('date_time', '=', $item->date)->where('category', '=', $category)->first();
+            $_external_id = explode('#', $item->permalink);
+            $external_id = end($_external_id);
+
+            $parentId = null;
+            if (str_contains($external_id, '-')) {
+                $_parent_id = explode('-', $external_id);
+                $parentId = $_parent_id[0];
+            }
+            $message = StatusMeldung::where('external_id', '=', $external_id)->first();
             if ($message == null && $category != '') {
                 $message = StatusMeldung::create([
                     'title' => $item->title,
                     'text' => $text,
                     'category' => $category,
                     'date_time' => $item->date,
+                    'external_id' => $external_id,
+                    'parent_id' => $parentId,
+                    'permalink' => $item->permalink,
                 ]);
-                event(new NewStatusMeldungArrived($message));
+                //event(new NewStatusMeldungArrived($message));
             }
         });
     }
