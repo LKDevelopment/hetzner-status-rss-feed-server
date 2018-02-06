@@ -14,6 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('meldungen', function () {
-    return response()->json(\App\StatusMeldung::all());
-});

@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('hetzner-status', function () {
+    return response()->json(\App\StatusMeldung::orderBy('date_time','DESC')->get());
+});
