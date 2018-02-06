@@ -114,7 +114,16 @@ class ReadFeed extends Command
                 $category = $parent->category;
             }
             $message = StatusMeldung::where('external_id', '=', $external_id)->first();
-            if ($message == null && $category != '') {
+            var_dump([
+                'title' => $item->title,
+                'text' => $text,
+                'category' => $category,
+                'date_time' => $item->date,
+                'external_id' => $external_id,
+                'parent_id' => $parentId,
+                'permalink' => $item->permalink,
+            ]);
+            if (true == false && $message == null && $category != '') {
                 $message = StatusMeldung::create([
                     'title' => $item->title,
                     'text' => $text,
