@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\NewStatusMeldungArrived;
 use App\StatusMeldung;
 use ArandiLopez\Feed\Facades\Feed;
 use Illuminate\Console\Command;
@@ -67,13 +68,14 @@ class ReadFeed extends Command
                 }
             }
             $message = StatusMeldung::where('date_time', '=', $item->date)->where('category', '=', $category)->first();
-            if ($message == null) {
-                StatusMeldung::create([
+            if ($message == null && $category != '') {
+                $message = StatusMeldung::create([
                     'title' => $item->title,
                     'text' => $text,
                     'category' => $category,
                     'date_time' => $item->date,
                 ]);
+                event(new NewStatusMeldungArrived($message));
             }
         });
     }

@@ -56,5 +56,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/thesoftwarefanatics/php-html-parser"
+        }
+    ]
 }
