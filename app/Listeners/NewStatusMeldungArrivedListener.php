@@ -36,6 +36,15 @@ class NewStatusMeldungArrivedListener
             "de" => $event->meldung->title,
         ];
         $tags = [["key" => $event->meldung->category, "relation" => "=", "value" => true]];
-        OneSignalFacade::sendNotificationCustom(['contents' => $contents, 'headings' => $headings, 'tags' => $tags]);
+        OneSignalFacade::sendNotificationCustom([
+            'contents' => $contents,
+            'headings' => $headings,
+            'tags' => $tags,
+            'android_group' => 'Hetzner-Status',
+            'android_group_message' => [
+                'en' => '$[notif_count] messages from Hetzner Status',
+                'de' => '$[notif_count] Status Meldungen von Hetzner',
+            ],
+        ]);
     }
 }
