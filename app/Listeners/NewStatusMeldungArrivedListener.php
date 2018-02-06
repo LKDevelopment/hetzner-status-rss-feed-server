@@ -33,7 +33,7 @@ class NewStatusMeldungArrivedListener
         ];
         $contents = [
             "en" => $event->meldung->text,
-            "de" => $event->meldung->title,
+            "de" => $event->meldung->text,
         ];
         $tags = [["key" => $event->meldung->category, "relation" => "=", "value" => true]];
         OneSignalFacade::sendNotificationCustom([
