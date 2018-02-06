@@ -43,9 +43,7 @@ class ReadFeed extends Command
     {
         $myFeed = Feed::make('https://www.hetzner-status.de/de.atom');
         collect($myFeed->getItems())->map(function ($item) {
-            $_doms = new Dom();
-            $_doms->load($item->toArray()['content']);
-            $doms = $_doms->find('div');
+
             $category = '';
             $text = '';
             $_external_id = explode('#', $item->permalink);
@@ -56,6 +54,14 @@ class ReadFeed extends Command
                 $_parent_id = explode('-', $external_id);
                 $parentId = $_parent_id[0];
             }
+            if ($parentId == null) {
+                $content = $item->toArray()['content'];
+            } else {
+                $content = '<div>'.$item->toArray()['content'].'</div>';
+            }
+            $_doms = new Dom();
+            $_doms->load($content);
+            $doms = $_doms->find('div');
             foreach ($doms as $dom) {
                 $_type = $dom->find('strong');
 
@@ -101,15 +107,6 @@ class ReadFeed extends Command
                 }
             }
 
-            var_dump([
-                'title' => $item->title,
-                'text' => $text,
-                'category' => $category,
-                'date_time' => $item->date,
-                'external_id' => $external_id,
-                'parent_id' => $parentId,
-                'permalink' => $item->permalink,
-            ]);
             $message = StatusMeldung::where('external_id', '=', $external_id)->first();
             if ($message == null && $category != '') {
                 $message = StatusMeldung::create([
