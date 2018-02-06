@@ -25,11 +25,11 @@ class StatusMeldung extends Model
         'permalink',
     ];
 
-    public $appends = [
+    public $with = [
         'children',
     ];
 
-    public function getChildrenAttribute()
+    public function children()
     {
         return $this->hasMany(StatusMeldung::class, 'parent_id', 'external_id');
     }
