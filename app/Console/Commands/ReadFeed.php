@@ -90,7 +90,7 @@ class ReadFeed extends Command
                             $link->delete();
                             unset($link);
                         }
-                        $text .= '<strong>Betroffen:</strong> '.(string) $_links;
+                        $text .= '<br /><strong>Betroffen:</strong> '.(string) $_links;
                     }
                 } else {
                     if ($_type->innerHTML == 'Update') {
@@ -114,15 +114,6 @@ class ReadFeed extends Command
                 $category = $parent->category;
             }
             $message = StatusMeldung::where('external_id', '=', $external_id)->first();
-            var_dump([
-                'title' => $item->title,
-                'text' => $text,
-                'category' => $category,
-                'date_time' => $item->date,
-                'external_id' => $external_id,
-                'parent_id' => $parentId,
-                'permalink' => $item->permalink,
-            ]);
             if ($message == null && $category != '') {
                 $message = StatusMeldung::create([
                     'title' => $item->title,
@@ -133,7 +124,7 @@ class ReadFeed extends Command
                     'parent_id' => $parentId,
                     'permalink' => $item->permalink,
                 ]);
-                //event(new NewStatusMeldungArrived($message));
+                event(new NewStatusMeldungArrived($message));
             }
         });
     }
