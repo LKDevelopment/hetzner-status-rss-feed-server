@@ -48,25 +48,6 @@ class ReadFeed extends Command
             $doms = $_doms->find('div');
             $category = '';
             $text = '';
-            foreach ($doms as $dom) {
-                $_type = $dom->find('strong');
-
-                if ($_type->innerHTML == 'Kategorie') {
-                    $type = $dom->find('li')->innerHTML;
-                    $category = $type;
-                }
-                if ($_type->innerHTML == 'Beschreibung') {
-                    $text = $dom->find('p')->innerHTML;
-                    $_links = new Dom();
-                    $_links->load($text);
-                    $links = $_links->find('a');
-                    foreach ($links as $link) {
-                        $link->delete();
-                        unset($link);
-                    }
-                    $text = (string) $_links;
-                }
-            }
             $_external_id = explode('#', $item->permalink);
             $external_id = end($_external_id);
 
@@ -75,6 +56,51 @@ class ReadFeed extends Command
                 $_parent_id = explode('-', $external_id);
                 $parentId = $_parent_id[0];
             }
+            foreach ($doms as $dom) {
+                $_type = $dom->find('strong');
+
+                if ($_type->innerHTML == 'Kategorie') {
+                    $type = $dom->find('li')->innerHTML;
+                    $category = $type;
+                }
+                if ($parentId == null) {
+                    if ($_type->innerHTML == 'Beschreibung') {
+                        $text = $dom->find('p')->innerHTML;
+                        $_links = new Dom();
+                        $_links->load($text);
+                        $links = $_links->find('a');
+                        foreach ($links as $link) {
+                            $link->delete();
+                            unset($link);
+                        }
+                        $text = (string) $_links;
+                    }
+                    if ($_type->innerHTML == 'Betroffen') {
+                        $text = $dom->find('p')->innerHTML;
+                        $_links = new Dom();
+                        $_links->load($text);
+                        $links = $_links->find('a');
+                        foreach ($links as $link) {
+                            $link->delete();
+                            unset($link);
+                        }
+                        $text .= '<strong>Betroffen:</strong> '.(string) $_links;
+                    }
+                } else {
+                    if ($_type->innerHTML == 'Update') {
+                        $text = $dom->find('p')->innerHTML;
+                        $_links = new Dom();
+                        $_links->load($text);
+                        $links = $_links->find('a');
+                        foreach ($links as $link) {
+                            $link->delete();
+                            unset($link);
+                        }
+                        $text = (string) $_links;
+                    }
+                }
+            }
+
             var_dump([
                 'title' => $item->title,
                 'text' => $text,
