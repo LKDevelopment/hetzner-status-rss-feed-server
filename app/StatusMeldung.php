@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class StatusMeldung extends Model
@@ -31,5 +32,10 @@ class StatusMeldung extends Model
     public function getChildrenAttribute()
     {
         return $this->hasMany(StatusMeldung::class, 'parent_id', 'external_id');
+    }
+
+    public function scopeOnlyParents(Builder $builder)
+    {
+        $builder->whereNull('parent_id');
     }
 }
