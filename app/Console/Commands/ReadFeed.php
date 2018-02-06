@@ -106,7 +106,13 @@ class ReadFeed extends Command
                     }
                 }
             }
-
+            if ($parentId != null) {
+                $parent = StatusMeldung::where('external_id', '=', $parentId)->first();
+                if ($parent == null) {
+                    return;
+                }
+                $category = $parent->category;
+            }
             $message = StatusMeldung::where('external_id', '=', $external_id)->first();
             if ($message == null && $category != '') {
                 $message = StatusMeldung::create([
