@@ -123,7 +123,7 @@ class ReadFeed extends Command
                 'parent_id' => $parentId,
                 'permalink' => $item->permalink,
             ]);
-            if (true == false && $message == null && $category != '') {
+            if ($message == null && $category != '') {
                 $message = StatusMeldung::create([
                     'title' => $item->title,
                     'text' => $text,
