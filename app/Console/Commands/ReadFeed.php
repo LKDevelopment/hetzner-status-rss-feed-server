@@ -15,7 +15,7 @@ class ReadFeed extends Command
      *
      * @var string
      */
-    protected $signature = 'read:feed';
+    protected $signature = 'read:feed {language}';
 
     /**
      * The console command description.
@@ -41,8 +41,9 @@ class ReadFeed extends Command
      */
     public function handle()
     {
-        $myFeed = Feed::make('https://www.hetzner-status.de/de.atom');
-        collect($myFeed->getItems())->map(function ($item) {
+        $language = $this->argument('language');
+        $myFeed = Feed::make('https://www.hetzner-status.de/'.$language.'.atom');
+        collect($myFeed->getItems())->map(function ($item) use ($language) {
 
             $category = '';
             $text = '';
@@ -123,6 +124,7 @@ class ReadFeed extends Command
                     'external_id' => $external_id,
                     'parent_id' => $parentId,
                     'permalink' => $item->permalink,
+                    'language' => $language,
                 ]);
                 event(new NewStatusMeldungArrived($message));
             }

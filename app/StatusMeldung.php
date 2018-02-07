@@ -23,6 +23,7 @@ class StatusMeldung extends Model
         'external_id',
         'parent_id',
         'permalink',
+        'language',
     ];
 
     public $with = [
@@ -31,11 +32,16 @@ class StatusMeldung extends Model
 
     public function children()
     {
-        return $this->hasMany(StatusMeldung::class, 'parent_id', 'external_id');
+        return $this->hasMany(StatusMeldung::class, 'parent_id', 'external_id')->language($this->language);
     }
 
     public function scopeOnlyParents(Builder $builder)
     {
         $builder->whereNull('parent_id');
+    }
+
+    public function scopeLanguage(Builder $builder, $language)
+    {
+        $builder->where('language', '=', $language);
     }
 }
