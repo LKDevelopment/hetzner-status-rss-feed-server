@@ -26,13 +26,18 @@ class StatusMeldung extends Model
         'language',
     ];
 
-    public $with = [
+    public $appends = [
         'children',
     ];
 
-    public function children()
+    public function getChildrenAttribute()
     {
-        return $this->hasMany(StatusMeldung::class, 'parent_id', 'external_id')->language($this->language);
+        return $this->_children()->language($this->language)->get();
+    }
+
+    public function _children()
+    {
+        return $this->hasMany(StatusMeldung::class, 'parent_id', 'external_id');
     }
 
     public function scopeOnlyParents(Builder $builder)
