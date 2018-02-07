@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('hetzner-status/{language?}', function ($language = null) {
+Route::get('hetzner-status/{language?}', function ($language = 'de') {
     return response()->json(\App\StatusMeldung::onlyParents()->language($language)->get());
 });
