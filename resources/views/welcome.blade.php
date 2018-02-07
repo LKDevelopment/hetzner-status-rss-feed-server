@@ -30,7 +30,7 @@
         }
 
         .flex-center {
-            align-items: center;
+
             display: flex;
             justify-content: center;
         }
@@ -38,19 +38,12 @@
         .position-ref {
             position: relative;
         }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
+        
         .content {
             text-align: center;
         }
 
         .title {
-            margin-top:10px;
             font-size: 84px;
         }
 
