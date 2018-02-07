@@ -15,7 +15,7 @@ class ReadFeed extends Command
      *
      * @var string
      */
-    protected $signature = 'read:feed {language}';
+    protected $signature = 'read:feed {language=de}';
 
     /**
      * The console command description.
@@ -58,7 +58,10 @@ class ReadFeed extends Command
                 'update' => 'Update',
             ],
         ];
-        collect($myFeed->getItems())->map(function ($item) use ($language, $languages) {
+        $output = $this;
+        $output->info(count($myFeed->getItems()).' founded');
+        $output->output->progressStart(count($myFeed->getItems()));
+        collect($myFeed->getItems())->map(function ($item) use ($language, $languages, $output) {
 
             $category = '';
             $text = '';
@@ -86,7 +89,7 @@ class ReadFeed extends Command
                     $category = $type;
                 }
                 if ($parentId == null) {
-                    if ($_type->innerHTML ==  $languages[$language]['text']) {
+                    if ($_type->innerHTML == $languages[$language]['text']) {
                         $text = $dom->find('p')->innerHTML;
                         $_links = new Dom();
                         $_links->load($text);
@@ -97,7 +100,7 @@ class ReadFeed extends Command
                         }
                         $text = (string) $_links;
                     }
-                    if ($_type->innerHTML ==  $languages[$language]['affected']) {
+                    if ($_type->innerHTML == $languages[$language]['affected']) {
                         $text = $dom->find('p')->innerHTML;
                         $_links = new Dom();
                         $_links->load($text);
@@ -109,7 +112,7 @@ class ReadFeed extends Command
                         $text .= '<br /><strong>'.$languages[$language]['affected'].':</strong> '.(string) $_links;
                     }
                 } else {
-                    if ($_type->innerHTML ==  $languages[$language]['update']) {
+                    if ($_type->innerHTML == $languages[$language]['update']) {
                         $text = $dom->find('p')->innerHTML;
                         $_links = new Dom();
                         $_links->load($text);
@@ -143,6 +146,8 @@ class ReadFeed extends Command
                 ]);
                 event(new NewStatusMeldungArrived($message));
             }
+            $this->output->progressAdvance();
         });
+        $this->output->progressFinish();
     }
 }
