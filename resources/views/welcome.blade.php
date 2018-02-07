@@ -88,7 +88,7 @@
         <div class="mt-2">
             Response
             <pre style="height:200px;">
-                <code class="json">{{ json_encode(App\StatusMeldung::onlyParents()->get(), JSON_PRETTY_PRINT) }}</code>
+                <code class="json">{{ json_encode(App\StatusMeldung::onlyParents()->limit(3)->get(), JSON_PRETTY_PRINT) }}</code>
             </pre>
         </div>
     </div>
