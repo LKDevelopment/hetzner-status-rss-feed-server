@@ -30,6 +30,20 @@ class StatusMeldung extends Model
         'children',
     ];
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order_by_id', function (Builder $builder) {
+            $builder->orderByDesc('id');
+        });
+    }
+
     public function getChildrenAttribute()
     {
         return $this->_children()->language($this->language)->get();
