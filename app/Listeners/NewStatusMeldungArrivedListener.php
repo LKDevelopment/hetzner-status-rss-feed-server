@@ -6,6 +6,7 @@ use App\Events\NewStatusMeldungArrived;
 use Berkayk\OneSignal\OneSignalFacade;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Stevebauman\Purify\Purify;
 
 class NewStatusMeldungArrivedListener
 {
@@ -32,8 +33,8 @@ class NewStatusMeldungArrivedListener
             "de" => $event->meldung->title,
         ];
         $contents = [
-            "en" => $event->meldung->text,
-            "de" => $event->meldung->text,
+            "en" => Purify::clean($event->meldung->text,['HTML.Allowed' => '']),
+            "de" => Purify::clean($event->meldung->text,['HTML.Allowed' => '']),
         ];
         $tags = [["key" => $event->meldung->category, "relation" => "=", "value" => true]];
         OneSignalFacade::sendNotificationCustom([
