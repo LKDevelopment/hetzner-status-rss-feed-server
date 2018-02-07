@@ -11,9 +11,9 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darkula.min.css" integrity="sha256-P2KWHSGJ9GJRarV8YnOiILPEadKfOCdzdoWv11gh5v4=" crossorigin="anonymous" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <!-- Styles -->
     <style>
         html, body {
@@ -87,16 +87,12 @@
         </div>
         <div class="mt-2">
             Response
-            <pre>
+            <pre style="height:200px;">
                 <code class="json">{{ json_encode(App\StatusMeldung::onlyParents()->get(), JSON_PRETTY_PRINT) }}</code>
             </pre>
         </div>
     </div>
 </div>
-<script>
-    $('pre code').each(function (i, block) {
-        hljs.highlightBlock(block);
-    });
-</script>
+
 </body>
 </html>
