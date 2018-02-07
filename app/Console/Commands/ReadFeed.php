@@ -43,7 +43,22 @@ class ReadFeed extends Command
     {
         $language = $this->argument('language');
         $myFeed = Feed::make('https://www.hetzner-status.de/'.$language.'.atom');
-        collect($myFeed->getItems())->map(function ($item) use ($language) {
+
+        $languages = [
+            'de' => [
+                'category' => 'Kategorie',
+                'text' => 'Beschreibung',
+                'affected' => 'Betroffen',
+                'update' => 'Update',
+            ],
+            'en' => [
+                'category' => 'Category',
+                'text' => 'Description',
+                'affected' => 'Affected',
+                'update' => 'Update',
+            ],
+        ];
+        collect($myFeed->getItems())->map(function ($item) use ($language, $languages) {
 
             $category = '';
             $text = '';
@@ -66,12 +81,12 @@ class ReadFeed extends Command
             foreach ($doms as $dom) {
                 $_type = $dom->find('strong');
 
-                if ($_type->innerHTML == 'Kategorie') {
+                if ($_type->innerHTML == $languages[$language]['category']) {
                     $type = $dom->find('li')->innerHTML;
                     $category = $type;
                 }
                 if ($parentId == null) {
-                    if ($_type->innerHTML == 'Beschreibung') {
+                    if ($_type->innerHTML ==  $languages[$language]['text']) {
                         $text = $dom->find('p')->innerHTML;
                         $_links = new Dom();
                         $_links->load($text);
@@ -82,7 +97,7 @@ class ReadFeed extends Command
                         }
                         $text = (string) $_links;
                     }
-                    if ($_type->innerHTML == 'Betroffen') {
+                    if ($_type->innerHTML ==  $languages[$language]['affected']) {
                         $text = $dom->find('p')->innerHTML;
                         $_links = new Dom();
                         $_links->load($text);
@@ -91,10 +106,10 @@ class ReadFeed extends Command
                             $link->delete();
                             unset($link);
                         }
-                        $text .= '<br /><strong>Betroffen:</strong> '.(string) $_links;
+                        $text .= '<br /><strong>'.$languages[$language]['affected'].':</strong> '.(string) $_links;
                     }
                 } else {
-                    if ($_type->innerHTML == 'Update') {
+                    if ($_type->innerHTML ==  $languages[$language]['update']) {
                         $text = $dom->find('p')->innerHTML;
                         $_links = new Dom();
                         $_links->load($text);
