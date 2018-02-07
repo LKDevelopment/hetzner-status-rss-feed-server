@@ -74,15 +74,19 @@
             <a href="https://github.com/LKDevelopment/hetzner-status-rss-feed-server">GitHub</a>
         </div>
         <div>
-            API
+            API (Available languages: de | en )
             <pre>
-                <code class="bash">$ curl https://hetzner-status.lkdev.co/api/hetzner-status</code>
+                <code class="bash">$ curl https://hetzner-status.lkdev.co/api/hetzner-status/{languageCode}</code>
             </pre>
+
         </div>
         <div class="mt-2">
             Response
+            <pre>
+                <code class="bash">$ curl https://hetzner-status.lkdev.co/api/hetzner-status/de</code>
+            </pre>
             <pre style="height:200px;">
-                <code class="json">{{ json_encode(App\StatusMeldung::onlyParents()->limit(3)->get(), JSON_PRETTY_PRINT) }}</code>
+                <code class="json">{{ json_encode(App\StatusMeldung::onlyParents()->language('de')->limit(3)->get(), JSON_PRETTY_PRINT) }}</code>
             </pre>
         </div>
     </div>
