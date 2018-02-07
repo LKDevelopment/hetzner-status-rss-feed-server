@@ -38,7 +38,7 @@
         .position-ref {
             position: relative;
         }
-        
+
         .content {
             text-align: center;
         }
