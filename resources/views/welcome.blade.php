@@ -78,7 +78,6 @@
             <pre>
                 <code class="bash">$ curl https://hetzner-status.lkdev.co/api/hetzner-status/{languageCode}</code>
             </pre>
-
         </div>
         <div class="mt-2">
             Response

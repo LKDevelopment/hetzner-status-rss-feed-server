@@ -23,8 +23,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('read:feed', ['language' => 'de'])->everyMinute();
-        $schedule->command('read:feed', ['language' => 'en'])->everyMinute();
+        $schedule->command('read:feed', [ 'de'])->everyMinute();
+        $schedule->command('read:feed', ['en'])->everyMinute();
     }
 
     /**
