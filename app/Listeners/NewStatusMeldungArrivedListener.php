@@ -34,8 +34,8 @@ class NewStatusMeldungArrivedListener
                 "de" => $event->meldung->title,
             ];
             $contents = [
-                "en" => Purify::clean($event->meldung->text, ['HTML.Allowed' => '']),
-                "de" => Purify::clean($event->meldung->text, ['HTML.Allowed' => '']),
+                "en" => \Stevebauman\Purify\Facades\Purify::clean($event->meldung->text, ['HTML.Allowed' => '']),
+                "de" => \Stevebauman\Purify\Facades\Purify::clean($event->meldung->text, ['HTML.Allowed' => '']),
             ];
             $tags = [["key" => $event->meldung->category, "relation" => "=", "value" => true]];
             OneSignalFacade::sendNotificationCustom([
