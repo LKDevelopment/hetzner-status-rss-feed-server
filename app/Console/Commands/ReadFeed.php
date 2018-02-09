@@ -101,9 +101,9 @@ class ReadFeed extends Command
                         $text = (string) $_links;
                     }
                     if ($_type->innerHTML == $languages[$language]['affected']) {
-                        $text = $dom->find('p')->innerHTML;
+                        $affected = $dom->find('p')->innerHTML;
                         $_links = new Dom();
-                        $_links->load($text);
+                        $_links->load($affected);
                         $links = $_links->find('a');
                         foreach ($links as $link) {
                             $link->delete();
