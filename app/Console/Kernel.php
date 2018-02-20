@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [//
+    protected $commands = [
+        //
     ];
 
     /**
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('read:feed', [ 'de'])->everyMinute();
+        $schedule->command('read:feed', ['en'])->everyMinute();
         $schedule->command('read:feed', ['en'])->everyMinute();
     }
 
