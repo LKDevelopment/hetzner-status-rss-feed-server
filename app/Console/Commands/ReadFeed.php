@@ -50,12 +50,32 @@ class ReadFeed extends Command
                 'text' => 'Beschreibung',
                 'affected' => 'Betroffen',
                 'update' => 'Update',
+                'categories' => [
+                    "Allgemein" => "Allgemein",
+                    "Basis Infrastruktur" => "Basis Infrastruktur",
+                    "Erweiterte Infrastruktur" => "Erweiterte Infrastruktur",
+                    "Netzwerk" => "Netzwerk",
+                    "Webhosting und Managed Server" => "Webhosting und Managed Server",
+                    "Domain Registration Robot" => "Domain Registration Robot",
+                    "vServer" => "vServer",
+                    "Cloud" => "Cloud",
+                ],
             ],
             'en' => [
                 'category' => 'Category',
                 'text' => 'Description',
                 'affected' => 'Affected',
                 'update' => 'Update',
+                'categories' => [
+                    "General" => "Allgemein",
+                    "Basic Infrastructure" => "Basis Infrastruktur",
+                    "Advanced Infrastructure" => "Erweiterte Infrastruktur",
+                    "Network" => "Netzwerk",
+                    "Web hosting and Managed Server" => "Webhosting und Managed Server",
+                    "Domain Registration Robot" => "Domain Registration Robot",
+                    "vServer" => "vServer",
+                    "Cloud" => "Cloud",
+                ],
             ],
         ];
         $output = $this;
@@ -86,7 +106,12 @@ class ReadFeed extends Command
 
                 if ($_type->innerHTML == $languages[$language]['category']) {
                     $type = $dom->find('li')->innerHTML;
-                    $category = $type;
+                    if (str_contains($type, ',')) {
+                        $_category = explode(',', $type);
+                        $category = end($_category);
+                    } else {
+                        $category = $type;
+                    }
                 }
                 if ($parentId == null) {
                     if ($_type->innerHTML == $languages[$language]['text']) {
@@ -137,7 +162,7 @@ class ReadFeed extends Command
                 $message = StatusMeldung::create([
                     'title' => $item->title,
                     'text' => $text,
-                    'category' => $category,
+                    'category' => $languages[$language]['categories'][$category],
                     'date_time' => $item->date,
                     'external_id' => $external_id,
                     'parent_id' => $parentId,
