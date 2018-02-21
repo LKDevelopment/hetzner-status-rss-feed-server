@@ -20,7 +20,7 @@ Route::get('v2/messages', function () {
 });
 Route::get('v2/tags', function () {
     return response()->json([
-        'general' => [
+        [
             'label' => ['de' => 'Allgemein'],
             'general.fault_report' => ['de' => 'Störungen'],
             'general.fault_report.update' => ['de' => 'Störungen Updates'],
@@ -29,7 +29,7 @@ Route::get('v2/tags', function () {
             'general.miscellaneous' => ['de' => 'Sonstiges'],
             'general.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
         ],
-        'basic_infrastructur' => [
+        [
             'label' => ['de' => 'Basis Infrastruktur'],
             'basic_infrastructur.fault_report' => ['de' => 'Störungen'],
             'basic_infrastructur.fault_report.update' => ['de' => 'Störungen Updates'],
@@ -38,7 +38,7 @@ Route::get('v2/tags', function () {
             'basic_infrastructur.miscellaneous' => ['de' => 'Sonstiges'],
             'basic_infrastructur.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
         ],
-        'advanced_infrastructur' => [
+        [
             'label' => ['de' => 'Erweiterte Infrastruktur'],
             'advanced_infrastructur.fault_report' => ['de' => 'Störungen'],
             'advanced_infrastructur.fault_report.update' => ['de' => 'Störungen Updates'],
@@ -47,7 +47,7 @@ Route::get('v2/tags', function () {
             'advanced_infrastructur.miscellaneous' => ['de' => 'Sonstiges'],
             'advanced_infrastructur.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
         ],
-        'network' => [
+        [
             'label' => ['de' => 'Netzwerk'],
             'network.fault_report' => ['de' => 'Störungen'],
             'network.fault_report.update' => ['de' => 'Störungen Updates'],
@@ -56,7 +56,7 @@ Route::get('v2/tags', function () {
             'network.miscellaneous' => ['de' => 'Sonstiges'],
             'network.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
         ],
-        'webhosting_and_managed_server' => [
+        [
             'label' => ['de' => 'Webhosting & Managed Server'],
             'webhosting_and_managed_server.fault_report' => ['de' => 'Störungen'],
             'webhosting_and_managed_server.fault_report.update' => ['de' => ' Störungen Updates'],
@@ -65,7 +65,7 @@ Route::get('v2/tags', function () {
             'webhosting_and_managed_server.miscellaneous' => ['de' => 'Sonstiges'],
             'webhosting_and_managed_server.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
         ],
-        'domain_registration_robot' => [
+        [
             'label' => ['de' => 'Domain Registration Robot'],
             'domain_registration_robot.fault_report' => ['de' => 'Störungen'],
             'domain_registration_robot.fault_report.update' => ['de' => 'Störungen Updates'],
@@ -74,7 +74,7 @@ Route::get('v2/tags', function () {
             'domain_registration_robot.miscellaneous' => ['de' => 'Sonstiges'],
             'domain_registration_robot.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
         ],
-        'v_servers' => [
+        [
             'label' => ['de' => 'vServer'],
             'v_servers.fault_report' => ['de' => 'Störungen'],
             'v_servers.fault_report.update' => ['de' => 'Störungen Updates'],
@@ -83,7 +83,7 @@ Route::get('v2/tags', function () {
             'v_servers.miscellaneous' => ['de' => 'Sonstiges'],
             'v_servers.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
         ],
-        'cloud' => [
+        [
             'label' => ['de' => 'Cloud'],
             'cloud.fault_report' => ['de' => 'Störungen'],
             'cloud.fault_report.update' => ['de' => 'Störungen Updates'],
