@@ -50,7 +50,7 @@ class ReadFeed extends Command
                 'text' => 'Beschreibung',
                 'affected' => 'Betroffen',
                 'update' => 'Update',
-                
+
             ],
             'en' => [
                 'category' => 'Category',
