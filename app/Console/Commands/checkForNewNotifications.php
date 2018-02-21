@@ -60,15 +60,10 @@ class checkForNewNotifications extends Command
                     "key" => $category.'.'.$newMessage->type,
                     "relation" => "=",
                     "value" => true,
-                ],
-                [
-                    "key" => 'v2',
-                    "relation" => "=",
-                    "value" => 'yes',
-                ],
+                ]
             ];
-            dump($tags);
-            /*foreach ($apps as $app => $envPrefix) {
+
+            foreach ($apps as $app => $envPrefix) {
                 $oneSignalClient = new OneSignalClient(env($envPrefix.'_ONE_SIGNAL_APP_ID'), env($envPrefix.'_ONE_SIGNAL_REST_KEY'), env($envPrefix.'_ONE_SIGNAL_USER_KEY'));
                 $oneSignalClient->sendNotificationCustom([
                     'contents' => $contents,
@@ -81,7 +76,7 @@ class checkForNewNotifications extends Command
                     ],
                 ]);
             }
-            $newMessage->update(['send_at' => Carbon::now()]);*/
+            $newMessage->update(['send_at' => Carbon::now()]);
         }
     }
 }
