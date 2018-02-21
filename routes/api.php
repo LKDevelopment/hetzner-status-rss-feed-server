@@ -20,52 +20,72 @@ Route::get('v2/messages', function () {
 });
 Route::get('v2/tags', function () {
     return response()->json([
-        [
-            'label' => ['de' => 'Allgemein'],
-            'general.fault_report' => ['de' => 'Störungen'],
-            'general.fault_report.update' => ['de' => 'Störungen Updates'],
-            'general.maintaince_work' => ['de' => 'Wartungsarbeiten'],
-            'general.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
-            'general.miscellaneous' => ['de' => 'Sonstiges'],
-            'general.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
-        ],
-        [
-            'label' => ['de' => 'Basis Infrastruktur'],
-            'basic_infrastructur.fault_report' => ['de' => 'Störungen'],
-            'basic_infrastructur.fault_report.update' => ['de' => 'Störungen Updates'],
-            'basic_infrastructur.maintaince_work' => ['de' => 'Wartungsarbeiten'],
-            'basic_infrastructur.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
-            'basic_infrastructur.miscellaneous' => ['de' => 'Sonstiges'],
-            'basic_infrastructur.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
-        ],
-        [
-            'label' => ['de' => 'Erweiterte Infrastruktur'],
-            'advanced_infrastructur.fault_report' => ['de' => 'Störungen'],
-            'advanced_infrastructur.fault_report.update' => ['de' => 'Störungen Updates'],
-            'advanced_infrastructur.maintaince_work' => ['de' => 'Wartungsarbeiten'],
-            'advanced_infrastructur.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
-            'advanced_infrastructur.miscellaneous' => ['de' => 'Sonstiges'],
-            'advanced_infrastructur.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
-        ],
-        [
-            'label' => ['de' => 'Netzwerk'],
-            'network.fault_report' => ['de' => 'Störungen'],
-            'network.fault_report.update' => ['de' => 'Störungen Updates'],
-            'network.maintaince_work' => ['de' => 'Wartungsarbeiten'],
-            'network.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
-            'network.miscellaneous' => ['de' => 'Sonstiges'],
-            'network.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
-        ],
+        /* [
+             'label' => ['de' => 'Allgemein'],
+             'general.fault_report' => ['de' => 'Störungen'],
+             'general.fault_report.update' => ['de' => 'Störungen Updates'],
+             'general.maintaince_work' => ['de' => 'Wartungsarbeiten'],
+             'general.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
+             'general.miscellaneous' => ['de' => 'Sonstiges'],
+             'general.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
+         ],
+         [
+             'label' => ['de' => 'Basis Infrastruktur'],
+             'basic_infrastructur.fault_report' => ['de' => 'Störungen'],
+             'basic_infrastructur.fault_report.update' => ['de' => 'Störungen Updates'],
+             'basic_infrastructur.maintaince_work' => ['de' => 'Wartungsarbeiten'],
+             'basic_infrastructur.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
+             'basic_infrastructur.miscellaneous' => ['de' => 'Sonstiges'],
+             'basic_infrastructur.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
+         ],
+         [
+             'label' => ['de' => 'Erweiterte Infrastruktur'],
+             'advanced_infrastructur.fault_report' => ['de' => 'Störungen'],
+             'advanced_infrastructur.fault_report.update' => ['de' => 'Störungen Updates'],
+             'advanced_infrastructur.maintaince_work' => ['de' => 'Wartungsarbeiten'],
+             'advanced_infrastructur.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
+             'advanced_infrastructur.miscellaneous' => ['de' => 'Sonstiges'],
+             'advanced_infrastructur.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
+         ],
+         [
+             'label' => ['de' => 'Netzwerk'],
+             'network.fault_report' => ['de' => 'Störungen'],
+             'network.fault_report.update' => ['de' => 'Störungen Updates'],
+             'network.maintaince_work' => ['de' => 'Wartungsarbeiten'],
+             'network.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
+             'network.miscellaneous' => ['de' => 'Sonstiges'],
+             'network.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
+         ],*/
         [
             'label' => ['de' => 'Webhosting & Managed Server'],
-            'webhosting_and_managed_server.fault_report' => ['de' => 'Störungen'],
-            'webhosting_and_managed_server.fault_report.update' => ['de' => ' Störungen Updates'],
-            'webhosting_and_managed_server.maintaince_work' => ['de' => 'Wartungsarbeiten'],
-            'webhosting_and_managed_server.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
-            'webhosting_and_managed_server.miscellaneous' => ['de' => 'Sonstiges'],
-            'webhosting_and_managed_server.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
+            'parts' => [
+                [
+                    'key' => 'webhosting_and_managed_server.fault_report',
+                    'label' => ['de' => 'Störungen'],
+                ],
+                [
+                    'key' => 'webhosting_and_managed_server.fault_report.update',
+                    'label' => ['de' => 'Störungen Updates'],
+                ],
+                [
+                    'key' => 'webhosting_and_managed_server.maintaince_work',
+                    'label' => ['de' => 'Wartungsarbeiten'],
+                ],
+                [
+                    'key' => 'webhosting_and_managed_server.maintaince_work.updates',
+                    'label' => ['de' => 'Wartungsarbeiten Updates'],
+                ],
+                [
+                    'key' => 'webhosting_and_managed_server.miscellaneous',
+                    'label' => ['de' => 'Sonstiges'],
+                ],
+                [
+                    'key' => 'webhosting_and_managed_server.miscellaneous.updates',
+                    'label' => ['de' => 'Sonstiges Updates'],
+                ],
+            ],
         ],
-        [
+        /*[
             'label' => ['de' => 'Domain Registration Robot'],
             'domain_registration_robot.fault_report' => ['de' => 'Störungen'],
             'domain_registration_robot.fault_report.update' => ['de' => 'Störungen Updates'],
@@ -91,6 +111,6 @@ Route::get('v2/tags', function () {
             'cloud.maintaince_work.update' => ['de' => 'Wartungsarbeiten Updates'],
             'cloud.miscellaneous' => ['de' => 'Sonstiges'],
             'cloud.miscellaneous.update' => ['de' => 'Sonstiges Updates'],
-        ],
+        ],*/
     ]);
 });
