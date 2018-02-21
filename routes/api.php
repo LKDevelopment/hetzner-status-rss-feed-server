@@ -15,10 +15,10 @@ Route::get('hetzner-status/{language?}', function ($language = 'de') {
     return response()->json(\App\StatusMeldung::onlyParents()->language($language)->get());
 });
 
-Route::get('v1/messages', function () {
+Route::get('v2/messages', function () {
     return response()->json(\App\Model\Message::onlyParents()->get());
 });
-Route::get('v1/tags', function () {
+Route::get('v2/tags', function () {
     return response()->json([
         'general' => [
             'fault_report' => 'update',
