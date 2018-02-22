@@ -25,7 +25,7 @@ class NewStatusMeldungArrivedListener
      */
     public function handle(NewStatusMeldungArrived $event)
     {
-        if ($event->meldung->language) {
+        if ($event->meldung->language == 'de') {
             $headings = [
                 "en" => $event->meldung->title,
                 "de" => $event->meldung->title,
