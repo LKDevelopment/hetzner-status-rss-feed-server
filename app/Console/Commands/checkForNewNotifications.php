@@ -40,9 +40,8 @@ class checkForNewNotifications extends Command
      */
     public function handle()
     {
-        $newMessages = Message::whereNull('send_at')->whereNotNull('title_de')->whereNotNull('title_en')->count();
+        $newMessages = Message::whereNull('send_at')->whereNotNull('title_de')->whereNotNull('title_en')->get();
         $apps = ['hetzner-status-app' => 'HetznerStatusApp'];
-        dd($newMessages);
         foreach ($newMessages as $newMessage) {
             $headings = [
                 "en" => $newMessage->title_en,
