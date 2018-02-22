@@ -22,6 +22,7 @@ class Message extends Model
         'type',
         'external_id',
         'parent_id',
+        'send_at'
     ];
 
     public $hidden = ['id', 'created_at', 'send_at', 'updated_at', 'parent_id'];
