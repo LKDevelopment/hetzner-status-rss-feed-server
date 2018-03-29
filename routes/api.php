@@ -12,7 +12,7 @@
 */
 
 Route::get('hetzner-status/{language?}', function ($language = 'de') {
-    return response()->json(\App\StatusMeldung::onlyParents()->language($language)->get());
+    return response()->json(\App\StatusMeldung::onlyParents()->language($language)->limit(request('limit', 20))->get());
 });
 
 Route::get('v2/messages', function () {
