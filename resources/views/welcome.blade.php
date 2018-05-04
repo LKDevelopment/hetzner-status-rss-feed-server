@@ -67,7 +67,7 @@
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title">
-            Hetzner-Status JSON Service
+            Hetzner-Status JSON Service <a href=""
         </div>
 
         <div class="links m-b-md">
@@ -90,6 +90,6 @@
         </div>
     </div>
 </div>
-
+<script defer src="https://use.fontawesome.com/releases/v5.0.12/js/all.js" integrity="sha384-Voup2lBiiyZYkRto2XWqbzxHXwzcm4A5RfdfG6466bu5LqjwwrjXCMBQBLMWh7qR" crossorigin="anonymous"></script>
 </body>
 </html>

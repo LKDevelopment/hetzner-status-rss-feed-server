@@ -45,17 +45,20 @@ class TweetListener extends Command
     {
         TwitterStreamingApi::publicStream()
             ->whenHears('@HetzStatusBot', function (array $tweet) {
-                $keyword = ltrim(trim(str_replace('@HetzStatusBot','',$tweet['text'])));
+                $keyword = explode(PHP_EOL, ltrim(trim(str_replace('@HetzStatusBot', '', $tweet['text']))))[0];
                 $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
                 var_dump($tweet);
-                if ($messages->count() == 0) {
-                    Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found nothing for your request!", 'format' => 'json']);
-                    echo "Nothing found";
-                } else {
-                    Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found something: " . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '), 'format' => 'json']);
-                    echo "Found something";
+                try {
+                    if ($messages->count() == 0) {
+                        Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found nothing for your request!", 'format' => 'json']);
+                        echo "Nothing found";
+                    } else {
+                        Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found something: " . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '), 'format' => 'json']);
+                        echo "Found something";
+                    }
+                } catch (\Exception $e) {
+                    echo "Aua!";
                 }
-
                 echo "{$tweet['user']['screen_name']} tweeted {$tweet['text']}";
             })
             ->startListening();

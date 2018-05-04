@@ -10,14 +10,15 @@
         "barryvdh/laravel-cors": "^0.11.0",
         "berkayk/onesignal-laravel": "^0.9.9",
         "botman/botman": "^2.3",
+        "botman/driver-telegram": "^1.5",
+        "fennb/phirehose": "dev-master#405d125db9baa771ac0cd861f0b2b2032434d40c",
         "fideloper/proxy": "~4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "spatie/laravel-twitter-streaming-api": "^1.1",
         "stevebauman/purify": "2.0.*",
         "thesoftwarefanatics/php-html-parser": "^1.8",
-        "thujohn/twitter": "^2.2",
-        "fennb/phirehose": "dev-master#405d125db9baa771ac0cd861f0b2b2032434d40c"
+        "thujohn/twitter": "^2.2"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
