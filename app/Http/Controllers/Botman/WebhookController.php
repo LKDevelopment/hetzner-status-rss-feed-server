@@ -9,15 +9,20 @@ use Carbon\Carbon;
 
 class WebhookController extends \App\Http\Controllers\Controller
 {
-    public function telegram(){
+
+    public function telegram()
+    {
         DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramDriver::class);
         $config = [
             // Your driver-specific configuration
-             "telegram" => [
-                "token" => getenv('TELEGRAM_TOKEN')
-            ]
+            "telegram" => [
+                "token" => getenv('TELEGRAM_TOKEN'),
+            ],
         ];
         $botman = BotManFactory::create($config);
+        $botman->hears('start', function ($bot) {
+            $bot->reply('Hello! Just write me what you want to know');
+        });
         $botman->hears('{keyword}', function ($bot, $keyword) {
 
             $keyword = explode(PHP_EOL, ltrim(trim($keyword)))[0];
@@ -25,14 +30,17 @@ class WebhookController extends \App\Http\Controllers\Controller
 
             try {
                 if ($messages->count() == 0) {
-                    $bot->reply("I've found something:". $messages->map(function ($m) { return $m->permalink_en; })->implode(' '));
+                    $bot->reply("I've found nothing for this.");
                     echo "Nothing found";
                 } else {
-                    $bot->reply("I've found something:". $messages->map(function ($m) { return $m->permalink_en; })->implode(' '));
+                    $bot->reply("I've found something:" . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '));
                 }
             } catch (\Exception $e) {
 
             }
+        });
+        $botman->fallback(function ($bot) {
+            $bot->reply('Sorry, I did not understand these commands. Here is a list of commands I understand: ...');
         });
 // Process incoming message
         $botman->listen();
