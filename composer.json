@@ -16,7 +16,8 @@
         "spatie/laravel-twitter-streaming-api": "^1.1",
         "stevebauman/purify": "2.0.*",
         "thesoftwarefanatics/php-html-parser": "^1.8",
-        "thujohn/twitter": "^2.2"
+        "thujohn/twitter": "^2.2",
+        "fennb/phirehose": "dev-master#405d125db9baa771ac0cd861f0b2b2032434d40c"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
