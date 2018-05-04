@@ -6,7 +6,7 @@ use App\Model\Message;
 use App\StatusMeldung;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Spatie\LaravelTwitterStreamingApi\TwitterStreamingApi;
+use TwitterStreamingApi;
 use Thujohn\Twitter\Facades\Twitter;
 
 class TweetListener extends Command
