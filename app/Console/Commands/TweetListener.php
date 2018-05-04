@@ -59,7 +59,7 @@ class TweetListener extends Command
                 } catch (\Exception $e) {
                     echo "Aua!";
                 }
-                echo "{$tweet['user']['screen_name']} tweeted {$tweet['text']}";
+                echo "{$tweet['user']['screen_name']} tweeted {$tweet['text']}; KEYWORD:".$keyword;
             })
             ->startListening();
     }
