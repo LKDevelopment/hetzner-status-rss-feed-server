@@ -47,7 +47,7 @@ class TweetListener extends Command
             ->whenHears('@HetzStatusBot', function (array $tweet) {
                 $keyword = explode(PHP_EOL, ltrim(trim(str_replace('@HetzStatusBot', '', $tweet['text']))))[0];
                 $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
-                var_dump($tweet);
+
                 try {
                     if ($messages->count() == 0) {
                         Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found nothing for your request!", 'format' => 'json']);

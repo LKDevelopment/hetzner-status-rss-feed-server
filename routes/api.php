@@ -18,6 +18,8 @@ Route::get('hetzner-status/{language?}', function ($language = 'de') {
 Route::get('v2/messages', function () {
     return response()->json(\App\Model\Message::onlyParents()->get());
 });
+
+Route::post('bot/webhook/telegram', "Botman\WebhookController@telegram");
 Route::get('v2/tags', function () {
     return response()->json([
         [
