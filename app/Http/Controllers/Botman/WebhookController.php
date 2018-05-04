@@ -25,7 +25,7 @@ class WebhookController extends \App\Http\Controllers\Controller
         });
         $botman->hears('{keyword}', function ($bot, $keyword) {
 
-            $keyword = explode(PHP_EOL, ltrim(trim($keyword)))[0];
+            $keyword = explode(PHP_EOL, str_replace(' ', '', $keyword))[0];
             $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
 
             try {
