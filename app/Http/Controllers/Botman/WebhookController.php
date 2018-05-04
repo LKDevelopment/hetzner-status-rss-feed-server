@@ -31,7 +31,7 @@ class WebhookController extends \App\Http\Controllers\Controller
             $bot->reply('And i will answer you if there are any messages! Just try it out :)');
         });
         $botman->hears('{keyword}', function ($bot, $keyword) {
-            if (str_contains($keyword,['start','help']) == false) {
+            if (str_contains($keyword, ['start', 'help']) == false) {
                 $keyword = explode(PHP_EOL, str_replace(' ', '', $keyword))[0];
                 $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
 
@@ -40,7 +40,11 @@ class WebhookController extends \App\Http\Controllers\Controller
                         $bot->reply("I've found nothing for this.");
                         echo "Nothing found";
                     } else {
-                        $bot->reply("I've found something:" . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '));
+                        $bot->reply("I found " . $messages->count() . " Messages for this");
+                        foreach ($messages as $message) {
+                            $bot->reply($message->title_en . ' ' . $message->permalink_en);
+                        }
+
                     }
                 } catch (\Exception $e) {
 
