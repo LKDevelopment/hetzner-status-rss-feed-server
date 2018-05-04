@@ -37,7 +37,7 @@ class WebhookController extends \App\Http\Controllers\Controller
 
                 try {
                     if ($messages->count() == 0) {
-                        $bot->reply("I've found nothing for this.");
+                        $bot->reply("I've found nothing for the keyword: ".$keyword);
                         echo "Nothing found";
                     } else {
                         $bot->reply("I found " . $messages->count() . " Messages for this");
