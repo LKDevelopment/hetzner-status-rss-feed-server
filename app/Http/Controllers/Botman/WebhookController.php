@@ -21,7 +21,9 @@ class WebhookController extends \App\Http\Controllers\Controller
         ];
         $botman = BotManFactory::create($config);
         $botman->hears('start', function ($bot) {
-            $bot->reply('Hello! Just write me what you want to know');
+            $bot->reply('Hello! Just write me what you want to know like so:');
+            $bot->reply('nbg');
+            $bot->reply('And i will answer you if there are any messages! Just try it out :)');
         });
         $botman->hears('{keyword}', function ($bot, $keyword) {
             if ($keyword != "start") {
