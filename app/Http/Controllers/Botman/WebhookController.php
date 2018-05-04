@@ -24,19 +24,20 @@ class WebhookController extends \App\Http\Controllers\Controller
             $bot->reply('Hello! Just write me what you want to know');
         });
         $botman->hears('{keyword}', function ($bot, $keyword) {
+            if ($keyword != "start") {
+                $keyword = explode(PHP_EOL, str_replace(' ', '', $keyword))[0];
+                $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
 
-            $keyword = explode(PHP_EOL, str_replace(' ', '', $keyword))[0];
-            $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
+                try {
+                    if ($messages->count() == 0) {
+                        $bot->reply("I've found nothing for this.");
+                        echo "Nothing found";
+                    } else {
+                        $bot->reply("I've found something:" . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '));
+                    }
+                } catch (\Exception $e) {
 
-            try {
-                if ($messages->count() == 0) {
-                    $bot->reply("I've found nothing for this.");
-                    echo "Nothing found";
-                } else {
-                    $bot->reply("I've found something:" . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '));
                 }
-            } catch (\Exception $e) {
-
             }
         });
         $botman->fallback(function ($bot) {
