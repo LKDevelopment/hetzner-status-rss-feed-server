@@ -45,13 +45,14 @@ class TweetListener extends Command
     {
         TwitterStreamingApi::publicStream()
             ->whenHears('@HetzStatusBot', function (array $tweet) {
-                $messages = Message::where('title_en', 'LIKE', '%' . $tweet['text'] . '%')->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
+                $keyword = ltrim(trim(str_replace('@HetzStatusBot','',$tweet['text'])));
+                $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
                 var_dump($tweet);
                 if ($messages->count() == 0) {
-                    Twitter::postTweet(['status' => 'Hey ' . $tweet['user']['screen_name'] . ", i've found nothing for your request!", 'format' => 'json']);
+                    Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found nothing for your request!", 'format' => 'json']);
                     echo "Nothing found";
                 } else {
-                    Twitter::postTweet(['status' => 'Hey ' . $tweet['user']['screen_name'] . ", i've found something: " . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '), 'format' => 'json']);
+                    Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found something: " . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '), 'format' => 'json']);
                     echo "Found something";
                 }
 
