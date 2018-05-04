@@ -67,7 +67,7 @@
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title">
-            Hetzner-Status JSON Service <a href=""
+            Hetzner-Status JSON Service <a href="https://twitter.com/HetzStatusBot"><i class="fab fa-twitter"></i></a>
         </div>
 
         <div class="links m-b-md">
