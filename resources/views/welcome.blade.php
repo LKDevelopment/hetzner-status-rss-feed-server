@@ -67,11 +67,13 @@
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title">
-            Hetzner-Status JSON Service <a href="https://twitter.com/HetzStatusBot"><i class="fab fa-twitter"></i></a>
+            Hetzner-Status JSON Service
         </div>
-
+        
         <div class="links m-b-md">
             <a href="https://github.com/LKDevelopment/hetzner-status-rss-feed-server">GitHub</a>
+            <a href="https://twitter.com/HetzStatusBot"><i class="fab fa-twitter"></i> Bot</a>
+            <a href="https://telegram.me/HetznerStatsBot"><i class="fab fa-telegram-plane"></i> Bot</a>
         </div>
         <div>
             API (Available languages: de | en )
