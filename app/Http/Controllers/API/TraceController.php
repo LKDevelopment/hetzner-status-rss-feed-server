@@ -9,7 +9,27 @@
 namespace App\Http\Controllers\API;
 
 
-class TraceController
+use App\Http\Controllers\Controller;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
+
+class TraceController extends Controller
 {
 
+    public function get(Request $request, $ip)
+    {
+        $request['ip'] = $ip;
+        $this->validate($request, [
+            'ip' => 'required|ip',
+        ]);
+        $client = new Client();
+        $response = $client->get("https://get.geojs.io/v1/ip/geo/" . $ip . ".json");
+
+        $response = \GuzzleHttp\json_decode((string)$response->getBody());
+        if (str_contains('Hetzner', $response->organization)) {
+            echo "OK!";
+        } else {
+            echo "NOT OK!";
+        }
+    }
 }
