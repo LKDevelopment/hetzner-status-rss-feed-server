@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 
 class testTrace extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
@@ -38,7 +39,10 @@ class testTrace extends Command
      */
     public function handle()
     {
-        $trace = new Traceroute();
-        var_dump($trace->trace($this->argument('ip')));
+        /*$trace = new Traceroute();
+        var_dump($trace->trace($this->argument('ip')));*/
+        $output = '';
+        exec('traceroute ' . escapeshellarg($this->argument('ip')), $output);
+        var_dump(explode(PHP_EOL, $output));
     }
 }
