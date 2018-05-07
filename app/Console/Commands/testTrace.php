@@ -43,6 +43,18 @@ class testTrace extends Command
         var_dump($trace->trace($this->argument('ip')));*/
         $output = '';
         exec('traceroute ' . escapeshellarg($this->argument('ip')), $output);
-        var_dump($output);
+        $hosts = [];
+        foreach ($output as $line) {
+            $line_parts = explode(' ', $line);
+            if (!empty($line_parts) && $line_parts[0] != '*') {
+                $ip = str_replace(['(', ')'], '', $line_parts[2]);
+                $host = $line_parts[1];
+                if ($ip == $host) {
+                    $host = gethostbyaddr($ip);
+                }
+                $hosts[] = [$ip => $host];
+            }
+        }
+        var_dump($hosts);
     }
 }
