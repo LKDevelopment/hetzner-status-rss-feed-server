@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Model\Message;
 use GuzzleHttp\Client;
 use Cache;
 use Illuminate\Http\Request;
@@ -23,7 +24,12 @@ class TraceController extends Controller
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
 
-        return response()->json(json_decode(Cache::remember($ip, 60, function () use ($ip) {
+        return response()->json($this->cacheOrTrace($ip));
+    }
+
+    protected function cacheOrTrace($ip)
+    {
+        return json_decode(Cache::remember($ip, 60 * 24, function () use ($ip) {
             exec('traceroute '.escapeshellarg($ip), $output);
             $hosts = [];
             foreach ($output as $index => $line) {
@@ -37,11 +43,24 @@ class TraceController extends Controller
                     if ($ip == $host) {
                         $host = gethostbyaddr($ip);
                     }
-                    $hosts[] = [$ip => $host];
+                    $hosts[] = ["ip" => $ip, 'host' => $host];
                 }
             }
 
             return json_encode($hosts);
-        })));
+        }));
+    }
+
+    public function issues($ip)
+    {
+        $request['ip'] = $ip;
+        $this->validate($request, [
+            'ip' => ['required', 'ip', 'hetzner_ip'],
+        ]);
+        $lastHop = last($this->cacheOrTrace($ip));
+
+        if (str_contains($lastHop['host'], 'your-cloud.host')) {
+            return Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.str_replace('.your-cloud.host', '', $lastHop['host']).'%')->get();
+        }
     }
 }
