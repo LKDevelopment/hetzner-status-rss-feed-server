@@ -44,8 +44,9 @@ class testTrace extends Command
         $output = '';
         exec('traceroute ' . escapeshellarg($this->argument('ip')), $output);
         $hosts = [];
-        foreach ($output as $line) {
-            $line_parts = explode(' ', $line);
+        foreach ($output as $index => $line) {
+            if($index == 0) continue;
+            $line_parts = explode(' ', ltrim($line));
             if (!empty($line_parts) && $line_parts[0] != '*') {
                 $ip = str_replace(['(', ')'], '', $line_parts[2]);
                 $host = $line_parts[1];
