@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
                 }
 
                 return false;
-            
+
             } catch (\Exception $e) {
                 return false;
             }
