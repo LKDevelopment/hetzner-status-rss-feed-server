@@ -27,7 +27,7 @@ class TraceController extends Controller
 
         $response = \GuzzleHttp\json_decode((string)$response->getBody());
         var_dump($response);
-        if (str_contains('Hetzner', $response->organization)) {
+        if (str_contains($response->organization, 'Hetzner')) {
             echo "OK!";
         } else {
             echo "NOT OK!";
