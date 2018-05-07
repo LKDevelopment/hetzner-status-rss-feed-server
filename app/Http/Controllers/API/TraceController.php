@@ -59,8 +59,9 @@ class TraceController extends Controller
         ]);
         $lastHop = last($this->cacheOrTrace($ip));
 
-        if (str_contains($lastHop['host'], 'your-cloud.host')) {
-            $response = Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.str_replace('.your-cloud.host', '', $lastHop['host']).'%')->get();
+        if (str_contains($lastHop->host, 'your-cloud.host')) {
+            $cloudHost = str_replace('.your-cloud.host', '', $lastHop->host);
+            $response = Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.$cloudHost.'%')->get();
         } else {
             $response = [];
         }
