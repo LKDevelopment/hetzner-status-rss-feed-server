@@ -87,7 +87,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-
+    "hetzner_ip" => "The :attribute must be a valid ip from the Hetzner Online GmbH!",
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -100,9 +100,7 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+
     ],
 
     /*

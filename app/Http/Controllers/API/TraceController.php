@@ -12,6 +12,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class TraceController extends Controller
 {
@@ -20,17 +21,9 @@ class TraceController extends Controller
     {
         $request['ip'] = $ip;
         $this->validate($request, [
-            'ip' => 'required|ip',
+            'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
-        $client = new Client();
-        $response = $client->get("https://get.geojs.io/v1/ip/geo/" . $ip . ".json");
 
-        $response = \GuzzleHttp\json_decode((string)$response->getBody());
-        var_dump($response);
-        if (str_contains($response->organization, 'Hetzner')) {
-            echo "OK!";
-        } else {
-            echo "NOT OK!";
-        }
+
     }
 }
