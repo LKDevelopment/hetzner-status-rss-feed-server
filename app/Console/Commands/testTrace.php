@@ -12,7 +12,7 @@ class testTrace extends Command
      *
      * @var string
      */
-    protected $signature = 'test:trace';
+    protected $signature = 'test:trace {ip}';
 
     /**
      * The console command description.
@@ -39,6 +39,6 @@ class testTrace extends Command
     public function handle()
     {
         $trace = new Traceroute();
-        $trace->trace('hetzner-status.lkdev.co');
+        $trace->trace($this->argument('ip'));
     }
 }

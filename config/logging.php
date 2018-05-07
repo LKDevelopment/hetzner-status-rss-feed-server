@@ -32,7 +32,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single','slack_info'],
+            'channels' => ['single'],
         ],
 
         'single' => [
@@ -62,13 +62,13 @@ return [
             'emoji' => ':white_check_mark:',
             'level' => 'debug',
         ],
-        'slack_error' => [
+        /*'slack_error' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Hetzner Status Error',
             'emoji' => ':boom:',
             'level' => 'critical',
-        ],
+        ],*/
         'syslog' => [
             'driver' => 'syslog',
             'level' => 'debug',
