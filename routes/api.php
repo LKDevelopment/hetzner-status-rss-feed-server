@@ -18,7 +18,7 @@ Route::get('hetzner-status/{language?}', function ($language = 'de') {
 Route::get('v2/messages', function () {
     return response()->json(\App\Model\Message::onlyParents()->get());
 });
-Route::group(['middleware' => 'throttle:2,1'], function () {
+Route::group(['middleware' => 'throttle:5,1'], function () {
     Route::get('traceing/{ip}', 'API\TraceController@get');
 });
 Route::get('bot/webhook/telegram', "Botman\WebhookController@telegram");
