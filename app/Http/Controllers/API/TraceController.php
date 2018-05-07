@@ -44,7 +44,7 @@ class TraceController extends Controller
                     $hosts[] = [$ip => $host];
                 }
             }
-            var_dump(Cache::put($ip, $hosts, now()->addHour()));
+            var_dump(Cache::put($ip, $hosts, 60));
 
             return response()->json($hosts);
         }

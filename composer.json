@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "arandilopez/laravel-feed-parser": "^0.1.3",
         "barryvdh/laravel-cors": "^0.11.0",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "berkayk/onesignal-laravel": "^0.9.9",
         "botman/botman": "^2.3",
         "botman/driver-facebook": "^1.7",
