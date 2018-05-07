@@ -24,6 +24,23 @@ class TraceController extends Controller
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
 
+        exec('traceroute ' . escapeshellarg($ip), $output);
+        $hosts = [];
+        foreach ($output as $index => $line) {
+            if ($index == 0) continue;
+            $line_parts = explode(' ', ltrim($line));
+            if (!empty($line_parts) && $line_parts[2] != '*' && $line_parts[2] != '3') {
+                $ip = str_replace(['(', ')'], '', $line_parts[3]);
+                $host = $line_parts[2];
+                if ($ip == $host) {
+                    $host = gethostbyaddr($ip);
+                }
+                $hosts[] = [$ip => $host];
+            }
+        }
+
+        return response()->json($hosts);
+
 
     }
 }
