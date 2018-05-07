@@ -51,7 +51,7 @@ class TraceController extends Controller
         }));
     }
 
-    public function issues($ip)
+    public function issues(Request $request, $ip)
     {
         $request['ip'] = $ip;
         $this->validate($request, [
@@ -60,9 +60,11 @@ class TraceController extends Controller
         $lastHop = last($this->cacheOrTrace($ip));
 
         if (str_contains($lastHop['host'], 'your-cloud.host')) {
-            return Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.str_replace('.your-cloud.host', '', $lastHop['host']).'%')->get();
+            $response = Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.str_replace('.your-cloud.host', '', $lastHop['host']).'%')->get();
         } else {
-
+            $response = [];
         }
+
+        return response()->json($response);
     }
 }
