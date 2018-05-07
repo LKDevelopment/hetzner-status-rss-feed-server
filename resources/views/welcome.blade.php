@@ -69,7 +69,8 @@
         <div class="title">
             Hetzner-Status JSON Service
         </div>
-        
+        <p>We have currently {{\App\Model\Message::count()}} status messages in our system. We perform the monitoring
+            since 2018-02-06 12:00:00. Since this date we have all available messages from Hetzner.</p>
         <div class="links m-b-md">
             <a href="https://github.com/LKDevelopment/hetzner-status-rss-feed-server">GitHub</a>
             <a href="https://twitter.com/HetzStatusBot"><i class="fab fa-twitter"></i> Bot</a>
@@ -92,6 +93,8 @@
         </div>
     </div>
 </div>
-<script defer src="https://use.fontawesome.com/releases/v5.0.12/js/all.js" integrity="sha384-Voup2lBiiyZYkRto2XWqbzxHXwzcm4A5RfdfG6466bu5LqjwwrjXCMBQBLMWh7qR" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"
+        integrity="sha384-Voup2lBiiyZYkRto2XWqbzxHXwzcm4A5RfdfG6466bu5LqjwwrjXCMBQBLMWh7qR"
+        crossorigin="anonymous"></script>
 </body>
 </html>

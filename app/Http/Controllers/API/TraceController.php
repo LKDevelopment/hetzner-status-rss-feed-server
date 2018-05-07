@@ -16,8 +16,16 @@ use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
+/**
+ *
+ */
 class TraceController extends Controller
 {
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param $ip
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function get(Request $request, $ip)
     {
         $request['ip'] = $ip;
@@ -28,6 +36,10 @@ class TraceController extends Controller
         return response()->json($this->cacheOrTrace($ip));
     }
 
+    /**
+     * @param $ip
+     * @return mixed
+     */
     protected function cacheOrTrace($ip)
     {
         return json_decode(Cache::remember($ip, 60 * 24, function () use ($ip) {
@@ -52,6 +64,11 @@ class TraceController extends Controller
         }));
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param $ip
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function issues(Request $request, $ip)
     {
         $request['ip'] = $ip;
