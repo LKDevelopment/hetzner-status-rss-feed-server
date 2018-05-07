@@ -17,13 +17,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Validator::extend('hetzner_ip', function ($attribute, $value, $parameters, $validator) {
-            $client = new Client();
-            $response = $client->get("https://get.geojs.io/v1/ip/geo/" . $value . ".json");
+            try {
+                $client = new Client();
+                $response = $client->get("https://get.geojs.io/v1/ip/geo/" . $value . ".json");
 
-            $response = \GuzzleHttp\json_decode((string)$response->getBody());
-            if (str_contains($response->organization, 'Hetzner')) {
-                return true;
-            } else {
+                $response = \GuzzleHttp\json_decode((string)$response->getBody());
+                if (str_contains($response->organization, 'Hetzner')) {
+                    return true;
+                }
+
+                return false;
+            
+            } catch (\Exception $e) {
                 return false;
             }
         });
