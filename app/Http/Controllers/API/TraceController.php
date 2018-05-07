@@ -10,6 +10,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Model\Message;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Cache;
 use Illuminate\Http\Request;
@@ -60,7 +61,10 @@ class TraceController extends Controller
         $lastHop = last($this->cacheOrTrace($ip));
         if (str_contains($lastHop->host, 'your-cloud.host')) {
             $cloudHost = str_replace('.your-cloud.host', '', $lastHop->host);
-            $response = Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.$cloudHost.'%')->get();
+            $response = Message::where('category', '=', 'cloud')
+                ->where('title_en', 'LIKE', '%'.$cloudHost.'%')
+                ->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())
+                ->get();
         } else {
             $response = [];
         }
