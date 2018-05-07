@@ -39,6 +39,6 @@ class testTrace extends Command
     public function handle()
     {
         $trace = new Traceroute();
-        $trace->trace($this->argument('ip'));
+        var_dump($trace->trace($this->argument('ip')));
     }
 }

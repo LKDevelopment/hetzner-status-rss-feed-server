@@ -37,7 +37,7 @@ class Traceroute
     */
 
 
-    protected $maximum_hops = 30;
+    protected $maximum_hops = 15;
 
     protected $port = 33434;  // Standard port that traceroute programs use. Could be anything actually.
 
@@ -45,13 +45,15 @@ class Traceroute
     {
 // Get IP from URL
         $dest_addr = gethostbyname($dest_url);
-        print "Tracerouting to destination: $dest_addr\n";
+        $response = [
+            'dest_addr' => $dest_addr,
+            'hops' => [],
+        ];
         $ttl = 1;
         while ($ttl < $this->maximum_hops) {
             // Create ICMP and UDP sockets
             $recv_socket = socket_create(AF_INET, SOCK_RAW, getprotobyname('icmp'));
             $send_socket = socket_create(AF_INET, SOCK_DGRAM, getprotobyname('udp'));
-            echo "T";
             // Set TTL to current lifetime
             socket_set_option($send_socket, SOL_IP, IP_TTL, $ttl);
             // Bind receiving ICMP socket to default IP (no port needed since it's ICMP)
@@ -79,12 +81,10 @@ class Traceroute
                     // Otherwise, fetch the hostname and geoinfo for the address found
                     $recv_name = gethostbyaddr($recv_addr);
                 }
-
-                printf("%3d   %-15s  %.3f ms  %s\n", $ttl, $recv_addr, $roundtrip_time, $recv_name);
+                $response['hops'][] = ["$recv_addr" => $recv_name];
 
             } else {
-                // A timeout has occurred, display a timeout
-                printf("%3d   (timeout)\n", $ttl);
+
             }
             // Close sockets
             socket_close($recv_socket);
@@ -94,6 +94,9 @@ class Traceroute
             // When we have hit our destination, stop the traceroute
             if ($recv_addr == $dest_addr) break;
         }
+
+        return $response;
     }
+
 
 }
