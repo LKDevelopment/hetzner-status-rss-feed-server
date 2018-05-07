@@ -11,7 +11,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
-use Illuminate\Filesystem\Cache;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
