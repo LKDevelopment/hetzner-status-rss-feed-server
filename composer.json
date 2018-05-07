@@ -10,6 +10,7 @@
         "barryvdh/laravel-cors": "^0.11.0",
         "berkayk/onesignal-laravel": "^0.9.9",
         "botman/botman": "^2.3",
+        "botman/driver-facebook": "^1.7",
         "botman/driver-telegram": "^1.5",
         "fennb/phirehose": "dev-master#405d125db9baa771ac0cd861f0b2b2032434d40c",
         "fideloper/proxy": "~4.0",

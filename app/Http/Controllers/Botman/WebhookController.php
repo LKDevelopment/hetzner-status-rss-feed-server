@@ -13,10 +13,16 @@ class WebhookController extends \App\Http\Controllers\Controller
     public function telegram()
     {
         DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramDriver::class);
+        DriverManager::loadDriver(\BotMan\Drivers\Facebook\FacebookDriver::class);
         $config = [
             // Your driver-specific configuration
             "telegram" => [
                 "token" => getenv('TELEGRAM_TOKEN'),
+            ],
+            'facebook' => [
+                'token' => getenv('FACEBOOK_PAGE_TOKEN'),
+                'app_secret' => getenv('FACEBOOK_APP_SECRET'),
+                'verification' => getenv('SECRET_VERIFICATION_TOKEN'),
             ],
         ];
         $botman = BotManFactory::create($config);
@@ -37,7 +43,7 @@ class WebhookController extends \App\Http\Controllers\Controller
 
                 try {
                     if ($messages->count() == 0) {
-                        $bot->reply("I've found nothing for the keyword: ".$keyword);
+                        $bot->reply("I've found nothing for the keyword: " . $keyword);
                         echo "Nothing found";
                     } else {
                         $bot->reply("I found " . $messages->count() . " Messages for this");
