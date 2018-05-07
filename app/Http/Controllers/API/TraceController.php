@@ -26,6 +26,7 @@ class TraceController extends Controller
         $response = $client->get("https://get.geojs.io/v1/ip/geo/" . $ip . ".json");
 
         $response = \GuzzleHttp\json_decode((string)$response->getBody());
+        var_dump($response);
         if (str_contains('Hetzner', $response->organization)) {
             echo "OK!";
         } else {
