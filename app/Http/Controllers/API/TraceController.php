@@ -22,12 +22,8 @@ class TraceController extends Controller
         $this->validate($request, [
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
-        var_dump(Cache::has($ip));
-        if (Cache::has($ip)) {
-            echo "Cache";
 
-            return response()->json(Cache::get($ip));
-        } else {
+        return response()->json(json_decode(Cache::remember($ip, 60, function () use ($ip) {
             exec('traceroute '.escapeshellarg($ip), $output);
             $hosts = [];
             foreach ($output as $index => $line) {
@@ -44,9 +40,8 @@ class TraceController extends Controller
                     $hosts[] = [$ip => $host];
                 }
             }
-            var_dump(Cache::put($ip, $hosts, 60));
 
-            return response()->json($hosts);
-        }
+            return json_encode($hosts);
+        })));
     }
 }
