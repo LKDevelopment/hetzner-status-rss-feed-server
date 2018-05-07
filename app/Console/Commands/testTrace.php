@@ -47,8 +47,7 @@ class testTrace extends Command
         foreach ($output as $index => $line) {
             if($index == 0) continue;
             $line_parts = explode(' ', ltrim($line));
-            if (!empty($line_parts) && $line_parts[0] != '*') {
-                var_dump($line_parts);
+            if (!empty($line_parts) && $line_parts[2] != '*' && $line_parts[2] != '3') {
                 $ip = str_replace(['(', ')'], '', $line_parts[3]);
                 $host = $line_parts[2];
                 if ($ip == $host) {
