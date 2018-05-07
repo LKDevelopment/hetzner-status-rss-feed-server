@@ -8,7 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *
@@ -17,20 +16,21 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Validator::extend('hetzner_ip', function ($attribute, $value, $parameters, $validator) {
-            try {
-                $client = new Client();
-                $response = $client->get("https://get.geojs.io/v1/ip/geo/" . $value . ".json");
+            return \Cache::remember('validation_'.$value, 60 * 24 * 10, function () use ($value) {
+                try {
+                    $client = new Client();
+                    $response = $client->get("https://get.geojs.io/v1/ip/geo/".$value.".json");
 
-                $response = \GuzzleHttp\json_decode((string)$response->getBody());
-                if (str_contains($response->organization, 'Hetzner')) {
-                    return true;
+                    $response = \GuzzleHttp\json_decode((string) $response->getBody());
+                    if (str_contains($response->organization, 'Hetzner')) {
+                        return true;
+                    }
+
+                    return false;
+                } catch (\Exception $e) {
+                    return false;
                 }
-
-                return false;
-
-            } catch (\Exception $e) {
-                return false;
-            }
+            });
         });
     }
 
