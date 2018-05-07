@@ -46,6 +46,7 @@ class TweetListener extends Command
         TwitterStreamingApi::publicStream()
             ->whenHears('@HetzStatusBot', function (array $tweet) {
                 $keyword = explode(PHP_EOL, ltrim(trim(str_replace('@HetzStatusBot', '', $tweet['text']))))[0];
+                $keyword = trim($keyword);
                 $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
 
                 try {

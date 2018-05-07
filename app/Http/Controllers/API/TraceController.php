@@ -61,6 +61,8 @@ class TraceController extends Controller
 
         if (str_contains($lastHop['host'], 'your-cloud.host')) {
             return Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.str_replace('.your-cloud.host', '', $lastHop['host']).'%')->get();
+        } else {
+
         }
     }
 }

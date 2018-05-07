@@ -20,7 +20,7 @@ Route::get('v2/messages', function () {
 });
 Route::group(['prefix' => 'traceing/{ip}'], function () {
     Route::get('/', 'API\TraceController@get');
-    Route::get('/issues', 'API\TraceController@get');
+    Route::get('/issues', 'API\TraceController@issues');
 });
 Route::get('bot/webhook/telegram', "Botman\WebhookController@telegram");
 Route::post('bot/webhook/telegram', "Botman\WebhookController@telegram");
