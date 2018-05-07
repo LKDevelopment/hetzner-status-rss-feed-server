@@ -43,6 +43,6 @@ class testTrace extends Command
         var_dump($trace->trace($this->argument('ip')));*/
         $output = '';
         exec('traceroute ' . escapeshellarg($this->argument('ip')), $output);
-        var_dump(explode(PHP_EOL, $output));
+        var_dump($output);
     }
 }
