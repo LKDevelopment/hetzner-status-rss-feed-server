@@ -25,6 +25,7 @@ class TraceController extends Controller
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
         if (Cache::has($ip)) {
+            echo "Cache";
             return response()->json(Cache::get($ip));
         } else {
             exec('traceroute ' . escapeshellarg($ip), $output);
