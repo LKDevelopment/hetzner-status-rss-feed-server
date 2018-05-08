@@ -24,7 +24,7 @@ Route::get('v2/messages', function () {
 });
 
 Route::get('metrics', function () {
-    return response()->json(DB::table('trackings')->select('type', 'user_agent', DB::raw('COUNT(*) as count'))->groupBy('type', 'user_agent')->get());
+    return response()->json(DB::table('trackings')->select('type', 'user_agent', DB::raw('COUNT(*) as count'))->groupBy('type', 'user_agent')->get()->groupBy('type'));
 });
 Route::group(['prefix' => 'traceing/{ip}'], function () {
     Route::get('/', 'API\TraceController@get');
