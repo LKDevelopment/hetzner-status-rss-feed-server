@@ -20,7 +20,7 @@ Route::get('hetzner-status/{language?}', function ($language = 'de') {
 Route::get('v2/messages', function () {
     \App\Model\Tracking::track('api_v2', '', request()->userAgent());
 
-    return response()->json(\App\Model\Message::onlyParents()->limit(10)->get());
+    return response()->json(\App\Model\Message::onlyParents()->limit(request('limit', 20))->get());
 });
 
 Route::get('metrics', function () {
