@@ -12,10 +12,14 @@
 */
 
 Route::get('hetzner-status/{language?}', function ($language = 'de') {
+    \App\Model\Tracking::track('old_api', $language);
+
     return response()->json(\App\StatusMeldung::onlyParents()->language($language)->limit(request('limit', 20))->get());
 });
 
 Route::get('v2/messages', function () {
+    \App\Model\Tracking::track('api_v2', '');
+
     return response()->json(\App\Model\Message::onlyParents()->get());
 });
 Route::group(['prefix' => 'traceing/{ip}'], function () {
