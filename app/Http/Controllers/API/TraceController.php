@@ -10,6 +10,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Model\Message;
+use App\Model\Tracking;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Cache;
@@ -32,6 +33,7 @@ class TraceController extends Controller
         $this->validate($request, [
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
+        Tracking::track('get_trace_to_ip', $ip);
 
         return response()->json($this->cacheOrTrace($ip));
     }
@@ -76,12 +78,10 @@ class TraceController extends Controller
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
         $lastHop = last($this->cacheOrTrace($ip));
+        Tracking::track('get_issues_to_ip', $ip);
         if (str_contains($lastHop->host, 'your-cloud.host')) {
             $cloudHost = str_replace('.your-cloud.host', '', $lastHop->host);
-            $response = Message::where('category', '=', 'cloud')
-                ->where('title_en', 'LIKE', '%'.$cloudHost.'%')
-                ->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())
-                ->get();
+            $response = Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.$cloudHost.'%')->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
         } else {
             $response = [];
         }

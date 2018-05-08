@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Botman;
 
 use App\Model\Message;
+use App\Model\Tracking;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
 use Carbon\Carbon;
@@ -39,6 +40,7 @@ class WebhookController extends \App\Http\Controllers\Controller
         $botman->hears('{keyword}', function ($bot, $keyword) {
             if (str_contains($keyword, ['start', 'help']) == false) {
                 $keyword = explode(PHP_EOL, str_replace(' ', '', $keyword))[0];
+                Tracking::track('webhook',$keyword);
                 $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
 
                 try {

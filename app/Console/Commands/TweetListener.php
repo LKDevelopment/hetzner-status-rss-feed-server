@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Model\Message;
+use App\Model\Tracking;
 use App\StatusMeldung;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -11,7 +12,6 @@ use Thujohn\Twitter\Facades\Twitter;
 
 class TweetListener extends Command
 {
-
     /**
      * The name and signature of the console command.
      *
@@ -43,25 +43,33 @@ class TweetListener extends Command
      */
     public function handle()
     {
-        TwitterStreamingApi::publicStream()
-            ->whenHears('@HetzStatusBot', function (array $tweet) {
+        TwitterStreamingApi::publicStream()->whenHears('@HetzStatusBot', function (array $tweet) {
                 $keyword = explode(PHP_EOL, ltrim(trim(str_replace('@HetzStatusBot', '', $tweet['text']))))[0];
                 $keyword = trim($keyword);
-                $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
-
+                $messages = Message::where('title_en', 'LIKE', '%'.$keyword.'%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
+                Tracking::track('tweeting', $keyword);
                 try {
                     if ($messages->count() == 0) {
-                        Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found nothing for your request!", 'format' => 'json']);
+                        Twitter::postTweet([
+                            'status' => 'Hey @'.$tweet['user']['screen_name'].", i've found nothing for your request!",
+                            'format' => 'json',
+                        ]);
                         echo "Nothing found";
                     } else {
-                        Twitter::postTweet(['status' => 'Hey @' . $tweet['user']['screen_name'] . ", i've found something: " . $messages->map(function ($m) { return $m->permalink_en; })->implode(' '), 'format' => 'json']);
+                        Twitter::postTweet([
+                            'status' => 'Hey @'.$tweet['user']['screen_name'].", i've found something: ".$messages->map(function (
+                                    $m
+                                ) {
+                                    return $m->permalink_en;
+                                })->implode(' '),
+                            'format' => 'json',
+                        ]);
                         echo "Found something";
                     }
                 } catch (\Exception $e) {
                     echo "Aua!";
                 }
                 echo "{$tweet['user']['screen_name']} tweeted {$tweet['text']}; KEYWORD:".$keyword;
-            })
-            ->startListening();
+            })->startListening();
     }
 }
