@@ -22,6 +22,10 @@ Route::get('v2/messages', function () {
 
     return response()->json(\App\Model\Message::onlyParents()->get());
 });
+
+Route::get('metrics', function () {
+    return response()->json(DB::table('trackings')->select('type', DB::raw('COUNT(*) as count'))->groupBy('type')->get());
+});
 Route::group(['prefix' => 'traceing/{ip}'], function () {
     Route::get('/', 'API\TraceController@get');
     Route::get('/issues', 'API\TraceController@issues');
