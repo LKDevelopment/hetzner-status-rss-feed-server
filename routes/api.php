@@ -12,19 +12,19 @@
 */
 
 Route::get('hetzner-status/{language?}', function ($language = 'de') {
-    \App\Model\Tracking::track('old_api', $language);
+    \App\Model\Tracking::track('old_api', $language, request()->userAgent());
 
     return response()->json(\App\StatusMeldung::onlyParents()->language($language)->limit(request('limit', 20))->get());
 });
 
 Route::get('v2/messages', function () {
-    \App\Model\Tracking::track('api_v2', '');
+    \App\Model\Tracking::track('api_v2', '', request()->userAgent());
 
     return response()->json(\App\Model\Message::onlyParents()->get());
 });
 
 Route::get('metrics', function () {
-    return response()->json(DB::table('trackings')->select('type', DB::raw('COUNT(*) as count'))->groupBy('type')->get());
+    return response()->json(DB::table('trackings')->select('type', 'user_agent', DB::raw('COUNT(*) as count'))->groupBy('type', 'user_agent')->get());
 });
 Route::group(['prefix' => 'traceing/{ip}'], function () {
     Route::get('/', 'API\TraceController@get');
