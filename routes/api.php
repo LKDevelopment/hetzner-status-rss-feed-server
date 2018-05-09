@@ -12,13 +12,13 @@
 */
 
 Route::get('hetzner-status/{language?}', function ($language = 'de') {
-    \App\Model\Tracking::track('old_api', $language, request()->userAgent());
+    \App\Model\Tracking::track('old_api', $language, get_user_agent());
 
     return response()->json(\App\StatusMeldung::onlyParents()->language($language)->limit(request('limit', 20))->get());
 });
 
 Route::get('v2/messages', function () {
-    \App\Model\Tracking::track('api_v2', '', request()->userAgent());
+    \App\Model\Tracking::track('api_v2', '', get_user_agent());
 
     return response()->json(\App\Model\Message::onlyParents()->limit(request('limit', 20))->get());
 });

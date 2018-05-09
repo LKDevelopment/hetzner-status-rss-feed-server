@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             });
         });
+        require __DIR__.'/../functions.php';
     }
 
     /**
