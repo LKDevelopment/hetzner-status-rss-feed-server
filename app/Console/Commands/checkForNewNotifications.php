@@ -42,6 +42,7 @@ class checkForNewNotifications extends Command
     {
         $newMessages = Message::whereNull('send_at')->whereNotNull('title_de')->whereNotNull('title_en')->get();
         $apps = ['hetzner-status-app' => 'HetznerStatusApp'];
+        echo "Whaat!";
         foreach ($newMessages as $newMessage) {
             $headings = [
                 "en" => $newMessage->title_en,
