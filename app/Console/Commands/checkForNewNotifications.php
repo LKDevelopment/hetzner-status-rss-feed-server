@@ -74,6 +74,7 @@ class checkForNewNotifications extends Command
                         'en' => '$[notif_count] messages from Hetzner Status',
                         'de' => '$[notif_count] Status Meldungen von Hetzner',
                     ],
+                    'data' => ['page' => 'status','statusId' => $newMessage->external_id]
                 ]);
             }
             $newMessage->update(['send_at' => Carbon::now()]);
