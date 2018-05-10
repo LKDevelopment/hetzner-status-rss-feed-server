@@ -65,7 +65,7 @@ class checkForNewNotifications extends Command
 
             foreach ($apps as $app => $envPrefix) {
                 $oneSignalClient = new OneSignalClient(env($envPrefix.'_ONE_SIGNAL_APP_ID'), env($envPrefix.'_ONE_SIGNAL_REST_KEY'), env($envPrefix.'_ONE_SIGNAL_USER_KEY'));
-                $oneSignalClient->sendNotificationCustom([
+                var_dump($oneSignalClient->sendNotificationCustom([
                     'contents' => $contents,
                     'headings' => $headings,
                     'tags' => $tags,
@@ -75,7 +75,7 @@ class checkForNewNotifications extends Command
                         'de' => '$[notif_count] Status Meldungen von Hetzner',
                     ],
                     'data' => ['page' => 'status','statusId' => $newMessage->external_id]
-                ]);
+                ]));
             }
             $newMessage->update(['send_at' => Carbon::now()]);
         }
