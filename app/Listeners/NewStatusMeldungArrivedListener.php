@@ -58,6 +58,7 @@ class NewStatusMeldungArrivedListener
                         'en' => '$[notif_count] messages from Hetzner Status',
                         'de' => '$[notif_count] Status Meldungen von Hetzner',
                     ],
+                    'data' => ['page' => 'status','statusId' => $event->meldung->external_id]
                 ]);
             }
         }
