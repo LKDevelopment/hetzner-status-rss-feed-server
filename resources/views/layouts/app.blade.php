@@ -37,7 +37,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     @auth
-                        <li><a class="nav-link" href="{{ url('messages') }}">{{ __('Messages') }}</a></li>
+                        <li><a class="nav-link" href="{{ route('messages.index') }}">{{ __('Messages') }}</a></li>
                     @endauth
                 </ul>
 
