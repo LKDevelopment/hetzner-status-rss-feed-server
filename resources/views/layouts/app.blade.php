@@ -23,7 +23,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #DF2F37;">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #DF2F37;">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 My Hetzner Backend
