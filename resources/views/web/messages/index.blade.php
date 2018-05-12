@@ -12,6 +12,7 @@
                             <thead>
                             <th>ID</th>
                             <th>Title</th>
+                            <th>Kategorie</th>
                             <th>Erstellt</th>
                             <th>Push versendet?</th>
                             </thead>
@@ -20,6 +21,7 @@
                                 <tr>
                                     <td>{{ $message->external_id }}</td>
                                     <td>{{ $message->title_de }}</td>
+                                    <td>{{$message->category}}</td>
                                     <td>{{ $message->created_at }}</td>
                                     <td>{{$message->send_at ? 'Ja':'Nein'}}</td>
                                 </tr>
