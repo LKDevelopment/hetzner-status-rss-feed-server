@@ -6,8 +6,8 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="float-left">Messages</h2>
-                        <a href="#" class="btn btn-success float-right">Add</a>
+                        <h3 class="float-left">Messages</h3>
+                        <a href="{{ route('messages.create') }}" class="btn btn-success float-right">Add</a>
                     </div>
 
                     <div class="card-body">

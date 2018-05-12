@@ -35,7 +35,7 @@ class TraceController extends Controller
         ]);
         Tracking::track('get_trace_to_ip', $ip, get_user_agent());
 
-        return response()->json($this->cacheOrTrace($ip));
+        return response()->json(['traces' => $this->cacheOrTrace($ip)]);
     }
 
     /**
