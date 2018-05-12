@@ -5,10 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Messages
-                    <div class="pull-right">
-                        <a href="#" class="btn btn-success">Add</a>
-                    </div>
+                    <div class="card-header">
+                        <span class="float-left">Messages</span>
+                        <a href="#" class="btn btn-success float-right">Add</a>
                     </div>
 
                     <div class="card-body">
