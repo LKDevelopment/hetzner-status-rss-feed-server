@@ -11,13 +11,17 @@
                         <table class="table table-bordered table-condensed table-striped">
                             <thead>
                             <th>ID</th>
-                            <th>Titel</th>
+                            <th>Title</th>
+                            <th>Erstellt</th>
+                            <th>Push versendet?</th>
                             </thead>
                             <tbody>
                             @foreach($messages as $message)
                                 <tr>
                                     <td>{{ $message->external_id }}</td>
                                     <td>{{ $message->title_de }}</td>
+                                    <td>{{ $message->created_at }}</td>
+                                    <td>{{$message->send_at ? 'Ja':'Nein'}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
