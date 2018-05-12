@@ -5,7 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Messages</div>
+                    <div class="card-header">Messages
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-success">Add</a>
+                    </div>
+                    </div>
 
                     <div class="card-body">
                         <table class="table table-bordered table-condensed table-striped">
