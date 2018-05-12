@@ -28,6 +28,7 @@ Route::get('metrics', function () {
 });
 Route::group(['prefix' => 'traceing/{ip}'], function () {
     Route::get('/', 'API\TraceController@get');
+    Route::get('/host', 'API\TraceController@getCloudHost');
     Route::get('/issues', 'API\TraceController@issues');
 });
 Route::get('bot/webhook/telegram', "Botman\WebhookController@telegram");

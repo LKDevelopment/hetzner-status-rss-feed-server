@@ -37,7 +37,15 @@ class TraceController extends Controller
 
         return response()->json(['traces' => $this->cacheOrTrace($ip)]);
     }
-
+    public function getCloudHost(Request $request, $ip){
+        $request['ip'] = $ip;
+        $this->validate($request, [
+            'ip' => ['required', 'ip', 'hetzner_ip'],
+        ]);
+        $lastHop = last($this->cacheOrTrace($ip));
+        Tracking::track('get_cloud_host_to_ip', $ip, get_user_agent());
+        return response()->json($lastHop);
+    }
     /**
      * @param $ip
      * @return mixed
