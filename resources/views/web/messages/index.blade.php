@@ -6,7 +6,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <span class="float-left">Messages</span>
+                        <h2 class="float-left">Messages</h2>
                         <a href="#" class="btn btn-success float-right">Add</a>
                     </div>
 
