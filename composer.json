@@ -14,6 +14,7 @@
         "botman/driver-facebook": "^1.7",
         "botman/driver-telegram": "^1.5",
         "botman/driver-web": "^1.5",
+        "eyewitness/eye": "dev-beta",
         "fennb/phirehose": "dev-master#405d125db9baa771ac0cd861f0b2b2032434d40c",
         "fideloper/proxy": "~4.0",
         "laravel/framework": "5.6.*",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f609f80f907652cd907a7f703a424c9e",
+    "content-hash": "976f3ba7db672026fe0dce3c2b6cd75c",
     "packages": [
         {
             "name": "arandilopez/laravel-feed-parser",
@@ -940,6 +940,115 @@
                 "event-emitter"
             ],
             "time": "2017-07-23T21:35:13+00:00"
+        },
+        {
+            "name": "eyewitness/cron-expression",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eyewitness/cron-expression.git",
+                "reference": "0665701f70761398e333cd999fa4f6b0f95b3c1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eyewitness/cron-expression/zipball/0665701f70761398e333cd999fa4f6b0f95b3c1b",
+                "reference": "0665701f70761398e333cd999fa4f6b0f95b3c1b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Eyewitness\\Cron\\": "src/Eyewitness/Cron/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Chris Tankersley",
+                    "email": "chris@ctankersley.com",
+                    "homepage": "https://github.com/dragonmantank"
+                }
+            ],
+            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
+            "keywords": [
+                "cron",
+                "schedule"
+            ],
+            "time": "2018-02-07T04:37:19+00:00"
+        },
+        {
+            "name": "eyewitness/eye",
+            "version": "dev-beta",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eyewitness/eye.git",
+                "reference": "c5488f25f36a94a6c0414f39a4668b62fed31d3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eyewitness/eye/zipball/c5488f25f36a94a6c0414f39a4668b62fed31d3c",
+                "reference": "c5488f25f36a94a6c0414f39a4668b62fed31d3c",
+                "shasum": ""
+            },
+            "require": {
+                "eyewitness/cron-expression": "~3.0",
+                "guzzlehttp/guzzle": "5.*|6.*",
+                "laravel/framework": "~5.1",
+                "nesbot/carbon": "*"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "mockery/mockery": "~1.0",
+                "orchestra/testbench": "~3.5",
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Eyewitness\\Eye\\EyeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eyewitness\\Eye\\": "app"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Laurence",
+                    "email": "laurence@eyewitness.io"
+                }
+            ],
+            "description": "Eyewitness.io client for Laravel 5 applications",
+            "homepage": "https://github.com/eyewitness/eye",
+            "keywords": [
+                "cron",
+                "eyewitness",
+                "laravel 5",
+                "monitor",
+                "queue"
+            ],
+            "time": "2018-05-14T05:34:56+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -6061,6 +6170,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "eyewitness/eye": 20,
         "fennb/phirehose": 20
     },
     "prefer-stable": false,
