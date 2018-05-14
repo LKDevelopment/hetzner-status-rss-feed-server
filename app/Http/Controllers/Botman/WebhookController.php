@@ -15,7 +15,7 @@ class WebhookController extends \App\Http\Controllers\Controller
     {
         DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramDriver::class);
         DriverManager::loadDriver(\BotMan\Drivers\Facebook\FacebookDriver::class);
-        DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
+        //DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
         $config = [
             // Your driver-specific configuration
             "telegram" => [
