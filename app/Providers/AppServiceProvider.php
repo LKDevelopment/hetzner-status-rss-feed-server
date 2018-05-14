@@ -5,7 +5,7 @@ namespace App\Providers;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Schema;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         Validator::extend('hetzner_ip', function ($attribute, $value, $parameters, $validator) {
             return \Cache::remember('validation_'.$value, 60 * 24 * 10, function () use ($value) {
                 try {
