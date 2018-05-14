@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('read:feed', [ 'de'])->everyMinute();
         $schedule->command('read:feed', ['en'])->everyMinute();
         $schedule->command('messages')->everyMinute();
-        $schedule->command('notifications')->everyMinute();
+       // $schedule->command('notifications')->everyMinute();
     }
 
     /**
