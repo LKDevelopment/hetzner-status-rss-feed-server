@@ -44,7 +44,7 @@ class NewStatusMeldungArrivedListener
             ];
             $apps = [
                 'hetzner-cloud-app' => 'HetznerCloudApp',
-                'hetzner-status-app' => 'HetznerStatusApp',
+               // 'hetzner-status-app' => 'HetznerStatusApp',
             ];
             foreach ($apps as $app => $envPrefix) {
 
