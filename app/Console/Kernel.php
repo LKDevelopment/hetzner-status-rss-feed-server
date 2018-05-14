@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('read:feed', [ 'de'])->everyMinute();
-        $schedule->command('read:feed', ['en'])->everyMinute();
+        $schedule->command('read:feed', [ 'de'])->everyMinute()->onOneServer();
+        $schedule->command('read:feed', ['en'])->everyMinute()->onOneServer();
         $schedule->command('messages')->everyMinute();
        // $schedule->command('notifications')->everyMinute();
     }
