@@ -12,7 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (request()->getBaseUrl() == 'hetzner-status.lkdev.co') {
+        return view('welcome');
+    } else {
+        if (auth()->check()) {
+            return redirect()->to('/home');
+        }
+
+        return redirect()->to('/login');
+    }
 });
 
 Auth::routes();
