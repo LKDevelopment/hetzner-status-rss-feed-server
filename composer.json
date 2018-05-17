@@ -14,16 +14,17 @@
         "botman/driver-facebook": "^1.7",
         "botman/driver-telegram": "^1.5",
         "botman/driver-web": "^1.5",
+        "doctrine/dbal": "^2.7",
         "fennb/phirehose": "dev-master#405d125db9baa771ac0cd861f0b2b2032434d40c",
         "fideloper/proxy": "~4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
-        "spatie/laravel-binary-uuid": "^1.1",
         "spatie/laravel-twitter-streaming-api": "^1.1",
         "stevebauman/purify": "2.0.*",
         "thesoftwarefanatics/php-html-parser": "^1.8",
-        "thujohn/twitter": "^2.2"
+        "thujohn/twitter": "^2.2",
+        "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
