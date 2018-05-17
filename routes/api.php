@@ -271,8 +271,11 @@ Route::get('v2/tags', function () {
 });
 
 Route::group(['prefix' => 'device'], function () {
-    Route::post('create','Api\DeviceTrackingController@create_device');
-    Route::group(['prefix' => '{device}'],function(){
-        Route::post('tracking','Api\DeviceTrackingController@create_track');
+    Route::post('create', 'Api\DeviceTrackingController@create_device');
+    Route::group(['prefix' => '{device}'], function () {
+        Route::post('tracking', 'Api\DeviceTrackingController@create_track');
+    });
+    Route::get('metrics', function () {
+        return response()->json(\App\Model\Device::with('trackings')->get());
     });
 });
