@@ -25,7 +25,7 @@ class DeviceTrackingController extends Controller
         ]);
         $device = Device::create(['os' => $request->get('os'), 'version' => $request->get('version')]);
 
-        return response()->json(['device_id' => $device->uuid_text]);
+        return response()->json(['device_id' => $device]);
     }
 
     /**
