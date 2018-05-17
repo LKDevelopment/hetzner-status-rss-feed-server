@@ -3,8 +3,8 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Uuid\Uuid;
-use Spatie\BinaryUuid\HasBinaryUuid;
+use Webpatser\Uuid\Uuid;
+
 
 /**
  *
