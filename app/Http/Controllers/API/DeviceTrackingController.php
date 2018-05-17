@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
  */
 class DeviceTrackingController extends Controller
 {
-
     /**
      * @param \Illuminate\Http\Request $request
      *
@@ -30,7 +29,7 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device        $device
+     * @param \App\Model\Device $device
      */
     public function create_track(Request $request, Device $device)
     {
@@ -38,6 +37,10 @@ class DeviceTrackingController extends Controller
             'projects' => 'required',
             'access' => 'required',
         ]);
-        $device->trackings()->create(['projects' => $request->get('projects'), 'access' => $request->get('access')]);
+        $device->trackings()->create([
+            'projects' => $request->get('projects'),
+            'access' => $request->get('access'),
+            'app_version' => get_user_agent(),
+        ]);
     }
 }

@@ -10,15 +10,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tracking extends Model
 {
-
     /**
      * @var string
      */
     protected $table = 'device_trackings';
+
     /**
      * @var array
      */
-    protected $fillable = ['projects', 'access', 'device_id'];
+    protected $fillable = ['projects', 'access', 'device_id', 'app_version'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
