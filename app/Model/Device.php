@@ -13,13 +13,18 @@ class Device extends Model
 {
 
     /**
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      *  Setup model event hooks
      */
     public static function boot()
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->id = (string) Uuid::generate(4);
+            $model->id = (string)Uuid::generate(4);
         });
     }
 
