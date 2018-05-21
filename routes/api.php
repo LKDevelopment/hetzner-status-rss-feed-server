@@ -278,6 +278,9 @@ Route::group(['prefix' => 'device'], function () {
     Route::get('metrics2', function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os'))->groupBy('os')->get());
     });
+    Route::get('cache', function () {
+        return response()->json(Cache::getRedis()->keys('*'));
+    });
     Route::group(['prefix' => '{device}'], function () {
         Route::post('tracking', 'Api\DeviceTrackingController@create_track');
     });
