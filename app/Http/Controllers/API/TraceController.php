@@ -49,7 +49,9 @@ class TraceController extends Controller
         $this->validate($request, [
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
-        $lastHop = last($this->cacheOrTrace($ip));
+        $lastHop = last(collect($this->cacheOrTrace($ip))->reject(function ($c) {
+            return $c->cloud_id != null;
+        })->toArray());
         Tracking::track('get_cloud_host_to_ip', $ip, get_user_agent());
 
         return response()->json($lastHop);
