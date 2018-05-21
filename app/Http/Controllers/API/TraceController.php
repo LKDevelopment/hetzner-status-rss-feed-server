@@ -50,7 +50,7 @@ class TraceController extends Controller
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
         $lastHop = last(collect($this->cacheOrTrace($ip))->reject(function ($c) {
-            return $c->cloud_id != null;
+            return $c->cloud_id == null;
         })->toArray());
         Tracking::track('get_cloud_host_to_ip', $ip, get_user_agent());
 
