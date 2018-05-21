@@ -38,17 +38,10 @@
                 <ul class="navbar-nav mr-auto">
                     @auth
                         <li><a class="nav-link" href="{{ route('messages.index') }}">{{ __('Messages') }}</a></li>
-                        <li class="nav-item dropdown">
-                            <a id="staticsDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Statics <span class="caret"></span>
+                        <li>
+                            <a class="nav-link" href="{{ route('statics.tracing_cache') }}">
+                                {{ __('Tracing Cache') }}
                             </a>
-
-                            <div class="dropdown-menu" aria-labelledby="staticsDropdown">
-                                <a class="dropdown-item" href="{{ route('statics.tracing_cache') }}">
-                                    {{ __('Tracing Cache') }}
-                                </a>
-                            </div>
                         </li>
                     @endauth
                 </ul>
@@ -58,7 +51,7 @@
                     <!-- Authentication Links -->
                     @guest
                         <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                        <!--<li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>-->
+                    <!--<li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>-->
                     @else
                         <li class="nav-item dropdown">
                             <a id="userDropdown" class="nav-link dropdown-toggle" href="#" role="button"
