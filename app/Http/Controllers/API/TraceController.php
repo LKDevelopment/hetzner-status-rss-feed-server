@@ -63,7 +63,7 @@ class TraceController extends Controller
      */
     protected function cacheOrTrace($ip)
     {
-        return json_decode(Cache::remember($ip, 60 * 24, function () use ($ip) {
+        return json_decode(Cache::remember('traceing_'.$ip, 60 * 24, function () use ($ip) {
             exec('traceroute '.escapeshellarg($ip), $output);
             $hosts = [];
             foreach ($output as $index => $line) {
