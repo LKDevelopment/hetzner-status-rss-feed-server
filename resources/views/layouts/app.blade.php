@@ -39,12 +39,12 @@
                     @auth
                         <li><a class="nav-link" href="{{ route('messages.index') }}">{{ __('Messages') }}</a></li>
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            <a id="staticsDropdown" class="nav-link dropdown-toggle" href="#statics" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Statics <span class="caret"></span>
                             </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="staticsDropdown" id="statics">
                                 <a class="dropdown-item" href="{{ route('statics.tracing_cache') }}">
                                     {{ __('Tracing Cache') }}
                                 </a>
@@ -61,12 +61,12 @@
                         <!--<li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>-->
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            <a id="userDropdown" class="nav-link dropdown-toggle" href="#user" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="userDropdown" id="user">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
