@@ -28,3 +28,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('messages', 'Web\Messages');
+Route::group(['prefix' => 'statics'], function () {
+    Route::get('tracing_cache', 'Web\StaticsController@getTracingCache')->name('statics.tracing_cache');
+});
