@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
  */
 class DeviceTrackingController extends Controller
 {
+
     /**
      * @param \Illuminate\Http\Request $request
      *
@@ -29,7 +30,24 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device $device
+     * @param \App\Model\Device        $device
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update_device(Request $request, Device $device)
+    {
+        $this->validate($request, [
+            'os' => 'required',
+            'version' => 'required',
+        ]);
+        $device->update(['os' => $request->get('os'), 'version' => $request->get('version')]);
+
+        return response()->json(['device_id' => $device->id]);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Model\Device        $device
      */
     public function create_track(Request $request, Device $device)
     {

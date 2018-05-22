@@ -9,7 +9,7 @@
                         <h3 class="float-left">Messages</h3>
                         <a href="{{ route('messages.create') }}" class="btn btn-success float-right">Add</a>
                     </div>
-
+                    
                     <div class="card-body">
                         <table class="table table-bordered table-condensed table-striped">
                             <thead>
@@ -31,7 +31,7 @@
                             @endforeach
                             </tbody>
                         </table>
-
+                        
                         {{$messages->render()}}
                     </div>
                 </div>
