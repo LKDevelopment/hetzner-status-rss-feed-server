@@ -66,6 +66,7 @@ class Messages extends Controller
                 'date_time' => $data['create'],
                 'permalink' => $data['permalink_'.$language],
                 'language' => $language,
+                'type' => $data['category'],
             ]);
             //event(new NewStatusMeldungArrived($message));
         }
