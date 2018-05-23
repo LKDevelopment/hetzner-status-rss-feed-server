@@ -64,7 +64,7 @@ class Messages extends Controller
                 'title' => $data['title_'.$language],
                 'text' => $data['description_'.$language].'<br />'.$data['affected_'.$language],
                 'category' => $data['category'],
-                'date_time' => $data['create'],
+                'date_time' => $data['start'],
                 'permalink' => $data['permalink_'.$language],
                 'language' => $language,
 
