@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
  */
 class DeviceTrackingController extends Controller
 {
-
     /**
      * @param \Illuminate\Http\Request $request
      *
@@ -30,7 +29,7 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device        $device
+     * @param \App\Model\Device $device
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -46,8 +45,17 @@ class DeviceTrackingController extends Controller
     }
 
     /**
+     * @param \App\Model\Device $device
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function feature_flags(Device $device)
+    {
+        return response()->json(['feature_flags' => $device->feature_flags]);
+    }
+
+    /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device        $device
+     * @param \App\Model\Device $device
      */
     public function create_track(Request $request, Device $device)
     {

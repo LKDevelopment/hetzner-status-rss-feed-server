@@ -16,6 +16,10 @@ class FeatureFlag extends Model
     protected $fillable = ['device_id', 'key', 'value'];
 
     /**
+     * @var array
+     */
+    protected $hidden = ['device_id','created_at','id','updated_at'];
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function device()
