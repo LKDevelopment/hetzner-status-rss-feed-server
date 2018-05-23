@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST">
+                        <form method="POST" action="{{ route('messages.store') }}">
                             {{csrf_field()}}
                             <h3>Deutsch</h3>
                             <div class="form-group">
