@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Events\NewStatusMeldungArrived;
 use App\Model\Message;
+use App\StatusMeldung;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,7 +45,32 @@ class Messages extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->validate($request, [
+            'title_de' => 'required',
+            'description_de' => 'required',
+            'affected_de' => 'required',
+            'permalink_de' => 'required',
+            'title_en' => 'required',
+            'description_en' => 'required',
+            'affected_en' => 'required',
+            'permalink_en' => 'required',
+            'category' => 'required',
+            'start' => 'required',
+        ]);
+        Message::create($data);
+        foreach (['de', 'en'] as $language) {
+            $message = StatusMeldung::create([
+                'title' => $data['title_'.$language],
+                'text' => $data['description_'.$language].'<br />'.$data['affected_'.$language],
+                'category' => $data['category'],
+                'date_time' => $data['create'],
+                'permalink' => $data['permalink_'.$language],
+                'language' => $language,
+            ]);
+            //event(new NewStatusMeldungArrived($message));
+        }
+
+        return redirect()->route('messages.index')->with('success', 'Angelegt');
     }
 
     /**

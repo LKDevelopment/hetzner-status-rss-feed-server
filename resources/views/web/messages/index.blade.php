@@ -9,8 +9,13 @@
                         <h3 class="float-left">Messages</h3>
                         <a href="{{ route('messages.create') }}" class="btn btn-success float-right">Add</a>
                     </div>
-                    
+
                     <div class="card-body">
+                        @if(Session::has('success'))
+                            <div class="alert alert-success">
+                                {{ Session::get('success') }}
+                            </div>
+                        @endif
                         <table class="table table-bordered table-condensed table-striped">
                             <thead>
                             <th>ID</th>
@@ -31,7 +36,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        
+
                         {{$messages->render()}}
                     </div>
                 </div>
