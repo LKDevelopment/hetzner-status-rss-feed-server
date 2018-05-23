@@ -23,6 +23,7 @@
                             <th>Kategorie</th>
                             <th>Erstellt</th>
                             <th>Push versendet?</th>
+                            <th>Aktionen</th>
                             </thead>
                             <tbody>
                             @foreach($messages as $message)
@@ -32,6 +33,9 @@
                                     <td>{{$message->category}}</td>
                                     <td>{{ $message->created_at }}</td>
                                     <td>{{$message->send_at ? 'Ja':'Nein'}}</td>
+                                    <td>@if($message->category == 'App')
+                                            <a href="{{ route('messages.delete',$message) }}">Delete</a>
+                                        @endif</td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -69,7 +69,7 @@ class Messages extends Controller
                 'language' => $language,
 
             ]);
-            //event(new NewStatusMeldungArrived($message));
+            event(new NewStatusMeldungArrived($message));
         }
 
         return redirect()->route('messages.index')->with('success', 'Angelegt');
@@ -115,8 +115,10 @@ class Messages extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Message $message)
     {
-        //
+        $message->delete();
+
+        return redirect()->route('messages.index')->with('success', 'Gelöscht!');
     }
 }
