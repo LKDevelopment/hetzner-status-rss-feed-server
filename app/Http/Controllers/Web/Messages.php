@@ -32,7 +32,7 @@ class Messages extends Controller
      */
     public function create()
     {
-        //
+        return view('web.messages.create');
     }
 
     /**
