@@ -34,7 +34,7 @@ class Message extends Model
         parent::boot();
 
         self::addGlobalScope(function (Builder $builder) {
-            $builder->orderByDesc('external_id');
+            $builder->orderByDesc('id');
         });
     }
 

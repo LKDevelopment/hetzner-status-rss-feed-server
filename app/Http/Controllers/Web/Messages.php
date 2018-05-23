@@ -58,6 +58,7 @@ class Messages extends Controller
             'start' => 'required',
         ]);
         $data['type'] = $data['category'];
+        $data['parent_id'] = null;
         Message::create($data);
         foreach (['de', 'en'] as $language) {
             $message = StatusMeldung::create([
