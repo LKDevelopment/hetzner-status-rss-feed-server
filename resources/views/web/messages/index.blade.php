@@ -28,7 +28,7 @@
                             <tbody>
                             @foreach($messages as $message)
                                 <tr>
-                                    <td>{{ $message->external_id }}</td>
+                                    <td>{{ $message->id }} (Ext: {{$message->external_id}})</td>
                                     <td>{{ $message->title_de }}</td>
                                     <td>{{$message->category}}</td>
                                     <td>{{ $message->created_at }}</td>
