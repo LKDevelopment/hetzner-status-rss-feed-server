@@ -57,6 +57,7 @@ class Messages extends Controller
             'category' => 'required',
             'start' => 'required',
         ]);
+        $data['type'] = $data['category'];
         Message::create($data);
         foreach (['de', 'en'] as $language) {
             $message = StatusMeldung::create([
@@ -66,7 +67,7 @@ class Messages extends Controller
                 'date_time' => $data['create'],
                 'permalink' => $data['permalink_'.$language],
                 'language' => $language,
-                'type' => $data['category'],
+
             ]);
             //event(new NewStatusMeldungArrived($message));
         }
