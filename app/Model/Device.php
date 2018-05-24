@@ -58,7 +58,7 @@ class Device extends Model
     public function hasFeatureFlag(FeatureFlag $featureFlag)
     {
         return $this->feature_flags->reject(function (FeatureFlag $flag) use ($featureFlag) {
-                return !$flag->key == $featureFlag->key;
+                return $flag->key != $featureFlag->key;
             })->count() == 1;
     }
 }
