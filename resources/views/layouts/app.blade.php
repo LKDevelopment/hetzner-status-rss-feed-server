@@ -39,6 +39,11 @@
                     @auth
                         <li><a class="nav-link" href="{{ route('messages.index') }}">{{ __('Messages') }}</a></li>
                         <li>
+                            <a class="nav-link" href="{{ route('feature_flags.index') }}">
+                                {{ __('Feature Flags') }}
+                            </a>
+                        </li>
+                        <li>
                             <a class="nav-link" href="{{ route('statics.tracing_cache') }}">
                                 {{ __('Tracing Cache') }}
                             </a>
