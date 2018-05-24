@@ -10,7 +10,7 @@
                     </div>
                     
                     <div class="card-body">
-                        <form method="POST" action="{{ route('messages.update',$device) }}">
+                        <form method="POST" action="{{ route('devices.update',$device) }}">
                             {{csrf_field()}}
                             {{ method_field('PUT') }}
                             <div class="form-group">
