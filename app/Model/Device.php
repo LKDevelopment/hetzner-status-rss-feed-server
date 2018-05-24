@@ -43,9 +43,10 @@ class Device extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function feature_flags(){
-        return $this->hasMany(FeatureFlag::class);
+    public function feature_flags()
+    {
+        return $this->belongsToMany(FeatureFlag::class);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeatureFlagsTable extends Migration
+class DeviceFeatureFlag extends Migration
 {
 
     /**
@@ -14,11 +14,10 @@ class CreateFeatureFlagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('feature_flags', function (Blueprint $table) {
+        Schema::create('device_feature_flag', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key');
-            $table->string('min_build')->nullable();
-            $table->string('description');
+            $table->integer('feature_flag_id');
+            $table->string('device_id');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateFeatureFlagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feature_flags');
+        Schema::dropIfExists('device_feature_flag');
     }
 }
