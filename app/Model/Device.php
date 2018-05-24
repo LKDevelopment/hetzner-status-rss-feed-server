@@ -32,7 +32,7 @@ class Device extends Model
     /**
      * @var array
      */
-    protected $fillable = ['os', 'version', 'app_version'];
+    protected $fillable = ['os', 'version', 'app_version', 'type', 'description'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
