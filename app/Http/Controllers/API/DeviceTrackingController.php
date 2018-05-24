@@ -23,7 +23,7 @@ class DeviceTrackingController extends Controller
             'os' => 'required',
             'version' => 'required',
         ]);
-        $device = Device::create(['os' => $request->get('os'), 'version' => $request->get('version')]);
+        $device = Device::create(['os' => $request->get('os'), 'version' => $request->get('version'), 'app_version' => get_user_agent()]);
 
         return response()->json(['device_id' => $device->id]);
     }
@@ -40,7 +40,7 @@ class DeviceTrackingController extends Controller
             'os' => 'required',
             'version' => 'required',
         ]);
-        $device->update(['os' => $request->get('os'), 'version' => $request->get('version')]);
+        $device->update(['os' => $request->get('os'), 'version' => $request->get('version'), 'app_version' => get_user_agent()]);
 
         return response()->json(['device_id' => $device->id]);
     }
