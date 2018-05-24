@@ -44,6 +44,11 @@
                             </a>
                         </li>
                         <li>
+                            <a class="nav-link" href="{{ route('devices.index') }}">
+                                {{ __('Devices') }}
+                            </a>
+                        </li>
+                        <li>
                             <a class="nav-link" href="{{ route('statics.tracing_cache') }}">
                                 {{ __('Tracing Cache') }}
                             </a>
