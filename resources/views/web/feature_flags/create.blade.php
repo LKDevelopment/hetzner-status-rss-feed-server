@@ -10,7 +10,7 @@
                     </div>
                     
                     <div class="card-body">
-                        <form method="POST" action="{{ route('feature_flags.store.store') }}">
+                        <form method="POST" action="{{ route('feature_flags.store') }}">
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Key:</label>

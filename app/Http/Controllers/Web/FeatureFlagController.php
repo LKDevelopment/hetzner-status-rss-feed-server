@@ -18,7 +18,7 @@ class FeatureFlagController extends Controller
     {
         $featureFlags = FeatureFlag::paginate(20);
 
-        return view('web.feature_flags.create', compact('featureFlags'));
+        return view('web.feature_flags.index', compact('featureFlags'));
     }
 
     /**
@@ -47,7 +47,7 @@ class FeatureFlagController extends Controller
         ]);
         FeatureFlag::create($data);
 
-        return redirect()->route('feature_flags.index.index')->with('success', 'Angelegt');
+        return redirect()->route('feature_flags.index')->with('success', 'Angelegt');
     }
 
     /**
