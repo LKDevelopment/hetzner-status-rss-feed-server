@@ -98,7 +98,7 @@ class DeviceController extends Controller
         ]);
         $device->update($data);
 
-        return redirect()->route('devices.index')->with('success', 'Gerät bearbeitet!');
+        return redirect()->route('devices.index', ['value' => $device->id])->with('success', 'Gerät bearbeitet!');
     }
 
     /**
@@ -127,6 +127,11 @@ class DeviceController extends Controller
 
     public function save_feature_flags(Request $request, Device $device)
     {
+        $data = $this->validate($request, [
+            'featureFlag.*' => 'exists:feature_flags,id',
+        ]);
+        $device->feature_flags()->sync($data['featureFlag']);
 
+        return redirect()->route('devices.index', ['value' => $device->id])->with('success', 'Gerät bearbeitet!');
     }
 }
