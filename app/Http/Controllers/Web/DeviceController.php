@@ -17,7 +17,7 @@ class DeviceController extends Controller
     public function index(Request $request)
     {
         if ($request->has('value')) {
-            $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
+            $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
         } else {
             $devices = [];
         }
@@ -67,9 +67,9 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Device $device)
     {
-        //
+        return view('web.devices.edit', compact('device'));
     }
 
     /**
@@ -80,9 +80,15 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Device $device)
     {
-        //
+        $data = $this->validate($request, [
+            'type' => 'required',
+            'description' => 'max:255',
+        ]);
+        $device->update($data);
+
+        return redirect()->route('devices.index')->with('success', 'Gerät bearbeitet!');
     }
 
     /**

@@ -18,7 +18,7 @@
                         <form class="form-inline" method="GET">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Device ID">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Device ID/Description">
                                 </div>
                             </div>
                             <div class="form-group">
