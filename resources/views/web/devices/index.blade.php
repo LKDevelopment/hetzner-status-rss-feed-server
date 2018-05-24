@@ -49,8 +49,10 @@
                                         <td>{{$device->os}} {{ $device->version }}</td>
                                         <td>{{ $device->app_version }}</td>
                                         <td>
-                                            <a href="{{ route('devices.edit',$device) }}" class="btn btn-info">Edit</a>
-                                            <a href="#" class="btn btn-success">Feature Flags</a>
+                                            <a href="{{ route('devices.edit',$device) }}" class="btn btn-info"><i class="fas fa-fw fa-pencil"></i>
+                                                Edit</a>
+                                            <a href="#" class="btn btn-success"><i class="fas fa-flag fa-fw"></i> Feature
+                                                Flags</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -9,7 +9,7 @@
                         <h3 class="float-left">Messages</h3>
                         <a href="{{ route('messages.create') }}" class="btn btn-success float-right">Add</a>
                     </div>
-
+                    
                     <div class="card-body">
                         @if(Session::has('success'))
                             <div class="alert alert-success">
@@ -34,13 +34,14 @@
                                     <td>{{ $message->created_at }}</td>
                                     <td>{{$message->send_at ? 'Ja':'Nein'}}</td>
                                     <td>@if($message->category == 'App')
-                                            <a href="{{ route('messages.delete',$message) }}">Delete</a>
+                                            <a href="{{ route('messages.delete',$message) }}" class="text-danger"><i class="fal fa-trash fa-fw"></i>
+                                                Delete</a>
                                         @endif</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-
+                        
                         {{$messages->render()}}
                     </div>
                 </div>

@@ -33,7 +33,7 @@
                                     <td>{{ $featureFlag->min_build }}</td>
                                     
                                     <td>
-                                        <a href="{{ route('feature_flags.delete',$featureFlag) }}">Delete</a>
+                                        <a href="{{ route('feature_flags.delete',$featureFlag) }}" class="text-danger"><i class="fal fa-trash fa-fw"></i> Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

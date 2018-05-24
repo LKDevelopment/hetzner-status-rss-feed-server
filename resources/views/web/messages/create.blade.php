@@ -75,7 +75,7 @@
                                 <label class="form-check-label" for="exampleCheck1" >Achtung! Die Nachrichten
                                     werden direkt versendet!</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary"><i class="fal fa-save fa-fw"></i> Speichern</button>
                         </form>
                     </div>
                 </div>

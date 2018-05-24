@@ -6,7 +6,10 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="float-left">Edit Device {{ $device->id }}</h3>
+                        <h3 class="float-left">Device
+                            <small>{{ $device->id }}</small>
+                            editieren
+                        </h3>
                     </div>
                     
                     <div class="card-body">
@@ -40,19 +43,19 @@
                                 <label for="exampleInputEmail1">Typ:</label>
                                 <select name="type" class="form-control">
                                     <option value="user" {{ old('type', $device->type) == 'user' ? 'selected' :'' }}>
-                                        User
+                                        Benutzer
                                     </option>
                                     <option value="internal" {{ old('type', $device->type) == 'internal' ? 'selected' :'' }}>
                                         Beta
                                         Tester
                                     </option>
                                     <option value="developer" {{ old('type', $device->type) == 'developer' ? 'selected' :'' }}>
-                                        Developer
+                                        Entwickler
                                     </option>
                                 </select>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Speichern</button>
+                            <button type="submit" class="btn btn-primary"><i class="fal fa-save"></i> Speichern</button>
                         </form>
                     </div>
                 </div>

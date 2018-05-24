@@ -28,7 +28,7 @@
                                        value="{{old('description')}}">
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary"><i class="fal fa-save fa-fw"></i> Speichern</button>
                         </form>
                     </div>
                 </div>
