@@ -8,10 +8,12 @@ use App\Http\Controllers\Controller;
 
 class DeviceController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +22,12 @@ class DeviceController extends Controller
     public function index(Request $request)
     {
         if ($request->has('value')) {
-            $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
+            if (in_array(strtolower($request->get('value')), ['developer', 'user', 'internal'])) {
+                $devices = Device::where('type', '=', strtolower($request->get('value')))->paginate(10);
+            } else {
+                $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
+            }
+
         } else {
             $devices = null;
         }
