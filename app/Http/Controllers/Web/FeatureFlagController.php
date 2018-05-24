@@ -99,6 +99,6 @@ class FeatureFlagController extends Controller
         $featureFlag->devices()->detach();
         $featureFlag->delete();
 
-        return redirect()->route('feature_flags.index.index')->with('success', 'Gelöscht');
+        return redirect()->route('feature_flags.index')->with('success', 'Gelöscht');
     }
 }
