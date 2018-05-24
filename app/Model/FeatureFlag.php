@@ -22,10 +22,23 @@ class FeatureFlag extends Model
     protected $hidden = ['created_at', 'id', 'updated_at'];
 
     /**
+     * @var array
+     */
+    protected $appends = ['value'];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function devices()
     {
         return $this->belongsToMany(Device::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getValueAttribute()
+    {
+        return true;
     }
 }
