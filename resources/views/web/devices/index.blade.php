@@ -25,9 +25,10 @@
                                 <div class="input-group">
                                     <input type="text" name="value" class="form-control" required
                                            value="{{ request()->get('value') }}">
-                                    <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
-                            </span>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">
+                                            <i class="fas fa-search"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </form>

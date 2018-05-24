@@ -21,6 +21,7 @@ class DeviceController extends Controller
         } else {
             $devices = [];
         }
+        dd($devices);
 
         return view('web.devices.index', compact('devices'));
     }
