@@ -12,6 +12,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('messages.update',$device) }}">
                             {{csrf_field()}}
+                            {{ method_field('PUT') }}
                             <div class="form-group">
                                 <div class="input-group">
                                     <label for="exampleInputEmail1">ID:</label>
