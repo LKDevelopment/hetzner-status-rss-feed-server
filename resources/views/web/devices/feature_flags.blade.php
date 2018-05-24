@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="float-left">Device
-                            <small>{{ $device->id }}</small>
+                            <small>{{ strlen($device->description) > 0 ? $device->description:$device->id }}</small>
                             Feature Flags
                         </h3>
                     </div>
