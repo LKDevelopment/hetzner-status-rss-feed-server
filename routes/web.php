@@ -31,6 +31,7 @@ Route::resource('messages', 'Web\Messages');
 Route::get('messages/{message}/delete', 'Web\Messages@destroy')->name('messages.delete');
 Route::resource('devices', 'Web\DeviceController');
 Route::resource('feature_flags', 'Web\FeatureFlagController');
+Route::get('feature_flags/{feature_flag}/delete', 'Web\FeatureFlagController@destroy')->name('feature_flags.delete');
 Route::group(['prefix' => 'devices/{device}'], function () {
 
 });
