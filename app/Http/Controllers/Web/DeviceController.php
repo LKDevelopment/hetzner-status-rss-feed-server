@@ -19,9 +19,8 @@ class DeviceController extends Controller
         if ($request->has('value')) {
             $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
         } else {
-            $devices = [];
+            $devices = null;
         }
-        dd($devices);
 
         return view('web.devices.index', compact('devices'));
     }

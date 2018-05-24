@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </form>
-                        @if(count($devices) > 0)
+                        @if($devices !== null)
                             <table class="table table-bordered table-condensed table-striped">
                                 <thead>
                                 <th>ID</th>
