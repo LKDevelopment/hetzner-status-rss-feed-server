@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="float-left">Devices</h3>
@@ -26,7 +26,7 @@
                                     <input type="text" name="value" class="form-control" required
                                            value="{{ request()->get('value') }}">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
+                                        <button class="btn btn-outline-secondary" type="submit">
                                             <i class="fas fa-search"></i></button>
                                     </div>
                                 </div>
