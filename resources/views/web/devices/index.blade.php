@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <h3 class="float-left">Devices</h3>
                     </div>
-                    
+
                     <div class="card-body">
                         @if(Session::has('success'))
                             <div class="alert alert-success">
@@ -30,7 +30,8 @@
                                 </div>
                             </div>
                         </form>
-                            <p class="text-muted">Durch Eingabe des Types werden alle Geräte des Types angegegben: z.B. developer oder user oder internal</p>
+                        <p class="text-muted">Durch Eingabe des Types werden alle Geräte des Types angegegben: z.B.
+                            developer oder user oder internal</p>
                         @if($devices !== null)
                             <table class="table table-bordered table-condensed table-striped">
                                 <thead>
@@ -48,8 +49,18 @@
                                         <td>{{$device->os}} {{ $device->version }}</td>
                                         <td>{{ $device->app_version }}</td>
                                         <td>
-                                            <a href="{{ route('devices.edit',$device) }}" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editieren"><i class="fas fa-fw fa-pencil"></i></a>
-                                            <a href="{{ route('devices.feature_flags',$device) }}" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Feature Flags"><i class="fas fa-flag fa-fw"></i></a>
+                                            <a href="{{ route('devices.show',$device) }}"
+                                               class="btn btn-outline-success btn-sm" data-toggle="tooltip"
+                                               data-placement="bottom" title="Details"><i
+                                                        class="fas fa-fw fa-info-circle"></i></a>
+                                            <a href="{{ route('devices.edit',$device) }}"
+                                               class="btn btn-outline-primary btn-sm" data-toggle="tooltip"
+                                               data-placement="bottom" title="Editieren"><i
+                                                        class="fas fa-fw fa-pencil"></i></a>
+                                            <a href="{{ route('devices.feature_flags',$device) }}"
+                                               class="btn btn-outline-warning btn-sm" data-toggle="tooltip"
+                                               data-placement="bottom" title="Feature Flags"><i
+                                                        class="fas fa-flag fa-fw"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
