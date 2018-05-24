@@ -30,6 +30,7 @@
                                 </div>
                             </div>
                         </form>
+                            <p class="text-muted">Durch Eingabe des Types werden alle Geräte des Types angegegben: z.B. developer oder user oder internal</p>
                         @if($devices !== null)
                             <table class="table table-bordered table-condensed table-striped">
                                 <thead>
