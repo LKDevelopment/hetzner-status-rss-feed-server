@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 
 class DeviceController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,16 +24,14 @@ class DeviceController extends Controller
             if (in_array(strtolower($request->get('value')), ['developer', 'user', 'internal'])) {
                 $devices = Device::where('type', '=', strtolower($request->get('value')))->paginate(10);
             } else {
-                $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
+                $devices = Device::where('id', 'LIKE', '%'.$request->get('value').'%')->orWhere('description', 'LIKE', '%'.$request->get('value').'%')->paginate(10);
             }
-
         } else {
             $devices = null;
         }
 
         return view('web.devices.index', compact('devices'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -65,9 +62,11 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Device $device)
     {
-        //
+        $device->load('trackings');
+
+        return $device;
     }
 
     /**
@@ -86,7 +85,7 @@ class DeviceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
