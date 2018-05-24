@@ -33,7 +33,6 @@ Route::resource('devices', 'Web\DeviceController');
 Route::resource('feature_flags', 'Web\FeatureFlagController');
 Route::get('feature_flags/{feature_flag}/delete', 'Web\FeatureFlagController@destroy')->name('feature_flags.delete');
 Route::group(['prefix' => 'devices/{device}'], function () {
-    Route::get('/', 'Web\DeviceController@show');
     Route::get('feature_flags', 'Web\DeviceController@feature_flags')->name('devices.feature_flags');
     Route::put('feature_flags', 'Web\DeviceController@save_feature_flags');
 });
