@@ -49,7 +49,7 @@
                                         <td>{{ $device->app_version }}</td>
                                         <td>
                                             <a href="{{ route('devices.edit',$device) }}" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editieren"><i class="fas fa-fw fa-pencil"></i></a>
-                                            <a href="#" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Feature Flags"><i class="fas fa-flag fa-fw"></i></a>
+                                            <a href="{{ route('devices.feature_flags',$device) }}" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Feature Flags"><i class="fas fa-flag fa-fw"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

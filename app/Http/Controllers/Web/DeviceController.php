@@ -112,4 +112,21 @@ class DeviceController extends Controller
     {
         //
     }
+
+    /**
+     * @param \App\Model\Device $device
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function feature_flags(Device $device)
+    {
+        $device->load('feature_flags');
+
+        return view('web.devices.feature_flags', compact('device'));
+    }
+
+    public function save_feature_flags(Request $request, Device $device)
+    {
+
+    }
 }
