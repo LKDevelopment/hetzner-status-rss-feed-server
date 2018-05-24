@@ -18,11 +18,9 @@
                         <form class="form-inline" method="GET">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Device ID/Description">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">Device ID/Description</span>
+                                    </div>
                                     <input type="text" name="value" class="form-control" required
                                            value="{{ request()->get('value') }}">
                                     <div class="input-group-append">
@@ -49,10 +47,8 @@
                                         <td>{{$device->os}} {{ $device->version }}</td>
                                         <td>{{ $device->app_version }}</td>
                                         <td>
-                                            <a href="{{ route('devices.edit',$device) }}" class="btn btn-info"><i class="fas fa-fw fa-pencil"></i>
-                                                Edit</a>
-                                            <a href="#" class="btn btn-success"><i class="fas fa-flag fa-fw"></i> Feature
-                                                Flags</a>
+                                            <a href="{{ route('devices.edit',$device) }}" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editieren"><i class="fas fa-fw fa-pencil"></i></a>
+                                            <a href="#" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Feature Flags"><i class="fas fa-flag fa-fw"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
