@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Description:</label>
-                                <input type="url" class="form-control" id="description" name="description"
+                                <input type="text" class="form-control" id="description" name="description"
                                        value="{{old('description')}}">
                             </div>
                             
