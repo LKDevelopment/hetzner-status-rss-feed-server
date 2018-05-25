@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Devices</h3>
@@ -14,25 +14,23 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Weekly Active Devices</h3>
                     </div>
-            
+                    
                     <div class="card-body">
                         <canvas id="active_devices" width="400" height="400"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">App-Version</h3>
                     </div>
-            
+                    
                     <div class="card-body">
                         <canvas id="app_version" width="400" height="400"></canvas>
                     </div>
@@ -113,6 +111,7 @@
                 }
             });
         });
+
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
             var color = '#';
