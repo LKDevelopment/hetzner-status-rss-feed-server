@@ -17,11 +17,22 @@
             <div class="col-md-2">
                 <div class="card box-shadow">
                     <div class="card-header">
+                        <h3 class="float-left">Daily Active Devices</h3>
+                    </div>
+                    
+                    <div class="card-body">
+                        <canvas id="daily_active_devices" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card box-shadow">
+                    <div class="card-header">
                         <h3 class="float-left">Weekly Active Devices</h3>
                     </div>
                     
                     <div class="card-body">
-                        <canvas id="active_devices" width="400" height="400"></canvas>
+                        <canvas id="weekly_active_devices" width="400" height="400"></canvas>
                     </div>
                 </div>
             </div>
@@ -88,7 +99,7 @@
                 }
             });
         });
-        $.getJSON('/api/statics/active_devices', function (data) {
+        $.getJSON('/api/statics/weekly_active_devices', function (data) {
             let _data = [];
             let _labels = [];
             let _colors = [];
@@ -98,7 +109,30 @@
                 _colors.push(val.color);
             });
             // And for a doughnut chart
-            var myDoughnutChart = new Chart('active_devices', {
+            var myDoughnutChart = new Chart('weekly_active_devices', {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: _data,
+                        backgroundColor: _colors,
+                    }],
+
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: _labels
+                }
+            });
+        });
+        $.getJSON('/api/statics/daily_active_devices', function (data) {
+            let _data = [];
+            let _labels = [];
+            let _colors = [];
+            $.each(data, function (index, val) {
+                _data.push(val.value);
+                _labels.push(val.label);
+                _colors.push(val.color);
+            });
+            // And for a doughnut chart
+            var myDoughnutChart = new Chart('daily_active_devices', {
                 type: 'doughnut',
                 data: {
                     datasets: [{

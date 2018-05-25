@@ -280,7 +280,7 @@ Route::group(['prefix' => 'device'], function () {
 });
 
 Route::group(['prefix' => 'statics'], function () {
-    Route::get('active_devices', function () {
+    Route::get('weekly_active_devices', function () {
         $data = [
             [
                 'value' =>  \App\Model\Device::whereHas('trackings',function($query){
@@ -298,6 +298,26 @@ Route::group(['prefix' => 'statics'], function () {
             ]
         ]
        ;
+        return response()->json($data);
+    });
+    Route::get('daily_active_devices', function () {
+        $data = [
+            [
+                'value' =>  \App\Model\Device::whereHas('trackings',function($query){
+                    $query->whereBetween('created_at',[\Carbon\Carbon::yesterday()->startOfDay(),\Carbon\Carbon::now()->endOfDay()]);
+                })->count(),
+                'label' => 'Daily Active Users',
+                'color' => '#17c11c'
+            ],
+            [
+                'value' =>  \App\Model\Device::whereDoesntHave('trackings',function($query){
+                    $query->whereBetween('created_at',[\Carbon\Carbon::yesterday()->startOfDay(),\Carbon\Carbon::now()->endOfDay()]);
+                })->count(),
+                'label' => 'Other Users',
+                'color' => '#ff0000'
+            ]
+        ]
+        ;
         return response()->json($data);
     });
     Route::get('os', function () {
