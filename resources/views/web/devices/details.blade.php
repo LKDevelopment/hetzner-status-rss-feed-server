@@ -24,40 +24,48 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <i class="fab fa-fw {{ $device->os == 'iOS' ? 'fa-apple':'fa-android' }} fa-4x avatar"></i>
-                                <div class="table-responsive table">
-                                    <table>
-                                        <tr>
-                                            <td><strong>OS:</strong></td>
-                                            <td>{{$device->os}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Version</strong></td>
-                                            <td>{{$device->version}}</td>
-                                        </tr>
-                                    </table>
+                                <div class="mx-auto">
+                                    <i class="fab fa-fw {{ $device->os == 'iOS' ? 'fa-apple':'fa-android' }} fa-4x avatar"></i>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td><strong>OS:</strong></td>
+                                                <td>{{$device->os}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Version</strong></td>
+                                                <td>{{$device->version}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <div class="table-responsive table">
-                                    <table>
-                                        <tr>
-                                            <td><strong>ID:</strong></td>
-                                            <td>{{$device->id}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Beschreibung</strong></td>
-                                            <td>{{$device->description}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>App Version:</strong></td>
-                                            <td>{{$device->app_version}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Letzte Änderung:</strong></td>
-                                            <td>{{$device->updated_at}}</td>
-                                        </tr>
-                                    </table>
+                                <div class="mx-auto">
+                                    <div class="table-responsive table">
+                                        <table>
+                                            <tr>
+                                                <td><strong>ID:</strong></td>
+                                                <td>{{$device->id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Beschreibung:</strong></td>
+                                                <td>{{$device->description}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Typ:</strong></td>
+                                                <td>{{ $device->type }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>App Version:</strong></td>
+                                                <td>{{$device->app_version}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Letzte Änderung:</strong></td>
+                                                <td>{{$device->updated_at}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
