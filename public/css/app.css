@@ -10424,7 +10424,8 @@ a.text-dark:focus {
 
 .avatar {
   background-color: #cccccc;
-  padding: 5px;
-  border-radius: 100%;
+  border-radius: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
