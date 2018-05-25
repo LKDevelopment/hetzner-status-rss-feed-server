@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
  */
 class StaticsController extends Controller
 {
+
     /**
      * StaticsController constructor.
      */
@@ -28,5 +29,10 @@ class StaticsController extends Controller
         });
 
         return response()->view('web.statics.traching_cache', compact('caches'));
+    }
+
+    public function dashboard()
+    {
+        return view('web.statics.device');
     }
 }

@@ -37,5 +37,6 @@ Route::group(['prefix' => 'devices/{device}'], function () {
     Route::put('feature_flags', 'Web\DeviceController@save_feature_flags');
 });
 Route::group(['prefix' => 'statics'], function () {
+    Route::get('dashboard', 'Web\StaticsController@dashboard')->name('statics.dashboard');
     Route::get('tracing_cache', 'Web\StaticsController@getTracingCache')->name('statics.tracing_cache');
 });

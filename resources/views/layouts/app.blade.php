@@ -47,10 +47,20 @@
                                 <i class="fal fa-fw fa-mobile"></i> {{ __('Devices') }}
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="{{ route('statics.tracing_cache') }}">
-                                <i class="fal fa-badge fa-fw"></i>{{ __('Tracing Cache') }}
+                        <li class="nav-item dropdown">
+                            <a id="staticsDropDown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fal fa-chart-line"></i> Statistiken <span class="caret"></span>
                             </a>
+                            
+                            <div class="dropdown-menu" aria-labelledby="staticsDropDown">
+                                <a class="dropdown-item" href="{{ route('statics.dashboard') }}">
+                                    <i class="fal fa-tachometer"></i> Dashboard
+                                </a>
+                                <a class="dropdown-item" href="{{ route('statics.tracing_cache') }}">
+                                    <i class="fal fa-badge fa-fw"></i>{{ __('Tracing Cache') }}
+                                </a>
+                            </div>
                         </li>
                     @endauth
                 </ul>
@@ -103,5 +113,6 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+@stack('js')
 </body>
 </html>
