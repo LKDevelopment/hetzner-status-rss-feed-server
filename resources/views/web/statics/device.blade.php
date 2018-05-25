@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Devices</h3>
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Weekly Active Devices</h3>
