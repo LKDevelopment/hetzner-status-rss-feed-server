@@ -280,7 +280,7 @@ Route::group(['prefix' => 'device'], function () {
 });
 
 Route::group(['prefix' => 'statics'], function () {
-    Route::get('activate_devices', function () {
+    Route::get('active_devices', function () {
         $data = [
             [
                 'value' =>  \App\Model\Device::whereHas('trackings',function($query){
