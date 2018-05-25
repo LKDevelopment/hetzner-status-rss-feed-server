@@ -1,9 +1,25 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
-
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import '~bootstrap/scss/bootstrap';
+
+@mixin box-shadow($color: rgba(0, 0, 0, 0.18)) {
+  box-shadow: 0px 2px 4px $color;
+}
+
+.navbar-hetzner {
+  background-color: #DF2F37;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.box-shadow {
+  @include box-shadow();
+}
+
+.avatar {
+  background-color: #cccccc;
+  padding: 5px;
+  border-radius: 100%;
+}

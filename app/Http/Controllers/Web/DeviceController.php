@@ -65,9 +65,9 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Device $device)
     {
-        //
+        return view('web.devices.details', compact('device'));
     }
 
     /**
