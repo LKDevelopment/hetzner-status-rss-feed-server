@@ -10,7 +10,7 @@
                     </div>
                     
                     <div class="card-body">
-                        <div id="devices"></div>
+                        <canvas id="devices" width="400" height="400"></canvas>
                     </div>
                 </div>
             </div>
