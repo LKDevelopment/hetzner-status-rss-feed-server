@@ -40,23 +40,26 @@ class WebhookController extends \App\Http\Controllers\Controller
         });
         $botman->hears('{keyword}', function ($bot, $keyword) {
             if (str_contains($keyword, ['start', 'help']) == false) {
-                $keyword = explode(PHP_EOL, str_replace(' ', '', $keyword))[0];
-                Tracking::track('webhook',$keyword);
-                $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
 
-                try {
-                    if ($messages->count() == 0) {
-                        $bot->reply("I've found nothing for the keyword: " . $keyword);
-                        echo "Nothing found";
-                    } else {
-                        $bot->reply("I found " . $messages->count() . " Messages for this");
-                        foreach ($messages as $message) {
-                            $bot->reply($message->title_en . ' ' . $message->permalink_en);
+                $keyword = explode(PHP_EOL, str_replace(' ', '', $keyword))[0];
+                if (strlen($keyword) > 2 && substr_count($keyword, '.') < 2) {
+                    Tracking::track('webhook', $keyword);
+                    $messages = Message::where('title_en', 'LIKE', '%' . $keyword . '%')->onlyParents()->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
+
+                    try {
+                        if ($messages->count() == 0) {
+                            $bot->reply("I've found nothing for the keyword: " . $keyword);
+                            echo "Nothing found";
+                        } else {
+                            $bot->reply("I found " . $messages->count() . " Messages for this");
+                            foreach ($messages as $message) {
+                                $bot->reply($message->title_en . ' ' . $message->permalink_en);
+                            }
+
                         }
+                    } catch (\Exception $e) {
 
                     }
-                } catch (\Exception $e) {
-
                 }
             }
         });
