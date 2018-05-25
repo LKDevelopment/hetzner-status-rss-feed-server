@@ -290,7 +290,7 @@ Route::group(['prefix' => 'statics'], function () {
                 'color' => '#17c11c'
             ],
             [
-                'value' =>  \App\Model\Device::whereDoesntHas('trackings',function($query){
+                'value' =>  \App\Model\Device::whereDoesntHave('trackings',function($query){
                     $query->whereBetween('created_at',[\Carbon\Carbon::now()->startOfWeek(),\Carbon\Carbon::now()->endOfWeek()]);
                 })->count(),
                 'label' => 'Other Users',
