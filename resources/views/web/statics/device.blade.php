@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Devices</h3>
                     </div>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
+                <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Weekly Active Devices</h3>
                     </div>
@@ -26,9 +26,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">App-Version</h3>
                     </div>
