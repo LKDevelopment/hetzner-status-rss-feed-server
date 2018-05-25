@@ -67,6 +67,8 @@ class DeviceController extends Controller
      */
     public function show(Device $device)
     {
+        $device->load('trackings');
+
         return view('web.devices.details', compact('device'));
     }
 
