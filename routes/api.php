@@ -279,7 +279,16 @@ Route::group(['prefix' => 'device'], function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os'))->groupBy('os')->orderBy('os')->get());
     });
     Route::get('metrics3', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version'))->groupBy('app_version')->get());
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version'))
+            ->groupBy('app_version')->get()
+            ->reject(function ($v) {
+                return $v->app_version == null;
+            })
+            ->map(function ($v) {
+                $v->app_version = str_replace('My Hertzner/', '', $v->app_version);
+
+                return $v;
+            }));
     });
     Route::group(['prefix' => '{device}'], function () {
         Route::put('/', 'Api\DeviceTrackingController@update_device');
