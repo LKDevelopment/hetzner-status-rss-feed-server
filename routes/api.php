@@ -272,27 +272,47 @@ Route::get('v2/tags', function () {
 
 Route::group(['prefix' => 'device'], function () {
     Route::post('create', 'Api\DeviceTrackingController@create_device');
-    Route::get('metrics', function () {
-        return response()->json(\App\Model\Device::with('trackings')->get());
+    Route::group(['prefix' => '{device}'], function () {
+        Route::put('/', 'Api\DeviceTrackingController@update_device');
+        Route::get('feature_flags', 'Api\DeviceTrackingController@feature_flags');
+        Route::post('tracking', 'Api\DeviceTrackingController@create_track');
     });
-    Route::get('metrics2', function () {
+});
+
+Route::group(['prefix' => 'statics'], function () {
+    Route::get('activate_devices', function () {
+        $data = [
+            [
+                'value' =>  \App\Model\Device::whereHas('trackings',function($query){
+                    $query->whereBetween('created_at',[\Carbon\Carbon::now()->startOfWeek(),\Carbon\Carbon::now()->endOfWeek()]);
+                })->count(),
+                'label' => 'Weekly Active Users',
+                'color' => '#17c11c'
+            ],
+            [
+                'value' =>  \App\Model\Device::whereDoesntHas('trackings',function($query){
+                    $query->whereBetween('created_at',[\Carbon\Carbon::now()->startOfWeek(),\Carbon\Carbon::now()->endOfWeek()]);
+                })->count(),
+                'label' => 'Other Users',
+                'color' => '#ff0000'
+            ]
+        ]
+       ;
+        return response()->json($data);
+    });
+    Route::get('os', function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os'))->groupBy('os')->orderBy('os')->get());
     });
-    Route::get('metrics3', function () {
+    Route::get('app_version', function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version'))
             ->groupBy('app_version')->get()
             ->reject(function ($v) {
                 return $v->app_version == null;
             })
             ->map(function ($v) {
-                $v->app_version = str_replace('My Hertzner/', '', $v->app_version);
+                $v->app_version = str_replace('My Hetzner/', '', $v->app_version);
 
                 return $v;
             }));
-    });
-    Route::group(['prefix' => '{device}'], function () {
-        Route::put('/', 'Api\DeviceTrackingController@update_device');
-        Route::get('feature_flags', 'Api\DeviceTrackingController@feature_flags');
-        Route::post('tracking', 'Api\DeviceTrackingController@create_track');
     });
 });
