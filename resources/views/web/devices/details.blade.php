@@ -24,24 +24,22 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="mx-auto">
-                                    <i class="fab fa-fw {{ $device->os == 'iOS' ? 'fa-apple':'fa-android' }} fa-4x avatar"></i>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tr>
-                                                <td><strong>OS:</strong></td>
-                                                <td>{{$device->os}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Version</strong></td>
-                                                <td>{{$device->version}}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                <i class="fab fa-fw {{ $device->os == 'iOS' ? 'fa-apple':'fa-android' }} fa-4x avatar"></i>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td><strong>OS:</strong></td>
+                                            <td>{{$device->os}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Version</strong></td>
+                                            <td>{{$device->version}}</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <div class="mx-auto">
+                                <div class="float-right">
                                     <div class="table-responsive table">
                                         <table>
                                             <tr>
