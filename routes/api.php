@@ -276,7 +276,7 @@ Route::group(['prefix' => 'device'], function () {
         return response()->json(\App\Model\Device::with('trackings')->get());
     });
     Route::get('metrics2', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os'))->groupBy('os')->get());
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os'))->groupBy('os')->orderBy('os')->get());
     });
     Route::get('metrics3', function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version'))->groupBy('app_version')->get());

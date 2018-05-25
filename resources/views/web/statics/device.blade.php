@@ -22,6 +22,7 @@
     <script>
         let _data = [];
         let _labels = [];
+        let device_colors = ['#89BF64', '#F7D247', '#327BF6'];
         $.getJSON('/api/device/metrics2', function (data) {
             $.each(data, function (index, val) {
                 _data.push(val.value);
@@ -32,7 +33,8 @@
                 type: 'doughnut',
                 data: {
                     datasets: [{
-                        data: _data
+                        data: _data,
+                        backgroundColor: device_colors,
                     }],
 
                     // These labels appear in the legend and in the tooltips when hovering different arcs
