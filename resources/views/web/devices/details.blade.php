@@ -24,12 +24,11 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <i class="fab fa-fw {{ $device->os == 'iOS' ? 'fa-apple':'fa-android' }} fa-4x avatar"></i>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tr>
                                             <td><strong>OS:</strong></td>
-                                            <td>{{$device->os}}</td>
+                                            <td>{{$device->os}} <i class="fab fa-fw {{ $device->os == 'iOS' ? 'fa-apple':'fa-android' }} fa-4x avatar"></i></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Version</strong></td>
