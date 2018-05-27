@@ -407,6 +407,6 @@ Route::group(['prefix' => 'statics'], function () {
         }));
     });
     Route::get('trackings', function () {
-        return response()->json(DB::table('trackings')->select(DB::raw('COUNT(*) as value, type'))->groupBy('type')->get());
+        return response()->json(DB::table('trackings')->select(DB::raw('COUNT(*) as value, type as label'))->groupBy('type')->get());
     });
 });
