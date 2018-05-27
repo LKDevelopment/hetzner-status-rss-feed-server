@@ -84,7 +84,7 @@
 
 @push('js')
     <script>
-        $.each(['os', 'trackings', 'app_version', 'weekly_active_devices', 'daily_active_devices', 'monthly_active_devices'], function (_index, reporting) {
+        $.each(['devices', 'os', 'trackings', 'app_version', 'weekly_active_devices', 'daily_active_devices', 'monthly_active_devices'], function (_index, reporting) {
             $.getJSON('/api/statics/' + reporting, function (data) {
                 let _data = [];
                 let _labels = [];

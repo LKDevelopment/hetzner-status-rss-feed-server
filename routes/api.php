@@ -401,9 +401,9 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version as label'))->groupBy('app_version')->get()->reject(function (
             $v
         ) {
-            return $v->app_version == null;
+            return $v->label == null;
         })->map(function ($v) {
-            $v->app_version = str_replace('My Hetzner/', '', $v->app_version);
+            $v->label = str_replace('My Hetzner/', '', $v->label);
 
             return $v;
         }));
