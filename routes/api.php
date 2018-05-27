@@ -280,56 +280,93 @@ Route::group(['prefix' => 'device'], function () {
 });
 
 Route::group(['prefix' => 'statics'], function () {
+    Route::get('monthly_active_devices', function () {
+        $data = [
+            [
+                'value' => \App\Model\Device::whereHas('trackings', function ($query) {
+                    $query->whereBetween('created_at', [
+                        \Carbon\Carbon::now()->startOfMonth(),
+                        \Carbon\Carbon::now()->endOfMonth(),
+                    ]);
+                })->count(),
+                'label' => 'Active Users',
+                'color' => '#17c11c',
+            ],
+            [
+                'value' => \App\Model\Device::whereDoesntHave('trackings', function ($query) {
+                    $query->whereBetween('created_at', [
+                        \Carbon\Carbon::now()->startOfWeek(),
+                        \Carbon\Carbon::now()->endOfWeek(),
+                    ]);
+                })->count(),
+                'label' => 'Other Users',
+                'color' => '#ff0000',
+            ],
+        ];
+
+        return response()->json($data);
+    });
     Route::get('weekly_active_devices', function () {
         $data = [
             [
-                'value' =>  \App\Model\Device::whereHas('trackings',function($query){
-                    $query->whereBetween('created_at',[\Carbon\Carbon::now()->startOfWeek(),\Carbon\Carbon::now()->endOfWeek()]);
+                'value' => \App\Model\Device::whereHas('trackings', function ($query) {
+                    $query->whereBetween('created_at', [
+                        \Carbon\Carbon::now()->startOfWeek(),
+                        \Carbon\Carbon::now()->endOfWeek(),
+                    ]);
                 })->count(),
-                'label' => 'Weekly Active Users',
-                'color' => '#17c11c'
+                'label' => 'Active Users',
+                'color' => '#17c11c',
             ],
             [
-                'value' =>  \App\Model\Device::whereDoesntHave('trackings',function($query){
-                    $query->whereBetween('created_at',[\Carbon\Carbon::now()->startOfWeek(),\Carbon\Carbon::now()->endOfWeek()]);
+                'value' => \App\Model\Device::whereDoesntHave('trackings', function ($query) {
+                    $query->whereBetween('created_at', [
+                        \Carbon\Carbon::now()->startOfWeek(),
+                        \Carbon\Carbon::now()->endOfWeek(),
+                    ]);
                 })->count(),
                 'label' => 'Other Users',
-                'color' => '#ff0000'
-            ]
-        ]
-       ;
+                'color' => '#ff0000',
+            ],
+        ];
+
         return response()->json($data);
     });
     Route::get('daily_active_devices', function () {
         $data = [
             [
-                'value' =>  \App\Model\Device::whereHas('trackings',function($query){
-                    $query->whereBetween('created_at',[\Carbon\Carbon::yesterday()->startOfDay(),\Carbon\Carbon::now()->endOfDay()]);
+                'value' => \App\Model\Device::whereHas('trackings', function ($query) {
+                    $query->whereBetween('created_at', [
+                        \Carbon\Carbon::yesterday()->startOfDay(),
+                        \Carbon\Carbon::now()->endOfDay(),
+                    ]);
                 })->count(),
-                'label' => 'Daily Active Users',
-                'color' => '#17c11c'
+                'label' => 'Active Users',
+                'color' => '#17c11c',
             ],
             [
-                'value' =>  \App\Model\Device::whereDoesntHave('trackings',function($query){
-                    $query->whereBetween('created_at',[\Carbon\Carbon::yesterday()->startOfDay(),\Carbon\Carbon::now()->endOfDay()]);
+                'value' => \App\Model\Device::whereDoesntHave('trackings', function ($query) {
+                    $query->whereBetween('created_at', [
+                        \Carbon\Carbon::yesterday()->startOfDay(),
+                        \Carbon\Carbon::now()->endOfDay(),
+                    ]);
                 })->count(),
                 'label' => 'Other Users',
-                'color' => '#ff0000'
-            ]
-        ]
-        ;
+                'color' => '#ff0000',
+            ],
+        ];
+
         return response()->json($data);
     });
     Route::get('os', function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os'))->groupBy('os')->orderBy('os')->get());
     });
     Route::get('app_version', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version'))
-            ->groupBy('app_version')->get()
-            ->reject(function ($v) {
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version'))->groupBy('app_version')->get()->reject(function (
+                $v
+            ) {
                 return $v->app_version == null;
-            })
-            ->map(function ($v) {
+            })->map(function ($v) {
                 $v->app_version = str_replace('My Hetzner/', '', $v->app_version);
 
                 return $v;
