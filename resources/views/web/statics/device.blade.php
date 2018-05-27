@@ -43,6 +43,17 @@
         <div class="card-deck mt-lg-3">
             <div class="card box-shadow">
                 <div class="card-header text-center">
+                    <strong>Devices Created a day</strong>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="devices_created" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mt-lg-3">
+            <div class="card box-shadow">
+                <div class="card-header text-center">
                     <strong>Zahlen</strong>
                 </div>
 
@@ -58,15 +69,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-            <div class="card box-shadow">
-                <div class="card-header text-center">
-                    <strong>Devices Created a day</strong>
-                </div>
-
-                <div class="card-body">
-                    <canvas id="devices_created" width="400" height="400"></canvas>
                 </div>
             </div>
             <div class="card box-shadow">
@@ -137,9 +139,9 @@
                 let _colors = [];
                 $.each(data, function (index, val) {
                     _data.push({x: val.x, y: val.y});
-                    _labels.push(val.label + ' (' +val.y + ')');
+                    _labels.push(val.x + ' (' + val.y + ')');
                     if (val.color == undefined) {
-                        _colors.push(ColorHash.hex(val.x));
+                        _colors.push(getRandomColor());
                     } else {
                         _colors.push(val.color);
                     }
