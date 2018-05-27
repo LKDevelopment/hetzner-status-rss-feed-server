@@ -8,7 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 require('chart.js');
-window.ColorHash = require('color-hash');
+let ColorHash = require('color-hash');
+window.ColorHash = new ColorHash();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

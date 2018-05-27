@@ -30052,7 +30052,8 @@ __webpack_require__(148);
 
 window.Vue = __webpack_require__(171);
 __webpack_require__(174);
-window.ColorHash = __webpack_require__(221);
+var ColorHash = __webpack_require__(221);
+window.ColorHash = new ColorHash();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
