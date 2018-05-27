@@ -84,142 +84,33 @@
 
 @push('js')
     <script>
+        $.each(['os', 'trackings', 'app_version', 'weekly_active_devices', 'daily_active_devices', 'monthly_active_devices'], function (_index, reporting) {
+            $.getJSON('/api/statics/' + reporting, function (data) {
+                let _data = [];
+                let _labels = [];
+                let _colors = [];
+                $.each(data, function (index, val) {
+                    _data.push(val.value);
+                    _labels.push(val.type);
+                    if (val.color == undefined) {
+                        _colors.push(getRandomColor());
+                    } else {
+                        _colors.push(val.color);
+                    }
+                });
+                // And for a doughnut chart
+                var myDoughnutChart = new Chart(reporting, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: _data,
+                            backgroundColor: _colors,
+                        }],
 
-        let device_colors = ['#89BF64', '#F7D247', '#327BF6'];
-        $.getJSON('/api/statics/os', function (data) {
-            let _data = [];
-            let _labels = [];
-            $.each(data, function (index, val) {
-                _data.push(val.value);
-                _labels.push(val.os);
-            });
-            // And for a doughnut chart
-            var myDoughnutChart = new Chart('devices', {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: _data,
-                        backgroundColor: device_colors,
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: _labels
-                }
-            });
-        });
-        $.getJSON('/api/statics/trackings', function (data) {
-            let _data = [];
-            let _labels = [];
-            let _colors = [];
-            $.each(data, function (index, val) {
-                _data.push(val.value);
-                _labels.push(val.type);
-                _colors.push(getRandomColor());
-            });
-            // And for a doughnut chart
-            var myDoughnutChart = new Chart('trackings', {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: _data,
-                        backgroundColor: _colors,
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: _labels
-                }
-            });
-        });
-        $.getJSON('/api/statics/app_version', function (data) {
-            let _data = [];
-            let _labels = [];
-            let _colors = [];
-            $.each(data, function (index, val) {
-                _data.push(val.value);
-                _labels.push(val.app_version);
-                _colors.push(getRandomColor());
-            });
-            // And for a doughnut chart
-            var myDoughnutChart = new Chart('app_version', {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: _data,
-                        backgroundColor: _colors,
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: _labels
-                }
-            });
-        });
-        $.getJSON('/api/statics/weekly_active_devices', function (data) {
-            let _data = [];
-            let _labels = [];
-            let _colors = [];
-            $.each(data, function (index, val) {
-                _data.push(val.value);
-                _labels.push(val.label);
-                _colors.push(val.color);
-            });
-            // And for a doughnut chart
-            var myDoughnutChart = new Chart('weekly_active_devices', {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: _data,
-                        backgroundColor: _colors,
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: _labels
-                }
-            });
-        });
-        $.getJSON('/api/statics/daily_active_devices', function (data) {
-            let _data = [];
-            let _labels = [];
-            let _colors = [];
-            $.each(data, function (index, val) {
-                _data.push(val.value);
-                _labels.push(val.label);
-                _colors.push(val.color);
-            });
-            // And for a doughnut chart
-            var myDoughnutChart = new Chart('daily_active_devices', {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: _data,
-                        backgroundColor: _colors,
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: _labels
-                }
-            });
-        });
-        $.getJSON('/api/statics/monthly_active_devices', function (data) {
-            let _data = [];
-            let _labels = [];
-            let _colors = [];
-            $.each(data, function (index, val) {
-                _data.push(val.value);
-                _labels.push(val.label);
-                _colors.push(val.color);
-            });
-            // And for a doughnut chart
-            var myDoughnutChart = new Chart('monthly_active_devices', {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: _data,
-                        backgroundColor: _colors,
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: _labels
-                }
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: _labels
+                    }
+                });
             });
         });
         $.getJSON('/api/statics/table', function (data) {

@@ -377,10 +377,28 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json($data);
     });
     Route::get('os', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os'))->groupBy('os')->orderBy('os')->get());
+        return response()->json(DB::table('devices')
+            ->select(DB::raw('COUNT(*) as value, os as label'))
+            ->groupBy('os')->orderBy('os')->get()->map(function (
+            $report
+        ) {
+            if ($report->label == 'Android') {
+                $report->color = '#89BF64';
+            } else {
+                if ($report->label == 'browser') {
+                    $report->color = '#F7D247';
+                } else {
+                    if ($report->label == 'iOS') {
+                        $report->color = '#327BF6';
+                    }
+                }
+            }
+
+            return $report;
+        }));
     });
     Route::get('app_version', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version'))->groupBy('app_version')->get()->reject(function (
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version as label'))->groupBy('app_version')->get()->reject(function (
             $v
         ) {
             return $v->app_version == null;
@@ -391,9 +409,6 @@ Route::group(['prefix' => 'statics'], function () {
         }));
     });
     Route::get('trackings', function () {
-        return response()->json(DB::table('trackings')
-            ->select(DB::raw('COUNT(*) as value, type'))
-            ->groupBy('type')
-            ->get());
+        return response()->json(DB::table('trackings')->select(DB::raw('COUNT(*) as value, type'))->groupBy('type')->get());
     });
 });
