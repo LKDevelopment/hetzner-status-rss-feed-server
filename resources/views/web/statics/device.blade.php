@@ -4,8 +4,8 @@
     <div class="container-fluid">
         <div class="card-deck">
             <div class="card box-shadow">
-                <div class="card-header">
-                    <h3 class="float-left">OS</h3>
+                <div class="card-header text-center">
+                    <strong>OS</strong>
                 </div>
 
                 <div class="card-body">
@@ -13,8 +13,8 @@
                 </div>
             </div>
             <div class="card box-shadow">
-                <div class="card-header">
-                    <h3 class="float-left">Daily Active Devices</h3>
+                <div class="card-header text-center">
+                    <strong>Daily Active Devices</strong>
                 </div>
 
                 <div class="card-body">
@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="card box-shadow">
-                <div class="card-header">
-                    <h3 class="float-left">Weekly Active Devices</h3>
+                <div class="card-header text-center">
+                    <strong>Weekly Active Devices</strong>
                 </div>
 
                 <div class="card-body">
@@ -31,8 +31,8 @@
                 </div>
             </div>
             <div class="card box-shadow">
-                <div class="card-header">
-                    <h3 class="float-left">Monthly Active Devices</h3>
+                <div class="card-header text-center">
+                    <strong>Monthly Active Devices</strong>
                 </div>
 
                 <div class="card-body">
@@ -40,8 +40,8 @@
                 </div>
             </div>
             <div class="card box-shadow">
-                <div class="card-header">
-                    <h3 class="float-left">Zahlen</h3>
+                <div class="card-header text-center">
+                    <strong>Zahlen</strong>
                 </div>
 
                 <div class="card-body">
@@ -61,8 +61,8 @@
         </div>
         <div class="card-deck mt-lg-3">
             <div class="card box-shadow">
-                <div class="card-header">
-                    <h3 class="float-left">App-Version</h3>
+                <div class="card-header text-center">
+                    <strong>App-Version</strong>
                 </div>
 
                 <div class="card-body">
@@ -70,8 +70,8 @@
                 </div>
             </div>
             <div class="card box-shadow">
-                <div class="card-header">
-                    <h3 class="float-left">Trackings</h3>
+                <div class="card-header text-center">
+                    <strong>Trackings</strong>
                 </div>
 
                 <div class="card-body">
