@@ -291,10 +291,11 @@ Route::group(['prefix' => 'statics'], function () {
                 'label' => 'Devices',
             ],
             [
-                'value' => \App\Model\Message::count(),
-                'label' => 'Status',
+                'value' => \App\Model\Message::onlyParents()->count(),
+                'label' => 'Status Messages',
             ],
         ];
+
         return response()->json($data);
     });
     Route::get('monthly_active_devices', function () {
@@ -388,5 +389,11 @@ Route::group(['prefix' => 'statics'], function () {
 
             return $v;
         }));
+    });
+    Route::get('trackings', function () {
+        return response()->json(DB::table('trackings')
+            ->select(DB::raw('COUNT(*) as value, type'))
+            ->groupBy('type')
+            ->get());
     });
 });

@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-deck">
+        <div class="card-deck mt-lg-3">
             <div class="card box-shadow">
                 <div class="card-header">
                     <h3 class="float-left">App-Version</h3>
@@ -67,6 +67,15 @@
 
                 <div class="card-body">
                     <canvas id="app_version" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="card box-shadow">
+                <div class="card-header">
+                    <h3 class="float-left">Trackings</h3>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="trackings" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
@@ -91,6 +100,29 @@
                     datasets: [{
                         data: _data,
                         backgroundColor: device_colors,
+                    }],
+
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: _labels
+                }
+            });
+        });
+        $.getJSON('/api/statics/trackings', function (data) {
+            let _data = [];
+            let _labels = [];
+            let _colors = [];
+            $.each(data, function (index, val) {
+                _data.push(val.value);
+                _labels.push(val.type);
+                _colors.push(getRandomColor());
+            });
+            // And for a doughnut chart
+            var myDoughnutChart = new Chart('trackings', {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: _data,
+                        backgroundColor: _colors,
                     }],
 
                     // These labels appear in the legend and in the tooltips when hovering different arcs
