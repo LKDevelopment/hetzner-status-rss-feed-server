@@ -415,4 +415,10 @@ Route::group(['prefix' => 'statics'], function () {
                 \Carbon\Carbon::now()->endOfDay(),
             ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))->get());
     });
+    Route::get('devices_created_hourly', function () {
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%Y-%m-%d %k") as x'))->whereBetween('created_at', [
+            \Carbon\Carbon::now()->startOfDay()->subDay(30),
+            \Carbon\Carbon::now()->endOfDay(),
+        ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d %k")'))->get());
+    });
 });

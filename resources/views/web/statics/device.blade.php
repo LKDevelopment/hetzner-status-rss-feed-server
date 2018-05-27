@@ -43,11 +43,20 @@
         <div class="card-deck mt-lg-3">
             <div class="card box-shadow">
                 <div class="card-header text-center">
-                    <strong>Devices Created a day</strong>
+                    <strong>Devices created a day</strong>
                 </div>
 
                 <div class="card-body">
                     <canvas id="devices_created" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="card box-shadow">
+                <div class="card-header text-center">
+                    <strong>Devices created a day hourly</strong>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="devices_created_hourly" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
@@ -132,7 +141,7 @@
                 row.appendTo('#basic_numbers tbody')
             });
         });
-        $.each(['devices_created'], function (index, reporting) {
+        $.each(['devices_created', 'devices_created_hourly'], function (index, reporting) {
             $.getJSON('/api/statics/' + reporting, function (data) {
                 let _data = [];
                 let _labels = [];
