@@ -291,6 +291,7 @@ Route::group(['prefix' => 'statics'], function () {
                 'label' => 'Devices',
             ],
         ];
+        return response()->json($data);
     });
     Route::get('monthly_active_devices', function () {
         $data = [
