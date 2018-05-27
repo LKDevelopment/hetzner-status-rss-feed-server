@@ -147,7 +147,6 @@
         $.each(['devices_created', 'devices_created_hourly'], function (index, reporting) {
             $.getJSON('/api/statics/' + reporting, function (data) {
                 let _data = [];
-                let _labels = [];
                 let _colors = [];
                 $.each(data, function (index, val) {
                     _data.push({x: val.x, y: val.y});
@@ -168,7 +167,7 @@
                         }],
 
                         // These labels appear in the legend and in the tooltips when hovering different arcs
-                        labels: _labels
+                        labels: reporting
                     }
                 });
             });
