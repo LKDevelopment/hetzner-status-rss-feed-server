@@ -39,6 +39,8 @@
                     <canvas id="monthly_active_devices" width="400" height="400"></canvas>
                 </div>
             </div>
+        </div>
+        <div class="card-deck mt-lg-3">
             <div class="card box-shadow">
                 <div class="card-header text-center">
                     <strong>Zahlen</strong>
@@ -58,8 +60,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card-deck mt-lg-3">
             <div class="card box-shadow">
                 <div class="card-header text-center">
                     <strong>App-Version</strong>
