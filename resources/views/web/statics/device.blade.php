@@ -121,6 +121,9 @@
                 // And for a doughnut chart
                 new Chart(reporting, {
                     type: 'doughnut',
+                    legend: {
+                        display: true,
+                    },
                     data: {
                         datasets: [{
                             data: _data,
