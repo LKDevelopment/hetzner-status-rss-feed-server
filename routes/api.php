@@ -290,6 +290,10 @@ Route::group(['prefix' => 'statics'], function () {
                 'value' => \App\Model\Device::count(),
                 'label' => 'Devices',
             ],
+            [
+                'value' => \App\Model\Message::count(),
+                'label' => 'Status',
+            ],
         ];
         return response()->json($data);
     });
