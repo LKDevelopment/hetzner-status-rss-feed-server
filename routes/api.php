@@ -419,6 +419,6 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%k") as x'))->whereBetween('created_at', [
             \Carbon\Carbon::now()->startOfHour()->subHours(23),
             \Carbon\Carbon::now()->endOfHour(),
-        ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%k")'))->get());
+        ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%k")'))->orderByRaw('DATE_FORMAT(created_at, "%k")')->get());
     });
 });
