@@ -62,6 +62,15 @@
             </div>
             <div class="card box-shadow">
                 <div class="card-header text-center">
+                    <strong>Devices Created a day</strong>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="devices_created" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="card box-shadow">
+                <div class="card-header text-center">
                     <strong>App-Version</strong>
                 </div>
 
@@ -99,7 +108,7 @@
                     }
                 });
                 // And for a doughnut chart
-                var myDoughnutChart = new Chart(reporting, {
+                new Chart(reporting, {
                     type: 'doughnut',
                     data: {
                         datasets: [{
@@ -119,6 +128,35 @@
                 $('<td></td>').text(val.label).appendTo(row);
                 $('<td></td>').text(val.value).appendTo(row);
                 row.appendTo('#basic_numbers tbody')
+            });
+        });
+        $.each(['devices_created'], function (index, reporting) {
+            $.getJSON('/api/statics/' + reporting, function (data) {
+                let _data = [];
+                let _labels = [];
+                let _colors = [];
+                $.each(data, function (index, val) {
+                    _data.push({x: val.x, y: val.y});
+                    _labels.push(val.label + ' (' +val.y + ')');
+                    if (val.color == undefined) {
+                        _colors.push(ColorHash.hex(val.x));
+                    } else {
+                        _colors.push(val.color);
+                    }
+                });
+                // And for a doughnut chart
+                new Chart(reporting, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: _data,
+                            backgroundColor: _colors,
+                        }],
+
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: _labels
+                    }
+                });
             });
         });
 

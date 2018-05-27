@@ -409,4 +409,7 @@ Route::group(['prefix' => 'statics'], function () {
     Route::get('trackings', function () {
         return response()->json(DB::table('trackings')->select(DB::raw('COUNT(*) as value, type as label'))->groupBy('type')->get());
     });
+    Route::get('devices_created', function () {
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%Y-%m-%d") as x'))->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))->get());
+    });
 });
