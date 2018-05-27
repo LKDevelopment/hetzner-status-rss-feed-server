@@ -377,9 +377,7 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json($data);
     });
     Route::get('os', function () {
-        return response()->json(DB::table('devices')
-            ->select(DB::raw('COUNT(*) as value, os as label'))
-            ->groupBy('os')->orderBy('os')->get()->map(function (
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, os as label'))->groupBy('os')->orderBy('os')->get()->map(function (
             $report
         ) {
             if ($report->label == 'Android') {

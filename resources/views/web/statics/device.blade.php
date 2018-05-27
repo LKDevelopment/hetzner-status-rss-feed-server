@@ -5,11 +5,11 @@
         <div class="card-deck">
             <div class="card box-shadow">
                 <div class="card-header">
-                    <h3 class="float-left">Devices</h3>
+                    <h3 class="float-left">OS</h3>
                 </div>
 
                 <div class="card-body">
-                    <canvas id="devices" width="400" height="400"></canvas>
+                    <canvas id="os" width="400" height="400"></canvas>
                 </div>
             </div>
             <div class="card box-shadow">
@@ -84,7 +84,7 @@
 
 @push('js')
     <script>
-        $.each(['devices', 'os', 'trackings', 'app_version', 'weekly_active_devices', 'daily_active_devices', 'monthly_active_devices'], function (_index, reporting) {
+        $.each(['os', 'trackings', 'app_version', 'weekly_active_devices', 'daily_active_devices', 'monthly_active_devices'], function (_index, reporting) {
             $.getJSON('/api/statics/' + reporting, function (data) {
                 let _data = [];
                 let _labels = [];
