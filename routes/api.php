@@ -410,6 +410,9 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json(DB::table('trackings')->select(DB::raw('COUNT(*) as value, type as label'))->groupBy('type')->get());
     });
     Route::get('devices_created', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%Y-%m-%d") as x'))->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))->get());
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%Y-%m-%d") as x'))->whereBetween('created_at', [
+                \Carbon\Carbon::now()->startOfDay()->subDay(30),
+                \Carbon\Carbon::now()->endOfDay(),
+            ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))->get());
     });
 });
