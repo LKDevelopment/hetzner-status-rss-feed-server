@@ -93,7 +93,7 @@
                     _data.push(val.value);
                     _labels.push(val.label + ' (' + val.value + ')');
                     if (val.color == undefined) {
-                        _colors.push(getRandomColor());
+                        _colors.push(ColorHash.hex(val.label));
                     } else {
                         _colors.push(val.color);
                     }
