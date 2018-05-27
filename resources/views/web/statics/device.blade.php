@@ -150,7 +150,7 @@
                 let _colors = [];
                 $.each(data, function (index, val) {
                     _data.push({x: val.x, y: val.y});
-                    _labels.push(val.x + ' (' + val.y + ')');
+                    //_labels.push(val.x + ' (' + val.y + ')');
                     if (val.color == undefined) {
                         _colors.push(getRandomColor());
                     } else {
