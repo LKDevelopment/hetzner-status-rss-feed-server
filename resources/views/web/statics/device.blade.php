@@ -2,82 +2,86 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="card box-shadow">
-                    <div class="card-header">
-                        <h3 class="float-left">Devices</h3>
-                    </div>
+        <div class="card-deck">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="card box-shadow">
+                        <div class="card-header">
+                            <h3 class="float-left">Devices</h3>
+                        </div>
 
-                    <div class="card-body">
-                        <canvas id="devices" width="400" height="400"></canvas>
+                        <div class="card-body">
+                            <canvas id="devices" width="400" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card box-shadow">
-                    <div class="card-header">
-                        <h3 class="float-left">Daily Active Devices</h3>
-                    </div>
+                <div class="col-md-2">
+                    <div class="card box-shadow">
+                        <div class="card-header">
+                            <h3 class="float-left">Daily Active Devices</h3>
+                        </div>
 
-                    <div class="card-body">
-                        <canvas id="daily_active_devices" width="400" height="400"></canvas>
+                        <div class="card-body">
+                            <canvas id="daily_active_devices" width="400" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card box-shadow">
-                    <div class="card-header">
-                        <h3 class="float-left">Weekly Active Devices</h3>
-                    </div>
+                <div class="col-md-2">
+                    <div class="card box-shadow">
+                        <div class="card-header">
+                            <h3 class="float-left">Weekly Active Devices</h3>
+                        </div>
 
-                    <div class="card-body">
-                        <canvas id="weekly_active_devices" width="400" height="400"></canvas>
+                        <div class="card-body">
+                            <canvas id="weekly_active_devices" width="400" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card box-shadow">
-                    <div class="card-header">
-                        <h3 class="float-left">Monthly Active Devices</h3>
-                    </div>
+                <div class="col-md-2">
+                    <div class="card box-shadow">
+                        <div class="card-header">
+                            <h3 class="float-left">Monthly Active Devices</h3>
+                        </div>
 
-                    <div class="card-body">
-                        <canvas id="monthly_active_devices" width="400" height="400"></canvas>
+                        <div class="card-body">
+                            <canvas id="monthly_active_devices" width="400" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card box-shadow">
-                    <div class="card-header">
-                        <h3 class="float-left">Zahlen</h3>
-                    </div>
+                <div class="col-md-2">
+                    <div class="card box-shadow">
+                        <div class="card-header">
+                            <h3 class="float-left">Zahlen</h3>
+                        </div>
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="basic_numbers">
-                                <thead>
-                                <th>Auswertung</th>
-                                <th>#</th>
-                                </thead>
-                                <tbody>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="basic_numbers">
+                                    <thead class="thead-dark">
+                                    <th>Auswertung</th>
+                                    <th>#</th>
+                                    </thead>
+                                    <tbody>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card box-shadow">
-                    <div class="card-header">
-                        <h3 class="float-left">App-Version</h3>
-                    </div>
+        <div class="card-deck">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card box-shadow">
+                        <div class="card-header">
+                            <h3 class="float-left">App-Version</h3>
+                        </div>
 
-                    <div class="card-body">
-                        <canvas id="app_version" width="400" height="400"></canvas>
+                        <div class="card-body">
+                            <canvas id="app_version" width="400" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
