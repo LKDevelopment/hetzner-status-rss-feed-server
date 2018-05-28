@@ -20,9 +20,13 @@ class Messages extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $messages = Message::onlyParents()->paginate();
+        if ($request->has('value') && strlen($request->get('value') > 3)) {
+            $messages = Message::where('title_en', 'LIKE', '%'.$request->get('value').'%')->paginate();
+        } else {
+            $messages = Message::onlyParents()->paginate();
+        }
 
         return view('web.messages.index', compact('messages'));
     }
