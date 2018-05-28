@@ -413,12 +413,12 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%Y-%m-%d") as x'))->whereBetween('created_at', [
             \Carbon\Carbon::now()->startOfDay()->subDay(30),
             \Carbon\Carbon::now()->endOfDay(),
-        ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))->get());
+        ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))->get()->sortBy('x'));
     });
     Route::get('devices_created_hourly', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%H") as x'))->whereBetween('created_at', [
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as y, DATE_FORMAT(created_at, "%k") as x'))->whereBetween('created_at', [
             \Carbon\Carbon::now()->startOfHour()->subHours(23),
             \Carbon\Carbon::now()->endOfHour(),
-        ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%H")'))->orderByRaw('DATE_FORMAT(created_at, "%k")')->get());
+        ])->groupBy(DB::raw('DATE_FORMAT(created_at, "%k")'))->orderByRaw('DATE_FORMAT(created_at, "%k")')->get()->sortBy('x'));
     });
 });
