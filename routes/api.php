@@ -276,6 +276,7 @@ Route::group(['prefix' => 'device'], function () {
         Route::put('/', 'Api\DeviceTrackingController@update_device');
         Route::get('feature_flags', 'Api\DeviceTrackingController@feature_flags');
         Route::post('tracking', 'Api\DeviceTrackingController@create_track');
+        Route::post('feature_track', 'Api\DeviceTrackingController@feature_track');
     });
 });
 

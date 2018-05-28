@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
  */
 class DeviceTrackingController extends Controller
 {
+
     /**
      * @param \Illuminate\Http\Request $request
      *
@@ -29,7 +30,7 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device $device
+     * @param \App\Model\Device        $device
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -46,6 +47,7 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \App\Model\Device $device
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function feature_flags(Device $device)
@@ -55,7 +57,7 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device $device
+     * @param \App\Model\Device        $device
      */
     public function create_track(Request $request, Device $device)
     {
@@ -68,5 +70,22 @@ class DeviceTrackingController extends Controller
             'access' => $request->get('access'),
             'app_version' => get_user_agent(),
         ]);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Model\Device        $device
+     */
+    public function feature_track(Request $request, Device $device)
+    {
+        $data = $this->validate($request, [
+            'feature_tracks' => 'required|json',
+        ]);
+        $data = json_decode($data['feature_tracks'], true);
+        foreach ($data as $feature => $count) {
+            $device->feature_tracking()->create(['feature' => $feature, 'value' => $count]);
+        }
+
+        return response()->json(['message' => 'ok']);
     }
 }

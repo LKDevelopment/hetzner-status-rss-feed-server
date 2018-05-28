@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Device\FeatureFlag;
+use App\Model\Device\FeatureTracking;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
@@ -50,6 +51,12 @@ class Device extends Model
         return $this->belongsToMany(FeatureFlag::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function feature_tracking(){
+        return $this->hasMany(FeatureTracking::class);
+    }
     /**
      * @param \App\Model\Device\FeatureFlag $featureFlag
      *
