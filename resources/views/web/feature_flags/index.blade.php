@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Feature Flags</h3>
                         <a href="{{ route('feature_flags.create') }}" class="btn btn-success float-right">Add</a>

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card box-shadow">
                     <div class="card-header">
                         <h3 class="float-left">Create Feature Flag</h3>
                     </div>

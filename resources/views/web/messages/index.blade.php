@@ -57,7 +57,7 @@
                             </tbody>
                         </table>
                         
-                        {{$messages->appends(['value' => request()->get('value') ])->links() }}}}
+                        {{$messages->appends(['value' => request()->get('value') ])->links() }}
                     </div>
                 </div>
             </div>
