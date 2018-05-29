@@ -424,19 +424,19 @@ Route::group(['prefix' => 'statics'], function () {
     });
 
     Route::get('features_all', function () {
-        return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->groupBy('feature')->get());
+        return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->groupBy(['device_id','feature'])->get());
     });
     Route::get('features_month', function () {
         return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->whereBetween('created_at', [
             \Carbon\Carbon::now()->startOfMonth(),
             \Carbon\Carbon::now()->endOfMonth(),
-        ])->groupBy('feature')->get());
+        ])->groupBy(['device_id','feature'])->get());
     });
     Route::get('features_last_month', function () {
         return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->whereBetween('created_at', [
             \Carbon\Carbon::now()->subMonth()->startOfMonth(),
             \Carbon\Carbon::now()->subMonth()->endOfMonth(),
-        ])->groupBy('feature')->get());
+        ])->groupBy(['device_id','feature'])->get());
     });
 
 });
