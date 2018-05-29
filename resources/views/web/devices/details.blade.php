@@ -79,7 +79,7 @@
                                         <th>Zugänge (Robot)</th>
                                         </thead>
                                         <tbody>
-                                        @foreach($device->trackings()->orderByDesc('id')->get() as $tracking)
+                                        @foreach($device->trackings()->orderByDesc('id')->limit(5)->get() as $tracking)
                                             <tr>
                                                 <td>{{ $tracking->id }}</td>
                                                 <td>{{$tracking->created_at->format('d.m.Y H:i:s')}}</td>
@@ -92,9 +92,84 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card-deck mt-l2">
+                            <div class="card box-shadow">
+                                <div class="card-header text-center">
+                                    <strong>Feature Usage All Time</strong>
+                                </div>
+            
+                                <div class="card-body">
+                                    <canvas id="features_all" width="400" height="400"></canvas>
+                                </div>
+                            </div>
+                            <div class="card box-shadow">
+                                <div class="card-header text-center">
+                                    <strong>Feature Usage Current Month</strong>
+                                </div>
+            
+                                <div class="card-body">
+                                    <canvas id="features_current_month" width="400" height="400"></canvas>
+                                </div>
+                            </div>
+                            <div class="card box-shadow">
+                                <div class="card-header text-center">
+                                    <strong>Feature Usage Last Month</strong>
+                                </div>
+            
+                                <div class="card-body">
+                                    <canvas id="features_last_month" width="400" height="400"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $.each(['features_all', 'features_current_month', 'features_last_month'], function (_index, reporting) {
+            $.getJSON('/api/statics/{{$device->id}}/' + reporting, function (data) {
+                let _data = [];
+                let _labels = [];
+                let _colors = [];
+                $.each(data, function (index, val) {
+                    _data.push(val.value);
+                    _labels.push(val.label + ' (' + val.value + ')');
+                    if (val.color == undefined) {
+                        _colors.push(ColorHash.hex(val.label));
+                    } else {
+                        _colors.push(val.color);
+                    }
+                });
+                // And for a doughnut chart
+                new Chart(reporting, {
+                    type: 'doughnut',
+                    legend: {
+                        display: true,
+                    },
+                    data: {
+                        datasets: [{
+                            data: _data,
+                            backgroundColor: _colors,
+                        }],
+
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: _labels
+                    }
+                });
+            });
+        });
+        
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    
+    </script>
+@endpush
