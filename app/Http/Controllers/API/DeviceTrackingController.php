@@ -75,6 +75,8 @@ class DeviceTrackingController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Model\Device        $device
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function feature_track(Request $request, Device $device)
     {
