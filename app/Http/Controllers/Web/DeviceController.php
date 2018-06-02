@@ -25,7 +25,7 @@ class DeviceController extends Controller
             if (in_array(strtolower($request->get('value')), ['developer', 'user', 'internal'])) {
                 $devices = Device::where('type', '=', strtolower($request->get('value')))->paginate(10);
             } else {
-                $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
+                $devices = Device::where('id', 'LIKE', '%' . $request->get('value') . '%')->orWhere('description', 'LIKE', '%' . $request->get('value') . '%')->orWhere('app_version', 'LIKE', '%' . $request->get('value') . '%')->paginate(10);
             }
 
         } else {
