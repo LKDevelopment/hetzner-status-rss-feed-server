@@ -481,12 +481,12 @@ Route::group(['prefix' => 'statics'], function () {
         $data = [
             [
                 'value' => round($avg_access->avg(), 5),
-                'label' => 'Cloud',
+                'label' => 'Cloud ('.$avg_access->count().')',
                 'color' => '#17c11c',
             ],
             [
                 'value' => round($avg_projects->avg(), 5),
-                'label' => 'Robot',
+                'label' => 'Robot ('.$avg_projects->count().')',
                 'color' => '#ff0000',
             ],
         ];
