@@ -292,6 +292,10 @@ Route::group(['prefix' => 'statics'], function () {
                 'label' => 'Devices',
             ],
             [
+                'value' => \App\Model\Device\Tracking::count(),
+                'label' => 'Device Trackings',
+            ],
+            [
                 'value' => \App\Model\Message::onlyParents()->count(),
                 'label' => 'Status Messages',
             ],
@@ -314,8 +318,8 @@ Route::group(['prefix' => 'statics'], function () {
             [
                 'value' => \App\Model\Device::whereDoesntHave('trackings', function ($query) {
                     $query->whereBetween('created_at', [
-                        \Carbon\Carbon::now()->startOfWeek(),
-                        \Carbon\Carbon::now()->endOfWeek(),
+                        \Carbon\Carbon::now()->startOfMonth(),
+                        \Carbon\Carbon::now()->endOfMonth(),
                     ]);
                 })->count(),
                 'label' => 'Other Users',
@@ -357,7 +361,7 @@ Route::group(['prefix' => 'statics'], function () {
                 'value' => \App\Model\Device::whereHas('trackings', function ($query) {
                     $query->whereBetween('created_at', [
                         \Carbon\Carbon::yesterday()->startOfDay(),
-                        \Carbon\Carbon::now()->endOfDay(),
+                        \Carbon\Carbon::now()->startOfDay(),
                     ]);
                 })->count(),
                 'label' => 'Active Users',
@@ -367,7 +371,7 @@ Route::group(['prefix' => 'statics'], function () {
                 'value' => \App\Model\Device::whereDoesntHave('trackings', function ($query) {
                     $query->whereBetween('created_at', [
                         \Carbon\Carbon::yesterday()->startOfDay(),
-                        \Carbon\Carbon::now()->endOfDay(),
+                        \Carbon\Carbon::now()->startOfDay(),
                     ]);
                 })->count(),
                 'label' => 'Other Users',
@@ -463,7 +467,11 @@ Route::group(['prefix' => 'statics'], function () {
     Route::get('avg_created_accounts', function () {
         $avg_projects = collect([]);
         $avg_access = collect([]);
-        \App\Model\Device::whereHas('trackings')->get()->each(function (\App\Model\Device $d) use (&$avg_access, &$avg_projects) {
+        \App\Model\Device::whereHas('trackings')->get()->each(function (\App\Model\Device $d) use (
+            &$avg_access,
+            &
+            $avg_projects
+        ) {
             $tmp = $d->latest_track();
             if ($tmp != null) {
                 $avg_projects->push($tmp->projects);
@@ -472,12 +480,12 @@ Route::group(['prefix' => 'statics'], function () {
         });
         $data = [
             [
-                'value' => round($avg_access->avg(),5),
+                'value' => round($avg_access->avg(), 5),
                 'label' => 'Cloud',
                 'color' => '#17c11c',
             ],
             [
-                'value' => round($avg_projects->avg(),5),
+                'value' => round($avg_projects->avg(), 5),
                 'label' => 'Robot',
                 'color' => '#ff0000',
             ],
