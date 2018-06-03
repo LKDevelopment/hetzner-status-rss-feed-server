@@ -472,12 +472,12 @@ Route::group(['prefix' => 'statics'], function () {
         });
         $data = [
             [
-                'value' => $avg_access->avg(),
+                'value' => round($avg_access->avg(),5),
                 'label' => 'Cloud',
                 'color' => '#17c11c',
             ],
             [
-                'value' => $avg_projects->avg(),
+                'value' => round($avg_projects->avg(),5),
                 'label' => 'Robot',
                 'color' => '#ff0000',
             ],
