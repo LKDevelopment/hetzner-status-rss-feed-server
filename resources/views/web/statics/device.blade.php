@@ -7,7 +7,7 @@
                 <div class="card-header text-center">
                     <strong>OS</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="os" width="400" height="400"></canvas>
                 </div>
@@ -16,7 +16,7 @@
                 <div class="card-header text-center">
                     <strong>Daily Active Devices</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="daily_active_devices" width="400" height="400"></canvas>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="card-header text-center">
                     <strong>Weekly Active Devices</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="weekly_active_devices" width="400" height="400"></canvas>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="card-header text-center">
                     <strong>Monthly Active Devices</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="monthly_active_devices" width="400" height="400"></canvas>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="card-header text-center">
                     <strong>Devices created a day</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="devices_created" width="400" height="400"></canvas>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="card-header text-center">
                     <strong>Devices created a day hourly</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="devices_created_hourly" width="400" height="400"></canvas>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="card-header text-center">
                     <strong>Feature Usage All Time</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="features_all" width="400" height="400"></canvas>
                 </div>
@@ -74,7 +74,7 @@
                 <div class="card-header text-center">
                     <strong>Feature Usage Current Month</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="features_current_month" width="400" height="400"></canvas>
                 </div>
@@ -83,7 +83,7 @@
                 <div class="card-header text-center">
                     <strong>Feature Usage Last Month</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="features_last_month" width="400" height="400"></canvas>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="card-header text-center">
                     <strong>Zahlen</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped" id="basic_numbers">
@@ -103,7 +103,7 @@
                             <th>#</th>
                             </thead>
                             <tbody>
-                            
+
                             </tbody>
                         </table>
                     </div>
@@ -113,7 +113,7 @@
                 <div class="card-header text-center">
                     <strong>App-Version</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="app_version" width="400" height="400"></canvas>
                 </div>
@@ -122,9 +122,18 @@
                 <div class="card-header text-center">
                     <strong>Trackings</strong>
                 </div>
-                
+
                 <div class="card-body">
                     <canvas id="trackings" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="card box-shadow">
+                <div class="card-header text-center">
+                    <strong>AVG Created Accounts</strong>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="avg_created_accounts" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
@@ -133,7 +142,7 @@
 
 @push('js')
     <script>
-        $.each(['os', 'trackings', 'app_version', 'weekly_active_devices', 'daily_active_devices', 'monthly_active_devices', 'features_all', 'features_current_month', 'features_last_month'], function (_index, reporting) {
+        $.each(['os', 'trackings', 'app_version', 'weekly_active_devices', 'daily_active_devices', 'monthly_active_devices', 'features_all', 'features_current_month', 'features_last_month', 'avg_created_accounts'], function (_index, reporting) {
             $.getJSON('/api/statics/' + reporting, function (data) {
                 let _data = [];
                 let _labels = [];
@@ -211,6 +220,6 @@
             }
             return color;
         }
-    
+
     </script>
 @endpush

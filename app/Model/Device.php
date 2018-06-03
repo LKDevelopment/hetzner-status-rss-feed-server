@@ -44,6 +44,12 @@ class Device extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder|null|object
+     */
+    public function latest_track(){
+        return $this->trackings()->latest()->first();
+    }
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function feature_flags()

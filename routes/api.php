@@ -424,7 +424,10 @@ Route::group(['prefix' => 'statics'], function () {
     });
 
     Route::get('features_all', function () {
-        return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->groupBy(['device_id', 'feature'])->get());
+        return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->groupBy([
+            'device_id',
+            'feature',
+        ])->get());
     });
     Route::get('features_current_month', function () {
         return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->whereBetween('created_at', [
@@ -439,22 +442,45 @@ Route::group(['prefix' => 'statics'], function () {
         ])->groupBy(['device_id', 'feature'])->get());
     });
     Route::get('{device_id}/features_all', function ($deviceId) {
-        return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->groupBy(['device_id', 'feature'])->where('device_id', '=', $deviceId)->get());
+        return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->groupBy([
+            'device_id',
+            'feature',
+        ])->where('device_id', '=', $deviceId)->get());
     });
     Route::get('{device_id}/features_current_month', function ($deviceId) {
         return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->whereBetween('created_at', [
             \Carbon\Carbon::now()->startOfMonth(),
             \Carbon\Carbon::now()->endOfMonth(),
-        ])->groupBy(['device_id', 'feature'])
-            ->where('device_id', '=', $deviceId)
-            ->get());
+        ])->groupBy(['device_id', 'feature'])->where('device_id', '=', $deviceId)->get());
     });
     Route::get('{device_id}/features_last_month', function ($deviceId) {
         return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->whereBetween('created_at', [
             \Carbon\Carbon::now()->subMonth()->startOfMonth(),
             \Carbon\Carbon::now()->subMonth()->endOfMonth(),
-        ])->groupBy(['device_id', 'feature'])
-            ->where('device_id', '=', $deviceId)
-            ->get());
+        ])->groupBy(['device_id', 'feature'])->where('device_id', '=', $deviceId)->get());
+    });
+
+    Route::get('avg_created_accounts', function () {
+        $avg_projects = collect([]);
+        $avg_access = collect([]);
+        \App\Model\Device::all()->map(function (\App\Model\Device $d) use ($avg_access, $avg_projects) {
+            $tmp = $d->latest_track();
+            $avg_projects->push($tmp->projects);
+            $avg_access->push($tmp->access);
+        });
+        $data = [
+            [
+                'value' => $avg_access->avg(),
+                'label' => 'Cloud',
+                'color' => '#17c11c',
+            ],
+            [
+                'value' => $avg_projects->avg(),
+                'label' => 'Robot',
+                'color' => '#ff0000',
+            ],
+        ];
+
+        return response()->json($data);
     });
 });
