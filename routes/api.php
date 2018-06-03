@@ -463,7 +463,7 @@ Route::group(['prefix' => 'statics'], function () {
     Route::get('avg_created_accounts', function () {
         $avg_projects = collect([]);
         $avg_access = collect([]);
-        \App\Model\Device::all()->map(function (\App\Model\Device $d) use ($avg_access, $avg_projects) {
+        \App\Model\Device::all()->each(function (\App\Model\Device $d) use (&$avg_access, &$avg_projects) {
             $tmp = $d->latest_track();
             $avg_projects->push($tmp->projects);
             $avg_access->push($tmp->access);
