@@ -401,7 +401,7 @@ Route::group(['prefix' => 'statics'], function () {
         }));
     });
     Route::get('app_version', function () {
-        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version as label'))->groupBy('app_version')->get()->reject(function (
+        return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version as label'))->groupBy('app_version')->orderByRaw('COUNT(*)')->limit(10)->get()->reject(function (
             $v
         ) {
             return $v->label == null;
@@ -431,7 +431,7 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->groupBy([
             'device_id',
             'feature',
-        ])->get());
+        ])->orderByRaw('SUM(value)')->limit(10)->get());
     });
     Route::get('features_current_month', function () {
         return response()->json(DB::table('feature_trackings')->select(DB::raw('SUM(value) as value, feature as label'))->whereBetween('created_at', [
