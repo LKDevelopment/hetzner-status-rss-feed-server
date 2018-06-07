@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\Device\FeatureFlag;
 use App\Model\Device\FeatureTracking;
+use App\Model\Device\Feedback;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
@@ -73,5 +74,12 @@ class Device extends Model
         return $this->feature_flags->reject(function (FeatureFlag $flag) use ($featureFlag) {
                 return $flag->key != $featureFlag->key;
             })->count() == 1;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function feedback(){
+        return $this->hasMany(Feedback::class);
     }
 }

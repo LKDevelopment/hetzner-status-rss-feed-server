@@ -20,7 +20,7 @@
                                         class="fas fa-flag fa-fw"></i></a>
                         </div>
                     </div>
-                    
+
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
@@ -92,12 +92,36 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <th>ID</th>
+                                        <th>Datum</th>
+                                        <th>Rating</th>
+                                        <th>Text</th>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($device->feedback()->orderByDesc('id')->limit(5)->get() as $feedback)
+                                            <tr>
+                                                <td>{{ $feedback->id }}</td>
+                                                <td>{{$feedback->created_at->format('d.m.Y H:i:s')}}</td>
+                                                <td>{{ $feedback->rating }}</td>
+                                                <td>{{$feedback->text}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-deck mt-l2">
                             <div class="card box-shadow">
                                 <div class="card-header text-center">
                                     <strong>Feature Usage All Time</strong>
                                 </div>
-            
+
                                 <div class="card-body">
                                     <canvas id="features_all" width="400" height="400"></canvas>
                                 </div>
@@ -106,7 +130,7 @@
                                 <div class="card-header text-center">
                                     <strong>Feature Usage Current Month</strong>
                                 </div>
-            
+
                                 <div class="card-body">
                                     <canvas id="features_current_month" width="400" height="400"></canvas>
                                 </div>
@@ -115,7 +139,7 @@
                                 <div class="card-header text-center">
                                     <strong>Feature Usage Last Month</strong>
                                 </div>
-            
+
                                 <div class="card-body">
                                     <canvas id="features_last_month" width="400" height="400"></canvas>
                                 </div>
@@ -161,7 +185,7 @@
                 });
             });
         });
-        
+
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
             var color = '#';
@@ -170,6 +194,6 @@
             }
             return color;
         }
-    
+
     </script>
 @endpush

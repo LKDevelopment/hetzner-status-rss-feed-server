@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
  */
 class DeviceTrackingController extends Controller
 {
-
     /**
      * @param \Illuminate\Http\Request $request
      *
@@ -23,14 +22,18 @@ class DeviceTrackingController extends Controller
             'os' => 'required',
             'version' => 'required',
         ]);
-        $device = Device::create(['os' => $request->get('os'), 'version' => $request->get('version'), 'app_version' => get_user_agent()]);
+        $device = Device::create([
+            'os' => $request->get('os'),
+            'version' => $request->get('version'),
+            'app_version' => get_user_agent(),
+        ]);
 
         return response()->json(['device_id' => $device->id]);
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device        $device
+     * @param \App\Model\Device $device
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -40,7 +43,11 @@ class DeviceTrackingController extends Controller
             'os' => 'required',
             'version' => 'required',
         ]);
-        $device->update(['os' => $request->get('os'), 'version' => $request->get('version'), 'app_version' => get_user_agent()]);
+        $device->update([
+            'os' => $request->get('os'),
+            'version' => $request->get('version'),
+            'app_version' => get_user_agent(),
+        ]);
 
         return response()->json(['device_id' => $device->id]);
     }
@@ -57,7 +64,7 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device        $device
+     * @param \App\Model\Device $device
      */
     public function create_track(Request $request, Device $device)
     {
@@ -74,7 +81,7 @@ class DeviceTrackingController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Model\Device        $device
+     * @param \App\Model\Device $device
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -88,6 +95,22 @@ class DeviceTrackingController extends Controller
             $device->feature_tracking()->create(['feature' => $feature, 'value' => $count]);
         }
 
+        return response()->json(['message' => 'ok']);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Model\Device $device
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function feedback(Request $request, Device $device)
+    {
+        $data = $this->validate($request, [
+            'rating' => 'required|numeric',
+            'text' => 'max:512',
+        ]);
+        $data['current_version'] = get_user_agent();
+        $device->feedback()->create($data);
         return response()->json(['message' => 'ok']);
     }
 }
