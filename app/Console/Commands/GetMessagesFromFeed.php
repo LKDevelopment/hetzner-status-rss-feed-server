@@ -191,7 +191,7 @@ class GetMessagesFromFeed extends Command
 
                 if ($message == null) {
                     $message = Message::create($_payload);
-                    Log::stack(['slack_info'])->info('Neue Nachricht: Lang:'.$languageCode.' ID:'.$external_id);
+                    Log::stack(['slack_info'])->info('Neue Nachricht: Lang:'.$languageCode.' ID:'.$external_id.' '.$_payload['description_de']);
                 } else {
                     $message->update($_payload);
                 }
