@@ -121,7 +121,7 @@ class TraceController extends Controller
     {
         $data = $this->validate($request, ['hostname' => 'required']);
 
-        return json_decode(Cache::remember('hostname_'.$data['domain'], 60 * 24 * 2, function () use ($data) {
+        return json_decode(Cache::remember('hostname_'.$data['hostname'], 60 * 24 * 2, function () use ($data) {
 
             return json_encode(['resp' => gethostbyname($data['hostname'])]);
         }));
