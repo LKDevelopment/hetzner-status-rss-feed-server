@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-md navbar-dark navbar-hetzner">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-               My Hetzner App - Wie ist mein Host?
+                My Hetzner App - Wie ist mein Host?
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,8 @@
             <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
         </div>
     </main>
-    <div class="fixed-bottom"><a href="https://lukas-kaemmerling.de/legal">Impressum</a> |  <a href="https://lukas-kaemmerling.de/datenschutz" target="_blank">Datenschutz</a></div>
+    <div class="fixed-bottom"><a href="https://lukas-kaemmerling.de/legal">Impressum</a> | <a
+                href="https://lukas-kaemmerling.de/datenschutz" target="_blank">Datenschutz</a></div>
 </div>
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -104,6 +105,7 @@
 
     function callApiDomain(value) {
         $.post('/api/domain', {hostname: value}, function (data) {
+            var data = JSON.parse(data);
             if (data.resp == value) {
                 $('#error_domain').fadeIn();
             } else {
