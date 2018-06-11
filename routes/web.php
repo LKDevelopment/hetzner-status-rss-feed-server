@@ -22,7 +22,7 @@ Route::get('/', function () {
         return redirect()->to('/login');
     }
 });
-
+Route::get('cloud', 'Web\CloudHostController@form');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
