@@ -57,7 +57,7 @@
             <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
         </div>
     </main>
-    <div class="fixed-bottom"><a href="https://lukas-kaemmerling.de/legal">Impressumg</a> |  <a href="https://lukas-kaemmerling.de/datenschutz" target="_blank">Datenschutz</a></div>
+    <div class="fixed-bottom"><a href="https://lukas-kaemmerling.de/legal">Impressum</a> |  <a href="https://lukas-kaemmerling.de/datenschutz" target="_blank">Datenschutz</a></div>
 </div>
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
