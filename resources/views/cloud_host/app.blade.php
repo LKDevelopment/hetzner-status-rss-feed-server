@@ -49,7 +49,7 @@
             </button>
         </form>
 
-        <textarea id="result" style="display:none;"></textarea>
+        <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
     </main>
 </div>
 <script
@@ -77,7 +77,7 @@
         }
         var value = $('#ip').val();
         $.getJSON('/api/traceing/' + value + '/host', function (data) {
-            $('#result').html(data);
+            $('#result').html(JSON.stringify(data));
             $('#result').fadeIn();
             $('#check').removeAttr('disabled');
             $('#loader').fadeOut();
