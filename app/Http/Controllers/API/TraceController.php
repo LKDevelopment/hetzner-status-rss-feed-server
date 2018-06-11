@@ -112,4 +112,18 @@ class TraceController extends Controller
 
         return response()->json($response);
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
+    public function getIpToName(Request $request)
+    {
+        $data = $this->validate($request, ['hostname' => 'required']);
+
+        return json_decode(Cache::remember('hostname_'.$data['hostname'], 60 * 24 * 7, function () use ($data) {
+
+            return ['resp' => gethostbyname($data['hostname'])];
+        }));
+    }
 }

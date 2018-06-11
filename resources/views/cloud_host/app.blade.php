@@ -48,7 +48,9 @@
                                                                         style="display:none;"></i> Prüfen
             </button>
         </form>
-
+        <div class="alert alert-danger" role="alert" id="error_domain" style="display: none">
+            Leider ist der eingegebene Wert ungültig.
+        </div>
         <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
     </main>
 </div>
@@ -71,18 +73,39 @@
     $('#check').on('click', function (e) {
         e.preventDefault();
         $('#loader').fadeIn();
+        var test = new RegExp("/^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/g");
         $('#check').attr('disabled', 'true');
         if ($('#result').css('display') == 'block') {
             $('#result').fadeOut();
         }
         var value = $('#ip').val();
+        if (test.test(value)) {
+            callApiDomain(value);
+        } else {
+            callApiTrace(value);
+        }
+
+
+    });
+
+    function callApiTrace(value) {
         $.getJSON('/api/traceing/' + value + '/host', function (data) {
             $('#result').html(JSON.stringify(data));
             $('#result').fadeIn();
             $('#check').removeAttr('disabled');
             $('#loader').fadeOut();
         });
-    })
+    }
+
+    function callApiDomain(value) {
+        $.post('/api/domain', {domain: value}, function (data) {
+            if (data.resp == value) {
+                $('#error_domain').fadeIn();
+            } else {
+                callApiTrace(data.resp);
+            }
+        });
+    }
 </script>
 </body>
 </html>
