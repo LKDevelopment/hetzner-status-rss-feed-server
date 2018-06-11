@@ -38,13 +38,15 @@
     <main class="py-4">
         <form>
             <div class="form-group">
-                <label for="exampleInputEmail1">Hostname/IP:</label>
+                <label for="exampleInputEmail1">IP:</label>
                 <input type="text" class="form-control" id="ip" required>
                 <small id="emailHelp" class="form-text text-muted">Bitte geben Sie den Hostname oder die IP des Servers
                     an.
                 </small>
             </div>
-            <button type="submit" class="btn btn-primary" id="check">Prüfen</button>
+            <button type="submit" class="btn btn-primary" id="check"><i class="fas fa-spin fa-spinner fa-fw" id="loader"
+                                                                        style="display:none;"></i> Prüfen
+            </button>
         </form>
 
         <textarea id="result" style="display:none;"></textarea>
@@ -68,13 +70,17 @@
 <script>
     $('#check').on('click', function (e) {
         e.preventDefault();
+        $('#loader').fadeIn();
+        $('#check').attr('disabled', 'true');
         if ($('#result').css('display') == 'block') {
             $('#result').fadeOut();
         }
         var value = $('#ip').val();
-        $.getJSON('/api/tracing/' + value + '/host', function (data) {
+        $.getJSON('/api/traceing/' + value + '/host', function (data) {
             $('#result').html(data);
             $('#result').fadeIn();
+            $('#check').removeAttr('disabled');
+            $('#loader').fadeOut();
         });
     })
 </script>
