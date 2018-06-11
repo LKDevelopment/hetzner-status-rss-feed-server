@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Hetzner Cloud - Get my Host</title>
+    <title>My Hetzner App - Wie ist mein Cloud Host?</title>
 
 
     <!-- Fonts -->
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-md navbar-dark navbar-hetzner">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                Get My Host
+               My Hetzner App - Wie ist mein Host?
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,6 +57,7 @@
             <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
         </div>
     </main>
+    <div class="fixed-bottom"><a href="https://lukas-kaemmerling.de/legal">Impressumg</a> |  <a href="https://lukas-kaemmerling.de/datenschutz" target="_blank">Datenschutz</a></div>
 </div>
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
