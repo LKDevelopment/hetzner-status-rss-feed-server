@@ -37,7 +37,7 @@
 
     <main class="py-4">
         <div class="container">
-            <div class="alert alert-info" role="alert" id="error_domain" style="display: none">
+            <div class="alert alert-info" role="alert">
                 Dies ist keine offizielle Seite der Hetzner Online GmbH. Sie wird von Kunden für Kunden bereitgestellt.
             </div>
             <form>
@@ -49,7 +49,7 @@
                         an.
                     </small>
                 </div>
-                <div class="alert alert-info mt-1" role="alert" id="error_domain" style="display: none">
+                <div class="alert alert-info mt-1" role="alert">
                     Die IP Adresse wird für 7 Tage gecachet, um eine schnelle und einfache Bereitstellung der
                     Informationen zu gewährleisten.
                 </div>
