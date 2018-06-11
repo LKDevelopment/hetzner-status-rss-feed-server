@@ -54,6 +54,9 @@
             <div class="alert alert-danger" role="alert" id="error_domain" style="display: none">
                 Leider ist der eingegebene Wert ungültig.
             </div>
+            <div class="alert alert-danger" role="alert" id="error_ip" style="display: none">
+                Leider ist die eingetragene IP zu keinem Hetzner (Cloud) Server zugehörig.
+            </div>
             <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
         </div>
     </main>
@@ -95,15 +98,23 @@
     });
 
     function callApiTrace(value) {
+        if ($('#error_ip').css('display') == 'block') {
+            $('#error_ip').fadeOut();
+        }
         $.getJSON('/api/traceing/' + value + '/host', function (data) {
             $('#result').html(JSON.stringify(data, null, 2));
             $('#result').fadeIn();
             $('#check').removeAttr('disabled');
             $('#loader').fadeOut();
+        }, function (error) {
+            $('#error_ip').fadeIn();
         });
     }
 
     function callApiDomain(value) {
+        if ($('#error_domain').css('display') == 'block') {
+            $('#error_domain').fadeOut();
+        }
         $.post('/api/domain', {hostname: value}, function (data) {
             var data = JSON.parse(data);
             if (data.resp == value) {
@@ -111,6 +122,16 @@
             } else {
                 callApiTrace(data.resp);
             }
+        });
+    }
+    function callApiIssue(value){
+        $.getJSON('/api/traceing/' + value + '/issues', function (data) {
+            $('#result').html(JSON.stringify(data, null, 2));
+            $('#result').fadeIn();
+            $('#check').removeAttr('disabled');
+            $('#loader').fadeOut();
+        }, function (error) {
+            $('#error_ip').fadeIn();
         });
     }
 </script>
