@@ -38,7 +38,7 @@
     <main class="py-4">
         <div class="container">
             <div class="alert alert-info" role="alert" id="error_domain" style="display: none">
-               Dies ist keine offizielle Seite der Hetzner Online GmbH. Sie wird von Kunden für Kunden bereitgestellt.
+                Dies ist keine offizielle Seite der Hetzner Online GmbH. Sie wird von Kunden für Kunden bereitgestellt.
             </div>
             <form>
                 <div class="form-group">
@@ -49,18 +49,23 @@
                         an.
                     </small>
                 </div>
+                <div class="alert alert-info mt-1" role="alert" id="error_domain" style="display: none">
+                    Die IP Adresse wird für 7 Tage gecachet, um eine schnelle und einfache Bereitstellung der
+                    Informationen zu gewährleisten.
+                </div>
+
                 <button type="submit" class="btn btn-primary" id="check"><i class="fas fa-spin fa-spinner fa-fw"
                                                                             id="loader"
                                                                             style="display:none;"></i> Prüfen
                 </button>
             </form>
-            <div class="alert alert-danger" role="alert" id="error_domain" style="display: none">
+            <div class="alert alert-danger mt-1" role="alert" id="error_domain" style="display: none">
                 Leider ist der eingegebene Wert ungültig.
             </div>
-            <div class="alert alert-danger" role="alert" id="error_ip" style="display: none">
+            <div class="alert alert-danger mt-1" role="alert" id="error_ip" style="display: none">
                 Leider ist die eingetragene IP zu keinem Hetzner (Cloud) Server zugehörig.
             </div>
-            <textarea id="result" style="display:none;" readonly class="form-control" rows="5"></textarea>
+            <textarea id="result" style="display:none;" readonly class="form-control mt-1" rows="5"></textarea>
         </div>
     </main>
     <div class="fixed-bottom"><a href="https://lukas-kaemmerling.de/legal">Impressum</a> | <a
@@ -127,7 +132,7 @@
             } else {
                 callApiTrace(data.resp);
             }
-        }).fail(function(error){
+        }).fail(function (error) {
             $('#error_domain').fadeIn();
             $('#check').removeAttr('disabled');
             $('#loader').fadeOut();
