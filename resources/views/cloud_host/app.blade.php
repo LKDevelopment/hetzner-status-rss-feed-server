@@ -108,6 +108,8 @@
             $('#loader').fadeOut();
         }).fail(function (error) {
             $('#error_ip').fadeIn();
+            $('#check').removeAttr('disabled');
+            $('#loader').fadeOut();
         });
     }
 
