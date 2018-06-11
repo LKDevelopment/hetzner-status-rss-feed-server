@@ -57,7 +57,7 @@
             <div class="alert alert-danger" role="alert" id="error_ip" style="display: none">
                 Leider ist die eingetragene IP zu keinem Hetzner (Cloud) Server zugehörig.
             </div>
-            <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
+            <textarea id="result" style="display:none;" readonly class="form-control" rows="5"></textarea>
         </div>
     </main>
     <div class="fixed-bottom"><a href="https://lukas-kaemmerling.de/legal">Impressum</a> | <a
