@@ -126,6 +126,8 @@
             }
         }).fail(function(error){
             $('#error_domain').fadeIn();
+            $('#check').removeAttr('disabled');
+            $('#loader').fadeOut();
         });
     }
 
