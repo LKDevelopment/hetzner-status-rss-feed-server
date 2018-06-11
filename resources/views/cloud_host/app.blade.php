@@ -37,6 +37,9 @@
 
     <main class="py-4">
         <div class="container">
+            <div class="alert alert-info" role="alert" id="error_domain" style="display: none">
+               Dies ist keine offizielle Seite der Hetzner Online GmbH. Sie wird von Kunden für Kunden bereitgestellt.
+            </div>
             <form>
                 <div class="form-group">
                     <label for="exampleInputEmail1">IP:</label>
