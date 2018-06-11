@@ -96,7 +96,7 @@
 
     function callApiTrace(value) {
         $.getJSON('/api/traceing/' + value + '/host', function (data) {
-            $('#result').html(JSON.stringify(data));
+            $('#result').html(JSON.stringify(data, null, 2));
             $('#result').fadeIn();
             $('#check').removeAttr('disabled');
             $('#loader').fadeOut();
