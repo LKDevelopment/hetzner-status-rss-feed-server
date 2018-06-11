@@ -106,7 +106,7 @@
             $('#result').fadeIn();
             $('#check').removeAttr('disabled');
             $('#loader').fadeOut();
-        }, function (error) {
+        }).fail(function (error) {
             $('#error_ip').fadeIn();
         });
     }
@@ -122,15 +122,18 @@
             } else {
                 callApiTrace(data.resp);
             }
+        }).fail(function(error){
+            $('#error_domain').fadeIn();
         });
     }
-    function callApiIssue(value){
+
+    function callApiIssue(value) {
         $.getJSON('/api/traceing/' + value + '/issues', function (data) {
             $('#result').html(JSON.stringify(data, null, 2));
             $('#result').fadeIn();
             $('#check').removeAttr('disabled');
             $('#loader').fadeOut();
-        }, function (error) {
+        }).fail(function (error) {
             $('#error_ip').fadeIn();
         });
     }
