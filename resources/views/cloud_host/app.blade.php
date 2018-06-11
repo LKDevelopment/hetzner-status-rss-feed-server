@@ -102,7 +102,7 @@
     }
 
     function callApiDomain(value) {
-        $.post('/api/domain', {domain: value}, function (data) {
+        $.post('/api/domain', {hostname: value}, function (data) {
             if (data.resp == value) {
                 $('#error_domain').fadeIn();
             } else {

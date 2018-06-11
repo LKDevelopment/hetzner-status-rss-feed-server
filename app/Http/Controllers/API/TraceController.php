@@ -119,11 +119,11 @@ class TraceController extends Controller
      */
     public function getIpToName(Request $request)
     {
-        $data = $this->validate($request, ['domain' => 'required']);
+        $data = $this->validate($request, ['hostname' => 'required']);
 
-        return json_decode(Cache::remember('domain_'.$data['domain'], 60 * 24 * 7, function () use ($data) {
+        return json_decode(Cache::remember('hostname_'.$data['domain'], 60 * 24 * 2, function () use ($data) {
 
-            return ['resp' => gethostbyname($data['domain'])];
+            return json_encode(['resp' => gethostbyname($data['hostname'])]);
         }));
     }
 }
