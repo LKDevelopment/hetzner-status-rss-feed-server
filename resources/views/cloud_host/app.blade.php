@@ -36,22 +36,26 @@
     </nav>
 
     <main class="py-4">
-        <form>
-            <div class="form-group">
-                <label for="exampleInputEmail1">IP:</label>
-                <input type="text" class="form-control" id="ip" required>
-                <small id="emailHelp" class="form-text text-muted">Bitte geben Sie den Hostname oder die IP des Servers
-                    an.
-                </small>
+        <div class="container">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">IP:</label>
+                    <input type="text" class="form-control" id="ip" required>
+                    <small id="emailHelp" class="form-text text-muted">Bitte geben Sie den Hostname oder die IP des
+                        Servers
+                        an.
+                    </small>
+                </div>
+                <button type="submit" class="btn btn-primary" id="check"><i class="fas fa-spin fa-spinner fa-fw"
+                                                                            id="loader"
+                                                                            style="display:none;"></i> Prüfen
+                </button>
+            </form>
+            <div class="alert alert-danger" role="alert" id="error_domain" style="display: none">
+                Leider ist der eingegebene Wert ungültig.
             </div>
-            <button type="submit" class="btn btn-primary" id="check"><i class="fas fa-spin fa-spinner fa-fw" id="loader"
-                                                                        style="display:none;"></i> Prüfen
-            </button>
-        </form>
-        <div class="alert alert-danger" role="alert" id="error_domain" style="display: none">
-            Leider ist der eingegebene Wert ungültig.
+            <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
         </div>
-        <textarea id="result" style="display:none;" readonly class="form-control"></textarea>
     </main>
 </div>
 <script
@@ -73,16 +77,16 @@
     $('#check').on('click', function (e) {
         e.preventDefault();
         $('#loader').fadeIn();
-        var test = new RegExp("/^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/g");
         $('#check').attr('disabled', 'true');
         if ($('#result').css('display') == 'block') {
             $('#result').fadeOut();
         }
         var value = $('#ip').val();
-        if (test.test(value)) {
-            callApiDomain(value);
-        } else {
+        var beesl = value.split('.').pop();
+        if ($.isNumeric(beesl)) {
             callApiTrace(value);
+        } else {
+            callApiDomain(value);
         }
 
 
