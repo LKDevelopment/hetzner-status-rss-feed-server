@@ -64,26 +64,23 @@ class TraceController extends Controller
     protected function cacheOrTrace($ip)
     {
         return json_decode(Cache::remember('traceing_'.$ip, 60 * 24 * 7, function () use ($ip) {
-            exec('traceroute '.escapeshellarg($ip), $output);
+            exec('mtr -j '.escapeshellarg($ip), $output);
             $hosts = [];
-            foreach ($output as $index => $line) {
-                if ($index == 0) {
+            $output = json_decode($output);
+            foreach ($output->report->hubs as $index => $data) {
+                if ($data->count == 1) {
                     continue;
                 }
-                $line_parts = explode(' ', ltrim($line));
-                if (! empty($line_parts) && $line_parts[2] != '*' && $line_parts[3] != '*') {
-                    $ip = str_replace(['(', ')'], '', $line_parts[3]);
-                    $host = $line_parts[2];
-                    if ($ip == $host) {
-                        $host = gethostbyaddr($ip);
-                    }
-                    $cloud_id = null;
-                    if (str_contains($host, 'your-cloud.host')) {
-                        $_host_parts = explode('.', $host);
-                        $cloud_id = $_host_parts[0];
-                    }
-                    $hosts[] = ["ip" => $ip, 'host' => $host, 'cloud_id' => $cloud_id];
+                $host = $data->host;
+
+                $ip = gethostbyname($host);
+
+                $cloud_id = null;
+                if (str_contains($host, 'your-cloud.host')) {
+                    $_host_parts = explode('.', $host);
+                    $cloud_id = $_host_parts[0];
                 }
+                $hosts[] = ["ip" => $ip, 'host' => $host, 'cloud_id' => $cloud_id];
             }
 
             return json_encode($hosts);
