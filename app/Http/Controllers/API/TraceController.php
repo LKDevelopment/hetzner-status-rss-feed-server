@@ -66,7 +66,7 @@ class TraceController extends Controller
         return json_decode(Cache::remember('traceing_'.$ip, 60 * 24 * 7, function () use ($ip) {
             exec('mtr -j '.escapeshellarg($ip), $output);
             $hosts = [];
-            $output = json_decode($output);
+            $output = json_decode(implode('', $output));
             foreach ($output->report->hubs as $index => $data) {
                 if ($data->count == 1) {
                     continue;
