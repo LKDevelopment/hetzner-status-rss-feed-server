@@ -105,7 +105,7 @@ class TraceController extends Controller
         Tracking::track('get_issues_to_ip', $ip, get_user_agent());
         if (str_contains($lastHop->host, 'your-cloud.host')) {
             $cloudHost = str_replace('.your-cloud.host', '', $lastHop->host);
-            $response = Message::where('category', '=', 'cloud')->where('title_en', 'LIKE', '%'.$cloudHost.'%')->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
+            $response = Message::where('category', '=', 'cloud')->where('affected_en', 'LIKE', '%'.$cloudHost.'%')->where('created_at', '>', Carbon::now()->subDays(2)->startOfDay())->get();
         } else {
             $response = [];
         }
