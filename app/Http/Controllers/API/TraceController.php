@@ -101,7 +101,9 @@ class TraceController extends Controller
         $this->validate($request, [
             'ip' => ['required', 'ip', 'hetzner_ip'],
         ]);
-        $lastHop = last($this->cacheOrTrace($ip));
+        $lastHop = collect($this->cacheOrTrace($ip))->reject(function($item){
+            return $item->cloud_id == null;
+        })->first();
         Tracking::track('get_issues_to_ip', $ip, get_user_agent());
         if (str_contains($lastHop->host, 'your-cloud.host')) {
             $cloudHost = str_replace('.your-cloud.host', '', $lastHop->host);
