@@ -10,7 +10,6 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::get('hetzner-status/{language?}', function ($language = 'de') {
     \App\Model\Tracking::track('old_api', $language, get_user_agent());
 
@@ -496,3 +495,5 @@ Route::group(['prefix' => 'statics'], function () {
         return response()->json($data);
     });
 });
+
+Route::get('_internal/builds/{version_code}', 'Internal\Api\BuildController@getBuildNumber');
