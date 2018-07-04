@@ -15,6 +15,14 @@ class Build extends Model
     protected $fillable = ['build_number', 'version_code'];
 
     /**
+     * @return mixed
+     */
+    public function getBuildNumberNumericAttribute()
+    {
+        return str_replace('|', '', $this->build_number);
+    }
+
+    /**
      * @param $version_code
      * @return mixed
      */
@@ -27,14 +35,15 @@ class Build extends Model
                 'version_code' => $version_code,
             ]);
         } else {
-            $_d = explode('|',$build->build_number);
+            $_d = explode('|', $build->build_number);
             $last_build = last($_d);
             $build = self::create([
                 'build_number' => self::generateBuildNumber($version_code, $last_build),
                 'version_code' => $version_code,
             ]);
         }
-        return str_replace('|','',$build->build_number);
+
+        return $build->build_number_numeric;
     }
 
     /**
