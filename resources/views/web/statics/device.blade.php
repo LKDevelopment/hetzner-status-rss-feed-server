@@ -113,9 +113,19 @@
                 <div class="card-header text-center">
                     <strong>App-Version</strong>
                 </div>
-
                 <div class="card-body">
                     <canvas id="app_version" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="card box-shadow">
+                <div class="card-header text-center">
+                    <strong>Latest Build Number</strong>
+                </div>
+                <div class="card-body">
+                    <?php
+                    $__tmp = \App\Model\App\Build::latest()->first();
+                    ?>
+                    <h3>{{$__tmp->version_code }} ({{$__tmp->build_number}})</h3>
                 </div>
             </div>
             <div class="card box-shadow">
