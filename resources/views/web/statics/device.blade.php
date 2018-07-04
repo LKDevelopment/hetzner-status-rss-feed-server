@@ -111,6 +111,26 @@
             </div>
             <div class="card box-shadow">
                 <div class="card-header text-center">
+                    <strong>Trackings</strong>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="trackings" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="card box-shadow">
+                <div class="card-header text-center">
+                    <strong>AVG Created Accounts</strong>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="avg_created_accounts" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mt-lg-3">
+            <div class="card box-shadow">
+                <div class="card-header text-center">
                     <strong>App-Version</strong>
                 </div>
                 <div class="card-body">
@@ -126,24 +146,6 @@
                     $__tmp = \App\Model\App\Build::latest()->first();
                     ?>
                     <h3>{{$__tmp->version_code }} ({{$__tmp->build_number}})</h3>
-                </div>
-            </div>
-            <div class="card box-shadow">
-                <div class="card-header text-center">
-                    <strong>Trackings</strong>
-                </div>
-
-                <div class="card-body">
-                    <canvas id="trackings" width="400" height="400"></canvas>
-                </div>
-            </div>
-            <div class="card box-shadow">
-                <div class="card-header text-center">
-                    <strong>AVG Created Accounts</strong>
-                </div>
-
-                <div class="card-body">
-                    <canvas id="avg_created_accounts" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
