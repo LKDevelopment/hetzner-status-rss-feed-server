@@ -148,7 +148,7 @@ return [
     |
     */
 
-    'domain' => 'backend.hetzner.app',
+    'domain' => 'backend.my-hetzner.app',
 
     /*
     |--------------------------------------------------------------------------
