@@ -9,6 +9,8 @@ class CloudHostController extends Controller
 {
     public function form()
     {
-        return view('cloud_host.app');
+
+        return redirect()->to('https://hetzner.cloud');
+        //return view('cloud_host.app');
     }
 }
