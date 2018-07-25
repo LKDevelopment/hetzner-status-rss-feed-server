@@ -38,7 +38,7 @@ class Build extends Model
             $_d = explode('|', $build->build_number);
             $last_build = last($_d);
             $build = self::create([
-                'build_number' => self::generateBuildNumber($version_code, $last_build),
+                'build_number' => self::generateBuildNumber($version_code, $last_build + 0),
                 'version_code' => $version_code,
             ]);
         }
@@ -57,7 +57,7 @@ class Build extends Model
         // Increment Build
         $build++;
         // from 2.2.0 will be 200 <-- Major 2 <-- Minor 0 <-- Bugfixing 21 <-- Build
-        $build_number_with_pipes = $points[0].'00|'.$points[1].'|'.$points[2].'|'.$build;
+        $build_number_with_pipes = $points[0].'00|'.$points[1].'|'.$points[2].'|'.str_pad($build, 3 ,'0', STR_PAD_LEFT);
 
         return $build_number_with_pipes;
     }
