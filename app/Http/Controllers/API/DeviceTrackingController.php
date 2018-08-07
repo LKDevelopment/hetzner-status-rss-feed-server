@@ -59,7 +59,7 @@ class DeviceTrackingController extends Controller
      */
     public function feature_flags(Device $device)
     {
-        return response()->json(['feature_flags' => $device->feature_flags]);
+        return response()->json(['feature_flags' => $device->feature_flags->merge([Device\FeatureFlag::where('key', '=', 'FEATURE_DEDICATED_RESOURCES')->first()])]);
     }
 
     /**
