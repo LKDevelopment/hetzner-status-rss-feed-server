@@ -145,7 +145,7 @@
                     <?php
                     $__tmp = \App\Model\App\Build::latest()->first();
                     ?>
-                    <h3>{{$__tmp->version_code }} ({{$__tmp->build_number_numeric}})</h3>
+                    <h3>{{$__tmp->getFormatedBuildNumber() }}</h3>
                 </div>
             </div>
         </div>

@@ -393,6 +393,11 @@ Route::group(['prefix' => 'statics'], function () {
             return $report;
         }));
     });
+    Route::get('dashboard', function () {
+        $result = DB::table('devices')->select(DB::raw('COUNT(*) as devices, os as label'))->groupBy('os')->orderBy('os')->get()->toArray();
+        $result['app_version'] = \App\Model\App\Build::latest()->first()->getFormatedBuildNumber();
+        return response()->json();
+    });
     Route::get('app_version', function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version as label'))->groupBy('app_version')->orderByRaw('COUNT(*) DESC')->limit(10)->get()->reject(function (
             $v
@@ -474,12 +479,12 @@ Route::group(['prefix' => 'statics'], function () {
         $data = [
             [
                 'value' => round($avg_access->avg(), 5),
-                'label' => 'Cloud ('.$avg_access->count().')',
+                'label' => 'Cloud (' . $avg_access->count() . ')',
                 'color' => '#17c11c',
             ],
             [
                 'value' => round($avg_projects->avg(), 5),
-                'label' => 'Robot ('.$avg_projects->count().')',
+                'label' => 'Robot (' . $avg_projects->count() . ')',
                 'color' => '#ff0000',
             ],
         ];
