@@ -25,12 +25,8 @@ Route::get('v2/messages', function () {
 Route::get('metrics', function () {
     return response()->json(DB::table('trackings')->select('type', 'user_agent', DB::raw('COUNT(*) as count'))->groupBy('type', 'user_agent')->get()->groupBy('type'));
 });
-Route::post('domain', 'API\TraceController@getIpToName');
-Route::group(['prefix' => 'traceing/{ip}'], function () {
-    Route::get('/', 'API\TraceController@get');
-    Route::get('/host', 'API\TraceController@getCloudHost');
-    Route::get('/issues', 'API\TraceController@issues');
-});
+
+
 Route::get('bot/webhook/telegram', "Botman\WebhookController@telegram");
 Route::post('bot/webhook/telegram', "Botman\WebhookController@telegram");
 Route::get('v2/tags', function () {
@@ -284,10 +280,6 @@ Route::group(['prefix' => 'device'], function () {
 Route::group(['prefix' => 'statics'], function () {
     Route::get('table', function () {
         $data = [
-            [
-                'value' => collect(\Cache::getRedis()->keys('laravel_cache:traceing_*'))->count(),
-                'label' => 'Cached IPs',
-            ],
             [
                 'value' => \App\Model\Device::count(),
                 'label' => 'Devices',
