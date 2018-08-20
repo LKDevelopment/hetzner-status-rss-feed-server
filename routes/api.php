@@ -396,7 +396,7 @@ Route::group(['prefix' => 'statics'], function () {
     Route::get('dashboard', function () {
         $result = DB::table('devices')->select(DB::raw('COUNT(*) as devices, os as label'))->groupBy('os')->orderBy('os')->get()->toArray();
         $result['app_version'] = \App\Model\App\Build::latest()->first()->getFormatedBuildNumber();
-        return response()->json();
+        return response()->json($result);
     });
     Route::get('app_version', function () {
         return response()->json(DB::table('devices')->select(DB::raw('COUNT(*) as value, app_version as label'))->groupBy('app_version')->orderByRaw('COUNT(*) DESC')->limit(10)->get()->reject(function (
