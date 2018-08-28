@@ -394,7 +394,7 @@ Route::group(['prefix' => 'statics'], function () {
         }));
     });
     Route::get('dashboard', function (Request $request) {
-        if ($request->get('api_key') == env('APP_API_KEY')) {
+        if (request()->get('api_key') == env('APP_API_KEY')) {
             $result = DB::table('devices')->select(DB::raw('COUNT(*) as devices, os as label'))->groupBy('os')->orderBy('os')->get()->toArray();
             $result[] = ['devices' => \App\Model\App\Build::latest()->first()->build_number_numeric, 'label' => 'app_build'];
             return response()->json($result);
