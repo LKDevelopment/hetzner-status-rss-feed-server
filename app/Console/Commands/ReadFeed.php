@@ -145,7 +145,6 @@ class ReadFeed extends Command
                     'permalink' => $item->permalink,
                     'language' => $language,
                 ]);
-                event(new NewStatusMeldungArrived($message));
             }
             $this->output->progressAdvance();
         });
